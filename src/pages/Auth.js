@@ -1,7 +1,23 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import '../styles/styles_for_pages/Auth.css'
+import {MANAGER_MAIN_ROUTE, PASSWORD_RESET_ROUTE, REGISTER_ROUTE} from "../utils/consts";
+import {Context} from "../index";
+import {useHistory, useNavigate} from "react-router";
+import {observer} from "mobx-react-lite";
 
-const Auth = () => {
+const Auth = observer(() => {
+    const {user} = useContext(Context)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    let navigate = useNavigate()
+
+    const signIn = async () => {
+        const response = true
+        user.setIsAuth(true)
+        navigate(MANAGER_MAIN_ROUTE)
+    }
+
+
     return (
         <div className="auth-main">
             <div className="auth-main-header">
@@ -15,26 +31,26 @@ const Auth = () => {
                 <div className="auth-main-form-control">
                     <h2 className="auth-main-form-control-h2">Email</h2>
                     <input type="email" id="inputEmail" className="auth-main-form-control-input" placeholder="" required=""
-                           autoFocus="" />
+                           autoFocus="" value={email || ''} onChange={e => setEmail(e.target.value)}/>
                 </div>
 
                 <div className="auth-main-form-control">
                     <h2 className="auth-main-form-control-h2">Password</h2>
                     <input type="password" id="inputPassword" className="auth-main-form-control-input" placeholder="" required=""
-                           autoFocus="" />
+                           autoFocus="" value={password || ''} onChange={e => setPassword(e.target.value)}/>
                 </div>
 
                 <div className="auth-main-form-control-password-reg">
                     <div className="label-link-left">
-                        <a href="URL" >Forgot password?</a>
+                        <a href={PASSWORD_RESET_ROUTE} >Forgot password?</a>
                     </div>
                     <div className="label-link-right">
-                        <a href="URL" >Sign up</a>
+                        <a href={REGISTER_ROUTE} >Sign up</a>
                     </div>
                 </div>
 
                 <div className="auth-main-form-control">
-                    <button className="auth-main-form-button">
+                    <button className="auth-main-form-button" onClick={signIn}>
                         Sign in
                     </button>
                 </div>
@@ -67,6 +83,6 @@ const Auth = () => {
 
         </div>
     );
-};
+});
 
 export default Auth;

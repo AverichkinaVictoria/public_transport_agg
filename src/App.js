@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {BrowserRouter} from 'react-router-dom'
 import AppRouter from "./components/AppRouter";
+import {observer} from "mobx-react-lite"
+import {Context} from "./index";
 
-const App = () => {
-  return (
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
-  );
-};
+const App = observer(() => {
+    const {user} = useContext(Context)
+    return (
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
+        );
+});
 
 export default App;
