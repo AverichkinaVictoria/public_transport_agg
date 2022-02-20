@@ -93,7 +93,7 @@ body {
 .registration-form-button {
     display: block;
     margin: 0 auto;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 
     width: 211px;
     height: 44px;
@@ -108,4 +108,10 @@ body {
     align-items: center;
 
     color: #FFFFFF;
+}
+
+.error {
+    color: red;
+    align-items: center;
+    text-align: center;
 }

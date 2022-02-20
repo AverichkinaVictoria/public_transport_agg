@@ -4,6 +4,7 @@ import {MANAGER_MAIN_ROUTE, PASSWORD_RESET_ROUTE, REGISTER_ROUTE} from "../utils
 import {Context} from "../index";
 import {useHistory, useNavigate} from "react-router";
 import {observer} from "mobx-react-lite";
+import {login} from "../http/userAPI";
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -13,6 +14,9 @@ const Auth = observer(() => {
 
     const signIn = async () => {
         const response = true
+        const res = await login()
+        console.log(res)
+
         user.setIsAuth(true)
         navigate(MANAGER_MAIN_ROUTE)
     }
