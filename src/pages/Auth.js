@@ -20,8 +20,7 @@ const Auth = observer(() => {
         user.setIsAuth(true)
         navigate(MANAGER_MAIN_ROUTE)
     }
-
-
+    
     return (
         <div className="auth-main">
             <div className="auth-main-header">
