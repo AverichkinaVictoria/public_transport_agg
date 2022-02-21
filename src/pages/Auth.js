@@ -5,6 +5,7 @@ import {Context} from "../index";
 import {useHistory, useNavigate} from "react-router";
 import {observer} from "mobx-react-lite";
 import {login} from "../http/userAPI";
+import {getRoutes} from "../http/transportCompanyAPI";
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -13,9 +14,10 @@ const Auth = observer(() => {
     let navigate = useNavigate()
 
     const signIn = async () => {
-        const response = true
-        const res = await login()
-        console.log(res)
+        //const response = await getRoutes()
+        //console.log(response)
+        //const res = await login()
+        //console.log(res)
 
         user.setIsAuth(true)
         navigate(MANAGER_MAIN_ROUTE)

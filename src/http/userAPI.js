@@ -24,3 +24,4 @@ export const passwordReset = async (passwordNew) => {
     const response = await $host.post('/api/v1/auth/reset', passwordNew)
     return response
 }
+
