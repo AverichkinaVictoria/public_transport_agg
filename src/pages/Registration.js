@@ -21,9 +21,8 @@ const Registration = () => {
         const ch = (password2===password)
         if (ch) {
             setErrorMessage('');
-            const response = await registration(firstName, middleName, lastName, email, transportCompany, password)
+            const response = await registration(email, password)
             console.log(response)
-            console.log('smth')
             navigate(MANAGER_MAIN_ROUTE)
         } else {
             setErrorMessage('The passwords are different!');

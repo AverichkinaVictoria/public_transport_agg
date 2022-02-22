@@ -1,12 +1,20 @@
 import {$authHost, $host} from "./index";
+import axios from "axios";
 
-export const registration = async (firstName, middleName, lastName, email, transportCompany, password) => {
-    const response = await $host.post('/api/v1/auth/register', {firstName, middleName, lastName, email, transportCompany, password})
+export const registration = async (user_email, user_password) => {
+    const response = await $host.post('api/v1/auth/register', {
+        email: user_email.toString(),
+        password: user_password.toString()
+    })
     return response
 }
 
-export const login = async (email, password) => {
-    const response = await $host.post('/api/v1/auth/login', {email, password})
+export const login = async (user_email, user_password) => {
+    // const response = await $host.post('/api/v1/auth/login', {email, password})
+    const response = await $host.post('api/v1/auth/login',{
+        email: user_email.toString(),
+        password: user_password.toString()
+    })
     return response
 }
 

@@ -4,6 +4,13 @@ body {
     background-color: #EBEAEA;
     display: flex;
     font-family: Roboto;
+    color: blue;
+    text-decoration: underline;
+}
+
+.password-a {
+    color: blue;
+    text-decoration:underline;
 }
 
 .auth-main {
@@ -86,10 +93,14 @@ body {
     background-color: #3FA5EF;
     display: flex;
     align-items: center;
+    padding-left: 0;
 }
 
-.auth-main-header-h1 {
+.auth-main h1{
     width: 100%;
+    padding-left: 0;
+    margin-left: 0;
+    align-items: center;
 
     font-style: normal;
     font-weight: bold;
@@ -111,6 +122,8 @@ body {
 
     display: flex;
     align-items: center;
+    color: black;
+    text-underline: none;
 
 }
 

@@ -1,31 +1,24 @@
 import React from 'react';
-import '../styles/styles_for_pages/ManagerMain.css'
-import Paper from '@mui/material/Paper';
-import eng_lan from '../UI/uk_flag.svg';
-import menu_but from '../UI/menu_but.svg';
-import search_but from '../UI/search_but.svg';
-import account_img from '../UI/account_img.svg';
+import '../styles/styles_for_pages/ManagerMainSupport.css'
 import {
     AUTH_ROUTE,
-    MANAGER_MAIN_FEEDBACK_ROUTE, MANAGER_MAIN_PROFILE_ROUTE,
+    MANAGER_MAIN_FEEDBACK_ROUTE,
+    MANAGER_MAIN_PROFILE_ROUTE,
     MANAGER_MAIN_ROUTE,
     MANAGER_MAIN_ROUTES_ROUTE, MANAGER_MAIN_SUPPORT_ROUTE, MANAGER_MAIN_TC_ROUTE,
-    MANAGER_MAIN_VEHICLES_ROUTE,
-    PASSWORD_RESET_ROUTE,
-    REGISTER_ROUTE
+    MANAGER_MAIN_VEHICLES_ROUTE
 } from "../utils/consts";
-import Extra from "./extra";
-
 import statictic_icon from "../UI/statistic_icon.svg";
 import vehicle_icon from "../UI/Vehicles_icon.svg";
-import feedback_icon from "../UI/feedback_icon.svg";
-import logout_icon from "../UI/logout_icon.svg";
-import profile_icon from "../UI/profile_icon.svg";
 import routes_icon from "../UI/routes_icon.svg";
-import support_icon from "../UI/support_icon.svg";
+import feedback_icon from "../UI/feedback_icon.svg";
 import trans_company_icon from "../UI/trans_company_icon.svg";
+import profile_icon from "../UI/profile_icon.svg";
+import support_icon from "../UI/support_icon.svg";
+import logout_icon from "../UI/logout_icon.svg";
+import Extra from "./extra";
 
-const ManagerMain = () => {
+const ManagerMainSupport = () => {
     return (
         <div className="container">
             <ul className="sidebar">
@@ -36,7 +29,7 @@ const ManagerMain = () => {
                     Last name<br/>
                     email@mail.ru
                 </span></a>
-                    </li>
+                </li>
                 <li className="li-ManagerMain">
                     <span>
                         <a className="a-ManagerMain" href={MANAGER_MAIN_ROUTE}>
@@ -113,15 +106,11 @@ const ManagerMain = () => {
             <div className="content">
                 <Extra></Extra>
                 <div className="content-page">
-                    Statistics
+                    Support
                 </div>
-                 </div>
+            </div>
         </div>
-
-
-
-
     );
 };
 
-export default ManagerMain;
+export default ManagerMainSupport;

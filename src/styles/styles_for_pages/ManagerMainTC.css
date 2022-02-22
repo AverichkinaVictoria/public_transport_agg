@@ -1,18 +1,12 @@
 * {
     padding: 0;
-    margin: 0;
+    margin: 0
 }
-
 
 .sidebar {
     background-color: #3FA5EF;
     height: 100%;
 
-}
-a:-webkit-any-link {
-    color: inherit;
-    cursor: pointer;
-    text-decoration: inherit;
 }
 
 .li-ManagerMain {
@@ -89,8 +83,6 @@ a:-webkit-any-link {
     background-color: #FFFFFF;
     height: 100%;
     width: 100%;
-
-    text-decoration: none;
 }
 
 .h1-Manager{

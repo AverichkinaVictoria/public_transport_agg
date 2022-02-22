@@ -6,6 +6,7 @@ import {useHistory, useNavigate} from "react-router";
 import {observer} from "mobx-react-lite";
 import {login} from "../http/userAPI";
 import {getRoutes} from "../http/transportCompanyAPI";
+import registration from "./Registration";
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -16,8 +17,8 @@ const Auth = observer(() => {
     const signIn = async () => {
         //const response = await getRoutes()
         //console.log(response)
-        //const res = await login()
-        //console.log(res)
+        const res = await login(email, password)
+        console.log(res)
 
         user.setIsAuth(true)
         navigate(MANAGER_MAIN_ROUTE)
@@ -26,7 +27,7 @@ const Auth = observer(() => {
     return (
         <div className="auth-main">
             <div className="auth-main-header">
-                <h1 className="auth-main-header-h1">PUBLIC TRANSPORT</h1>
+                <h1>PUBLIC TRANSPORT</h1>
             </div>
 
             <div className="auth-main-form">
@@ -47,10 +48,10 @@ const Auth = observer(() => {
 
                 <div className="auth-main-form-control-password-reg">
                     <div className="label-link-left">
-                        <a href={PASSWORD_RESET_ROUTE} >Forgot password?</a>
+                        <a  className="password-a" href={PASSWORD_RESET_ROUTE} >Forgot password?</a>
                     </div>
                     <div className="label-link-right">
-                        <a href={REGISTER_ROUTE} >Sign up</a>
+                        <a className="password-a" href={REGISTER_ROUTE} >Sign up</a>
                     </div>
                 </div>
 
