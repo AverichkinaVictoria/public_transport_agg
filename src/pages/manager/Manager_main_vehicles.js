@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/styles_for_pages/Manager.css'
 import ManagerMain from "./ManagerMain";
 import statictic_icon from "../../UI/statistic_icon.svg";
 import {
@@ -17,17 +18,18 @@ import profile_icon from "../../UI/profile_icon.svg";
 import support_icon from "../../UI/support_icon.svg";
 import logout_icon from "../../UI/logout_icon.svg";
 import Extra from "../extra";
-import '../../styles/styles_for_pages/ManagerMainVehicles.css'
 import MenuBarManager from "./components/MenuBarManager";
 
 const ManagerMainVehicles = () => {
     return (
-        <div className="container">
-            <MenuBarManager></MenuBarManager>
-            <div className="content">
-                <Extra></Extra>
-                <div className="content-page">
-                    Vehicles
+        <div className='manager-menu-bar'>
+            <div className="container">
+                <MenuBarManager></MenuBarManager>
+                <div className="content">
+                    <Extra></Extra>
+                    <div className="content-page">
+                        Vehicles
+                    </div>
                 </div>
             </div>
         </div>

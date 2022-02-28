@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import '../styles/styles_for_pages/Auth.css'
+import '../styles/styles_for_pages/Authorization.css'
 import {MANAGER_MAIN_ROUTE, PASSWORD_RESET_ROUTE, REGISTER_ROUTE} from "../utils/consts";
 import {Context} from "../index";
 import {useHistory, useNavigate} from "react-router";

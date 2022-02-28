@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../styles/styles_for_pages/Moderator.css'
 import {
     AUTH_ROUTE,
     MANAGER_MAIN_FEEDBACK_ROUTE,
@@ -24,7 +25,7 @@ import feedbacks_icon from "../../../UI/feedbacks_icon.svg";
 
 const MenuBarMain = () => {
     return (
-        <div>
+        <div className='moderator-menu-bar'>
             <ul className="sidebar">
                 <h1 className="h1-Manager">Public Transport</h1>
                 <li className="li-ManagerMain">

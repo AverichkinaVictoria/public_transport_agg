@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/styles_for_pages/ManagerMain.css'
+import '../../styles/styles_for_pages/Manager.css'
 import Paper from '@mui/material/Paper';
 import eng_lan from '../../UI/uk_flag.svg';
 import menu_but from '../../UI/menu_but.svg';
@@ -28,12 +28,14 @@ import MenuBarManager from "./components/MenuBarManager";
 
 const ManagerMain = () => {
     return (
-        <div className="container">
-            <MenuBarManager></MenuBarManager>
-            <div className="content">
-                <Extra></Extra>
-                <div className="content-page">
-                    Statistics
+        <div className='manager-menu-bar'>
+            <div className="container">
+                <MenuBarManager></MenuBarManager>
+                <div className="content">
+                    <Extra></Extra>
+                    <div className="content-page">
+                        Statistics
+                    </div>
                 </div>
             </div>
         </div>

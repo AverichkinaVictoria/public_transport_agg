@@ -1,25 +1,38 @@
 * {
     padding: 0;
-    margin: 0
+    margin: 0;
+
 }
 
-.sidebar {
+.manager-menu-bar {
+    text-decoration: none;
+}
+
+
+.manager-menu-bar .sidebar {
     background-color: #3FA5EF;
     height: 100%;
 
 }
 
-.li-ManagerMain {
-
+.manager-menu-bar .li-ManagerMain {
+    text-decoration: none;
+}
+a:-webkit-any-link {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: inherit;
 }
 
-.container {
+
+
+.manager-menu-bar .container {
     height: 100vh;
     background-color: #ccc;
     position: relative
 }
 
-.container .sidebar {
+.manager-menu-bar .container .sidebar {
     position: fixed;
     height: 100vh;
     width: 330px;
@@ -28,16 +41,16 @@
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1)
 }
 
-.sidebar li:nth-child(1) {
+.manager-menu-bar .sidebar li:nth-child(1) {
     padding: 30px 0px
 }
-.sidebar li:hover:nth-child(2) {
+.manager-menu-bar .sidebar li:hover:nth-child(2) {
     padding: 30px 0px;
     background-color: transparent;
     color: #000
 }
 
-.sidebar li {
+.manager-menu-bar .sidebar li {
     padding: 12px;
     cursor: pointer;
     transition: all 0.5s;
@@ -59,33 +72,35 @@
 
 }
 
-.sidebar li span:nth-child(1) {
+.manager-menu-bar .sidebar li span:nth-child(1) {
     font-size: 20px
 }
 
-.sidebar li span:nth-child(2) {
+.manager-menu-bar .sidebar li span:nth-child(2) {
     font-size: 20px
 }
 
-.sidebar li:hover {
+.manager-menu-bar .sidebar li:hover {
     background-color: #87CDFF;
     padding: 12px
 }
 
-.container .content {
+.manager-menu-bar .container .content {
     padding-left: 75px
 }
 
-.content {
+.manager-menu-bar .content {
     padding: 10px;
     padding-right: 75px;
     margin-left: 330px;
     background-color: #FFFFFF;
     height: 100%;
     width: 100%;
+
+    text-decoration: none;
 }
 
-.h1-Manager{
+.manager-menu-bar .h1-Manager{
     text-align: left;
     margin-left: 40px;
     font-family: Roboto;
@@ -101,13 +116,14 @@
 
     color: #FFFFFF;
 }
-span{
+.manager-menu-bar span{
 
     justify-content: center;
     align-items: center;
+    text-decoration: none;
 }
 
-.icons {
+.manager-menu-bar .icons {
     align-items: center;
     justify-content: center;
     width: 25px;
@@ -116,13 +132,13 @@ span{
     display: inline-block;
     vertical-align: middle;
 }
-a-ManagerMain {
+.manager-menu-bar .a-ManagerMain {
     text-decoration: none;
     color: #FFFFFF;
 }
 
 
 
-.content-page {
+.manager-menu-bar .content-page {
     margin-top: 80px;
 }

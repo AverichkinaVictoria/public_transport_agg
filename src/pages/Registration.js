@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../styles/styles_for_pages/Registration.css'
+import '../styles/styles_for_pages/Authorization.css'
 import {registration} from "../http/userAPI";
 import {MANAGER_MAIN_ROUTE} from "../utils/consts";
 import {useNavigate} from "react-router";

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/styles_for_pages/ManagerMainTC.css'
+import '../../styles/styles_for_pages/Manager.css'
 import {
     AUTH_ROUTE,
     MANAGER_MAIN_FEEDBACK_ROUTE,
@@ -21,12 +21,14 @@ import MenuBarManager from "./components/MenuBarManager";
 
 const ManagerMainTc = () => {
     return (
-        <div className="container">
-            <MenuBarManager></MenuBarManager>
-            <div className="content">
-                <Extra></Extra>
-                <div className="content-page">
-                    Transport Company
+        <div className='manager-menu-bar'>
+            <div className="container">
+                <MenuBarManager></MenuBarManager>
+                <div className="content">
+                    <Extra></Extra>
+                    <div className="content-page">
+                        Transport Company
+                    </div>
                 </div>
             </div>
         </div>

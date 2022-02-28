@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../styles/styles_for_pages/Manager.css'
 import {
     AUTH_ROUTE,
     MANAGER_MAIN_FEEDBACK_ROUTE,
@@ -18,7 +19,7 @@ import logout_icon from "../../../UI/logout_icon.svg";
 
 const MenuBarManager = () => {
     return (
-        <div>
+        <div className='manager-menu-bar'>
             <ul className="sidebar">
                 <h1 className="h1-Manager">Public Transport</h1>
                 <li className="li-ManagerMain">
