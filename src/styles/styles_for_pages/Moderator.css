@@ -126,12 +126,27 @@ a:-webkit-any-link {
     text-decoration: none;
 }
 
+.card-moderator-4 span {
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
 .moderator-menu-bar .icons {
     align-items: center;
     justify-content: center;
     width: 25px;
     height: 25px;
     padding-right: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.moderator-menu-bar .feedback-ic-star {
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -149,13 +164,43 @@ a:-webkit-any-link {
 .card {
     /*margin: 2rem 2rem 2rem 0;*/
     padding: 1.5rem;
-    width: 600px;
+    width: 700px;
     height: 200px;
     /*box-shadow: 0 0 28px 4px rgba(0,0,0,0.1);*/
     transition: transform .3s ease;
     /*cursor: pointer;*/
     background: rgba(63, 165, 239, 0.26);
     box-shadow: 8px 0px 5px rgba(0, 0, 0, 0.25);
+}
+
+.description-moderator {
+    padding: 1.5rem;
+    width: 700px;
+    /*box-shadow: 0 0 28px 4px rgba(0,0,0,0.1);*/
+    transition: transform .3s ease;
+    /*cursor: pointer;*/
+    background: rgba(63, 165, 239, 0.26);
+    box-shadow: 8px 0px 5px rgba(0, 0, 0, 0.25);
+}
+
+.card-feedbacks {
+    padding: 1.5rem;
+    width: 700px;
+    height: 300px;
+    /*box-shadow: 0 0 28px 4px rgba(0,0,0,0.1);*/
+    transition: transform .3s ease;
+    /*cursor: pointer;*/
+    background: rgba(63, 165, 239, 0.26);
+    box-shadow: 8px 0px 5px rgba(0, 0, 0, 0.25);
+
+}
+
+.description-moderator p {
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
 }
 
 /*.card:hover {*/
@@ -272,6 +317,11 @@ a:-webkit-any-link {
     overflow: hidden;
 }
 
+.card-moderator-1-f {
+    overflow: hidden;
+    height: 400px;
+}
+
 .card-moderator-2{
     width: 1000%;
 }
@@ -288,6 +338,16 @@ a:-webkit-any-link {
 }
 
 .card-moderator-1 p {
+    height: 35px;
+    font-family: Roboto;
+    font-style: normal;
+    /*font-weight: bold;*/
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
+
+.card-moderator-1-f p {
     height: 35px;
     font-family: Roboto;
     font-style: normal;

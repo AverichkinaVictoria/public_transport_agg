@@ -5,7 +5,7 @@ export default class TC {
         this._companies = [
             {id: 1, isActive: true, name: 'RZD1', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
             {id: 2, isActive: false, name: 'RZD2', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
-            {id: 3, isActive: true, name: 'RZD3', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
+            {id: 3, isActive: true, name: 'RZD3', address: 'moscow  moscow moscow  moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
             {id: 4, isActive: true, name: 'RZD4', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
             {id: 5, isActive: false, name: 'RZD5', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
             {id: 6, isActive: false, name: 'RZD6', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
