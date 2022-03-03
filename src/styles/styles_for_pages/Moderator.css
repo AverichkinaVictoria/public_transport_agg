@@ -356,3 +356,133 @@ a:-webkit-any-link {
     line-height: 28px;
     color: #000000;
 }
+
+
+
+.profile-fields-moderator {
+    /*background-color: #cccccc;*/
+    display: inline-block;
+    /*height: 500px;*/
+    padding-left: 60px;
+}
+
+.moderator-img-container {
+    text-align: center;
+    display: block;
+}
+
+.profile-main-moderator {
+    display: flex;
+}
+
+.profile-img-fields-moderator img {
+
+    height: 150px;
+    width: 150px;
+}
+
+.profile-img-fields-moderator  {
+    align-items: center;
+    /*background-color: #87CDFF;*/
+    width: 200px;
+    display: inline-block;
+    /*height: 500px;*/
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.profile-field {
+    text-align: left;
+    display: block;
+}
+
+.profile-field-input {
+    width: 411px;
+    height: 49px;
+    display: block;
+    margin: 0 auto;
+
+    background: rgba(63, 165, 239, 0.26);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    align-items: center;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+
+    text-indent: 15px;
+}
+
+.moderator-load-img-profile {
+    display: flex;
+    margin: 0 auto;
+
+
+    margin-top: 20px;
+
+    width: 150px;
+    height: 44px;
+
+    background: #FD8653;
+    border-radius: 10px;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    align-items: center;
+    justify-content: center;
+
+    color: #FFFFFF;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.profile-field-h2 {
+    margin: 0 auto;
+    width: 411px;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-top: 10px;
+}
+
+.moderator-submit-profile  {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    width: 211px;
+    height: 44px;
+
+    background: #FD8653;
+    border-radius: 10px;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
