@@ -9,12 +9,25 @@ export default class User {
             {id: 4, role: 'user', firstName: 'Victoria4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
             {id: 5, role: 'manager', firstName: 'Victoria5', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
         ]
+        this._test = []
 
         makeAutoObservable(this)
     }
 
     setUsers(users) {
+        console.log("SET>>>")
         this._users = users
+    }
+
+    setTest(test) {
+        console.log("SET>>>")
+        this._test = test
+    }
+
+
+    get test() {
+        console.log("GET>>>")
+        return this._test
     }
 
 

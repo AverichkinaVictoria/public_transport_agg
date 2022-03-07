@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Routes, Route, Navigate, Redirect} from 'react-router-dom'
-import {authRoutes, publicRoutes} from "../routes";
+import {authRoutesManager, authRoutesModerator, publicRoutes} from "../routes";
 import {AUTH_ROUTE} from "../utils/consts";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
@@ -9,11 +9,20 @@ const AppRouter = observer(() => {
     const {user} = useContext(Context)
     return (
         <Routes>
-            {user.isAuth && authRoutes.map(({path, Component}) =>
+            {user.isAuth && user.role==='manager' && authRoutesManager.map(({path, Component}) =>
                 <Route key={path} path={path} element={<Component/>} />
             )}
 
-            {!user.isAuth && authRoutes.map(({path, Component}) =>
+            {user.isAuth && user.role==='moderator' && authRoutesModerator.map(({path, Component}) =>
+                <Route key={path} path={path} element={<Component/>} />
+            )}
+
+            {(!user.isAuth || !(user.role==='manager'))&& authRoutesManager.map(({path, Component}) =>
+
+                <Route key={path} path="*" element={<Navigate to={AUTH_ROUTE} replace />} />
+            )}
+
+            {(!user.isAuth || !(user.role==='moderator')) && authRoutesModerator.map(({path, Component}) =>
                 <Route key={path} path="*" element={<Navigate to={AUTH_ROUTE} replace />} />
             )}
 

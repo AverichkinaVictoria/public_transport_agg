@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../styles/styles_for_pages/Authorization.css'
-import {registration} from "../http/userAPI";
+import {getCurrentUser, registration} from "../http/userAPI";
 import {MANAGER_MAIN_ROUTE} from "../utils/consts";
 import {useNavigate} from "react-router";
+import {Context} from "../index";
 
 
 const Registration = () => {
@@ -16,14 +17,25 @@ const Registration = () => {
     const [password2, setPassword2] = useState('')
     const [errorMessage, setErrorMessage] = useState('');
     let navigate = useNavigate()
+    const {user} = useContext(Context)
 
     const registration_user = async () => {
+
+        // console.log(localStorage.getItem('id'))
         const ch = (password2===password)
         if (ch) {
             setErrorMessage('');
             const response = await registration(email, password)
             console.log(response)
-            navigate(MANAGER_MAIN_ROUTE)
+
+            user.setIsAuth(true)
+            // const infoUserCurrent = await getCurrentUser()
+            // user.setRole(infoUserCurrent.data.type)
+            // localStorage.setItem('role', infoUserCurrent.data.type)
+            //
+            // console.log('USER')
+            // console.log(infoUserCurrent.data.type)
+            // navigate(MANAGER_MAIN_ROUTE)
         } else {
             setErrorMessage('The passwords are different!');
         }
@@ -39,34 +51,11 @@ const Registration = () => {
                 <div className="padds"> </div>
 
                 <div className="registration-form-control">
-                    <h2 className="registration-form-control-h2">First name</h2>
-                    <input type="text" id="first-name" className="registration-form-control-input" placeholder="" required=""
-                           autoFocus="" value={firstName || ''} onChange={e => setFirstName(e.target.value)}/>
-                </div>
-
-                <div className="registration-form-control">
-                    <h2 className="registration-form-control-h2">Middle name</h2>
-                    <input type="text" id="middle-name" className="registration-form-control-input" placeholder="" required=""
-                           autoFocus="" value={middleName || ''} onChange={e => setMiddleName(e.target.value)}/>
-                </div>
-
-                <div className="registration-form-control">
-                    <h2 className="registration-form-control-h2">Last name</h2>
-                    <input type="text" id="last-name" className="registration-form-control-input" placeholder="" required=""
-                           autoFocus="" value={lastName || ''} onChange={e => setLastName(e.target.value)}/>
-                </div>
-
-                <div className="registration-form-control">
                     <h2 className="registration-form-control-h2">Email</h2>
                     <input type="email" id="inputEmail" className="registration-form-control-input" placeholder="" required=""
                            autoFocus="" value={email || ''} onChange={e => setEmail(e.target.value)} />
                 </div>
 
-                <div className="registration-form-control">
-                    <h2 className="registration-form-control-h2">Transport company</h2>
-                    <input type="text" id="transport-company" className="registration-form-control-input" placeholder="" required=""
-                           autoFocus="" value={transportCompany || ''} onChange={e => setTransportCompany(e.target.value)}/>
-                </div>
 
                 <div className="registration-form-control">
                     <h2 className="registration-form-control-h2">New password</h2>

@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import '../../styles/styles_for_pages/Moderator.css'
 import MenuBarMain from "./components/MenuBarMain";
 import Extra from "../extra";
 import yes_bttn from "../../UI/yes_button.svg";
 import no_bttn from "../../UI/no_button.svg";
-import {login} from "../../http/userAPI";
+import {getCurrentUser, login} from "../../http/userAPI";
 import {MANAGER_MAIN_ROUTE} from "../../utils/consts";
 import CardsTc from "./components/cards_TC";
 import {observer} from "mobx-react-lite";
@@ -14,6 +14,15 @@ import CardsTcAll from "./components/cardsTCAll";
 const ModeratorTc = observer(() => {
 
     const {companies} = useContext(Context)
+
+    const {usersArr} = useContext(Context)
+
+    useEffect(() => {
+        getCurrentUser().then(data => {
+            usersArr.setTest(data.data)
+            console.log('USE EFFECT TC>>>')
+        }).finally()
+    }, [])
 
 
     return (
@@ -53,6 +62,13 @@ const ModeratorTc = observer(() => {
                             return <CardsTcAll key={company.id} compAll= {companies} companies={company}/>}}
                         )}
                         <div className="extra-bottom"></div>
+                        <div className="extra-bottom"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
 
 
                     </div>

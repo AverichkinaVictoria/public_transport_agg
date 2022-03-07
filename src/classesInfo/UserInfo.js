@@ -3,7 +3,8 @@ import {makeAutoObservable} from "mobx"
 export default class UserInfo {
     constructor() {
         this._isAuth = false
-        this._user = {id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
+        this._role = 'none'
+        this._user = {}
         makeAutoObservable(this)
     }
 
@@ -15,11 +16,19 @@ export default class UserInfo {
         this._user = user
     }
 
+    setRole(role) {
+        this._role = role
+    }
+
     get isAuth() {
         return this._isAuth
     }
 
     get user() {
         return this._user
+    }
+
+    get role() {
+        return this._role
     }
 }

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import '../../styles/styles_for_pages/Moderator.css'
 import MenuBarMain from "./components/MenuBarMain";
 import Extra from "../extra";
@@ -8,9 +8,20 @@ import profilePic from "../../UI/account_img.jpg";
 import ProfileCard from "./components/profileCard";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import {getCurrentUser} from "../../http/userAPI";
 
 const ModeratorProfile = observer(() => {
     const {user} = useContext(Context)
+
+    const {usersArr} = useContext(Context)
+
+    useEffect(() => {
+        getCurrentUser().then(data => {
+            usersArr.setTest(data.data)
+            console.log('USE EFFECT PROFILE>>>')
+        }).finally()
+    }, [])
+
     return (
         <div className='moderator-menu-bar'>
             <div className="container">
@@ -21,6 +32,8 @@ const ModeratorProfile = observer(() => {
 
                         <ProfileCard user={user}></ProfileCard>
 
+                    </div>
+                    <div className="bottom-profile">
                     </div>
                 </div>
             </div>

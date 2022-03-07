@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import '../../styles/styles_for_pages/Moderator.css'
 import MenuBarMain from "./components/MenuBarMain";
 import Extra from "../extra";
@@ -7,9 +7,19 @@ import {observer} from "mobx-react-lite";
 import CardsTc from "./components/cards_TC";
 import CardsTcAll from "./components/cardsTCAll";
 import CardManager from "./components/cardManager";
+import {getComp, getCompanies, getRoutes} from "../../http/transportCompanyAPI";
+import {check, getCurrentUser} from "../../http/userAPI";
 
 const ModeratorManagers = observer(() => {
     const {usersArr} = useContext(Context)
+
+    useEffect(() => {
+        getCurrentUser().then(data => {
+            usersArr.setTest(data.data)
+            console.log('USE EFFECT MANAGERS>>>')
+        }).finally()
+    }, [])
+
 
     return (
         <div className='moderator-menu-bar'>
@@ -34,7 +44,15 @@ const ModeratorManagers = observer(() => {
 
 
 
+
+
                         <div className="extra-bottom"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
+                        <div className="bottom-profile"></div>
 
                     </div>
                 </div>

@@ -34,63 +34,7 @@ import ModeratorFeedbacks from "./pages/moderator/ModeratorFeedbacks";
 import ModeratorProfile from "./pages/moderator/ModeratorProfile";
 import ModeratorSupportService from "./pages/moderator/ModeratorSupportService";
 
-export const authRoutes = [
-
-]
-
-export const publicRoutes = [
-    {
-        path: REGISTER_ROUTE,
-        Component: Registration
-    },
-    {
-        path: AUTH_ROUTE,
-        Component: Auth
-    },
-    {
-        path: PASSWORD_RESET_ROUTE,
-        Component: PasswordReset
-    },
-    {
-        path: PASSWORD_RESET_CHANGE_ROUTE,
-        Component: PasswordResetChange
-    },
-
-
-
-//перенести в authroutes
-    {
-        path: MANAGER_MAIN_VEHICLES_ROUTE,
-        Component: Manager_main_vehicles
-    },
-    {
-        path: MANAGER_MAIN_ROUTE,
-        Component: ManagerMain
-    },
-    {
-        path: MANAGER_MAIN_FEEDBACK_ROUTE,
-        Component: ManagerMainFeedback
-    },
-    {
-        path: MANAGER_MAIN_PROFILE_ROUTE,
-        Component: ManagerMainProfile
-    },
-    {
-        path: MANAGER_MAIN_ROUTES_ROUTE,
-        Component: ManagerMainRoutes
-    },
-    {
-        path: MANAGER_MAIN_SUPPORT_ROUTE,
-        Component: ManagerMainSupport
-    },
-    {
-        path: MANAGER_MAIN_TC_ROUTE,
-        Component: ManagerMainTC
-    },
-
-
-
-    //перенести в authroutes
+export const authRoutesModerator = [
     {
         path: MODERATOR_MAIN_ROUTE,
         Component: ModeratorMain
@@ -119,5 +63,66 @@ export const publicRoutes = [
         path: MODERATOR_MAIN_SUPPORT_ROUTE,
         Component: ModeratorSupportService
     }
+
+]
+
+export const authRoutesManager = [
+    {
+        path: MANAGER_MAIN_VEHICLES_ROUTE,
+        Component: Manager_main_vehicles
+    },
+    {
+        path: MANAGER_MAIN_ROUTE,
+        Component: ManagerMain
+    },
+    {
+        path: MANAGER_MAIN_FEEDBACK_ROUTE,
+        Component: ManagerMainFeedback
+    },
+    {
+        path: MANAGER_MAIN_PROFILE_ROUTE,
+        Component: ManagerMainProfile
+    },
+    {
+        path: MANAGER_MAIN_ROUTES_ROUTE,
+        Component: ManagerMainRoutes
+    },
+    {
+        path: MANAGER_MAIN_SUPPORT_ROUTE,
+        Component: ManagerMainSupport
+    },
+    {
+        path: MANAGER_MAIN_TC_ROUTE,
+        Component: ManagerMainTC
+    }
+]
+
+export const publicRoutes = [
+    {
+        path: REGISTER_ROUTE,
+        Component: Registration
+    },
+    {
+        path: AUTH_ROUTE,
+        Component: Auth
+    },
+    {
+        path: PASSWORD_RESET_ROUTE,
+        Component: PasswordReset
+    },
+    {
+        path: PASSWORD_RESET_CHANGE_ROUTE,
+        Component: PasswordResetChange
+    }
+
+
+
+//перенести в authroutes
+
+
+
+
+    //перенести в authroutes
+
 
 ]
