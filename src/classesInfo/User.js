@@ -15,18 +15,15 @@ export default class User {
     }
 
     setUsers(users) {
-        console.log("SET>>>")
         this._users = users
     }
 
     setTest(test) {
-        console.log("SET>>>")
         this._test = test
     }
 
 
     get test() {
-        console.log("GET>>>")
         return this._test
     }
 

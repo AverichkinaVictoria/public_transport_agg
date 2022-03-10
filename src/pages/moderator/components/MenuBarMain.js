@@ -1,14 +1,7 @@
 import React, {useContext} from 'react';
 import '../../../styles/styles_for_pages/Moderator.css'
 import {
-    AUTH_ROUTE,
-    MANAGER_MAIN_FEEDBACK_ROUTE,
-    MANAGER_MAIN_PROFILE_ROUTE,
-    MANAGER_MAIN_ROUTE,
-    MANAGER_MAIN_ROUTES_ROUTE,
-    MANAGER_MAIN_SUPPORT_ROUTE,
-    MANAGER_MAIN_TC_ROUTE,
-    MANAGER_MAIN_VEHICLES_ROUTE, MODERATOR_MAIN_FEEDBACK_ROUTE,
+    AUTH_ROUTE, MODERATOR_MAIN_FEEDBACK_ROUTE,
     MODERATOR_MAIN_MANAGERS_ROUTE, MODERATOR_MAIN_PROFILE_ROUTE,
     MODERATOR_MAIN_ROUTE, MODERATOR_MAIN_SUPPORT_ROUTE,
     MODERATOR_MAIN_TC_ROUTE,
@@ -37,11 +30,11 @@ const MenuBarMain = observer(() => {
         navigate(AUTH_ROUTE)
     }
 
-    const moveManagers = () => {
+    const moveManagers = async() => {
         navigate(MODERATOR_MAIN_MANAGERS_ROUTE)
     }
 
-    const moveMainProfile = () => {
+    const moveMainProfile = async() => {
         navigate(MODERATOR_MAIN_PROFILE_ROUTE)
     }
 
@@ -76,14 +69,14 @@ const MenuBarMain = observer(() => {
                         {user.user.email}
                 </span></a>
                 </li>
-                <li className="li-ManagerMain">
-                    <span>
-                        <a className="a-ManagerMain" onClick={moveMainRoute}>
-                            <img src={statictic_icon} className="icons" alt="menu"/>
-                        Statistics
-                            </a>
-                    </span>
-                </li>
+                {/*<li className="li-ManagerMain">*/}
+                {/*    <span>*/}
+                {/*        <a className="a-ManagerMain" onClick={moveMainRoute}>*/}
+                {/*            <img src={statictic_icon} className="icons" alt="menu"/>*/}
+                {/*        Statistics*/}
+                {/*            </a>*/}
+                {/*    </span>*/}
+                {/*</li>*/}
 
 
                 <li className="li-ManagerMain">

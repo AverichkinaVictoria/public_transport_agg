@@ -8,7 +8,7 @@ import '../styles/styles_for_pages/extra.css'
 const Extra = () => {
     return (
             <div className="root">
-                <header className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-ManagerHeader">
+                <header className="MuiPaper-root MuiPaper-elevation  MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-ManagerHeader">
                     <div className="MuiToolBar-root MuiToolBar-gutters MuiToolBar-regular css-ManagerHeaderInside">
                         {/*<button className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-ManagerHeaderMenuButton"*/}
                         {/*        tabIndex="0" type="button">*/}

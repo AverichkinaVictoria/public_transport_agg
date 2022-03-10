@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import profilePic from "../../../UI/account_img.jpg";
 import {useNavigate} from "react-router";
-import {MANAGER_MAIN_ROUTE, PASSWORD_RESET_ROUTE} from "../../../utils/consts";
+import {AUTH_ROUTE, MANAGER_MAIN_ROUTE, PASSWORD_RESET_ROUTE} from "../../../utils/consts";
 
 const ProfileCard = ({user}) => {
     const [firstName, setFirstName] = useState(user.user.firstName)
@@ -23,6 +23,10 @@ const ProfileCard = ({user}) => {
 
     const resetPassword = () => {
         //сбросить токен
+        user.setUser({})
+        user.setIsAuth(false)
+        localStorage.clear()
+
         navigate(PASSWORD_RESET_ROUTE)
     }
 

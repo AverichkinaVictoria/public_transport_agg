@@ -282,7 +282,7 @@ a:-webkit-any-link {
 
 .yes-no-bttn {
     display: inline;
-    background: rgba(63, 165, 239, 0.26);
+    background:#FFFFFF;
     border: none;
     cursor: pointer;
 }
@@ -505,5 +505,64 @@ input[type="file"] {
 .bottom-profile {
     width: 500px;
     height: 100px;
+}
+
+.moderator-table {
+    width: 1000px;
+}
+
+
+
+@media (max-width:600px) {
+    .moderator-modal {
+        margin-left: 330px;
+        min-height: 100vh;
+        min-width: 100vw;
+        background-color: rgba(0,0,0,0.4);
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+}
+
+.moderator-modal {
+    /*margin-left: 330px;*/
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.moderator_modal__content {
+    padding: 20px;
+    color: #FFFFFF;
+    border-radius: 12px;
+    background-color:#3FA5EF;
+    width: 40%;
+    transform: scale(0.5);
+    transition: 0.4s all;
+}
+
+.moderator-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.moderator_modal__content.active {
+    transform: scale(1);
 }
 

@@ -1,6 +1,12 @@
 import React, {useContext, useState} from 'react';
 import '../styles/styles_for_pages/Authorization.css'
-import {MANAGER_MAIN_ROUTE, MODERATOR_MAIN_ROUTE, PASSWORD_RESET_ROUTE, REGISTER_ROUTE} from "../utils/consts";
+import {
+    MANAGER_MAIN_ROUTE,
+    MODERATOR_MAIN_ROUTE,
+    MODERATOR_MAIN_TC_ROUTE,
+    PASSWORD_RESET_ROUTE,
+    REGISTER_ROUTE
+} from "../utils/consts";
 import {Context} from "../index";
 import {useHistory, useNavigate} from "react-router";
 import {observer} from "mobx-react-lite";
@@ -32,7 +38,7 @@ const Auth = observer(() => {
                 navigate(MANAGER_MAIN_ROUTE)
             } else if (infoUserCurrent.data.type==='moderator') {
                 console.log('moderator')
-                navigate(MODERATOR_MAIN_ROUTE)
+                navigate(MODERATOR_MAIN_TC_ROUTE)
             }
         }
         catch (e) {

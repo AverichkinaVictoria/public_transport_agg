@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import '../styles/styles_for_pages/Authorization.css'
 import {getCurrentUser, registration} from "../http/userAPI";
-import {MANAGER_MAIN_ROUTE} from "../utils/consts";
+import {AUTH_ROUTE, MANAGER_MAIN_ROUTE} from "../utils/consts";
 import {useNavigate} from "react-router";
 import {Context} from "../index";
 
@@ -27,15 +27,13 @@ const Registration = () => {
             setErrorMessage('');
             const response = await registration(email, password)
             console.log(response)
-
-            user.setIsAuth(true)
             // const infoUserCurrent = await getCurrentUser()
             // user.setRole(infoUserCurrent.data.type)
             // localStorage.setItem('role', infoUserCurrent.data.type)
             //
             // console.log('USER')
             // console.log(infoUserCurrent.data.type)
-            // navigate(MANAGER_MAIN_ROUTE)
+            navigate(AUTH_ROUTE)
         } else {
             setErrorMessage('The passwords are different!');
         }

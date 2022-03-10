@@ -11,6 +11,7 @@ const App = observer(() => {
 
     const [loading, setLoading] = useState(true)
 
+
     useEffect(() => {
         check().then(data => {
             user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
@@ -18,7 +19,14 @@ const App = observer(() => {
             user.setIsAuth(true)
             user.setRole(localStorage.getItem('role'))
             console.log('CHECKING>>>')
+        }).catch(function() {
+            console.log('Invalid token!')
+            user.setUser({})
+            user.setIsAuth(false)
+            localStorage.clear()
+            // отказ
         }).finally(() => setLoading(false))
+
     }, [])
 
     if (loading) {
