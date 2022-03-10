@@ -47,13 +47,17 @@ export const getCurrentUser = async () => {
 
 
 export const sendReset = async (email) => {
-    const response = await $host.post('api/v1/auth/send_reset', email)
+    const response = await $host.post('api/v1/auth/send_reset', {email: email.toString()})
     return response
 }
 
 
-export const passwordReset = async (passwordNew) => {
-    const response = await $host.post('api/v1/auth/reset', passwordNew)
+export const passwordReset = async (email, passwordNew) => {
+    const response = await $host.post('api/v1/auth/reset', {
+        email: email.toString(),
+        token: localStorage.getItem('token'),
+        password: passwordNew.toString()
+    })
     return response
 }
 

@@ -105,16 +105,16 @@ const ModeratorTc = observer(() => {
         // ])
 
 
-        // console.log("LOADING>>>")
+        console.log("LOADING getCompanies>>>")
         getCompanies().then(data => {
 
-            // console.log(data)
+            console.log(data)
             setTableDataAll(data.data.companies)
 
         }).finally()
 
         getCompaniesRequests().then(data => {
-            // console.log('LOADING DATA>>>')
+            console.log('LOADING DATA getCompaniesRequests>>>')
             // console.log(data.data.list)
             const arr = []
             data.data.list.forEach(function(entry) {
@@ -122,7 +122,7 @@ const ModeratorTc = observer(() => {
                     arr.push(entry)
                 }
             });
-            // console.log(arr)
+            console.log(arr)
             setTableData(arr)
 
         }).finally()
@@ -167,7 +167,8 @@ const ModeratorTc = observer(() => {
                                                        setTableData(updatedData)
                                                        //обновить setTableDataAll
                                                        const addedData = [...tableDataAll]
-                                                       addedData.push(data)
+
+                                                       addedData.push(data.company)
                                                        setTableDataAll(addedData)
                                                    }
 
@@ -228,7 +229,7 @@ const ModeratorTc = observer(() => {
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Decline",
+                                                   tooltip: "Delete",
                                                    onClick: (e, data) => {
                                                        const req = putCompanies(data.id, false, data.code, data.name, data.address, data.phone, data.website, data.description)
                                                        console.log(req)
@@ -240,17 +241,6 @@ const ModeratorTc = observer(() => {
                                                            updatedData.splice(index, 1); // 2nd parameter means remove one item only
                                                        }
                                                        setTableDataAll(updatedData)
-
-                                                   }
-
-                                               },
-                                               {
-                                                   icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={documents_bttn} style={{height: "35px", width: '35px'}}/></button>,
-                                                   tooltip: "Show documents",
-                                                   onClick: (e, data) => {
-                                                       console.log(data.name)
-                                                       //серверные запросы на просмотр документов
-
 
                                                    }
 

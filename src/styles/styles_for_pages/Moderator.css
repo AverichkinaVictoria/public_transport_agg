@@ -295,7 +295,19 @@ a:-webkit-any-link {
 }
 
 .moderator-TC-card {
+    height: 0px;
+    width: 0px;
     margin-bottom: 15px;
+    opacity: 0;
+    transition: 0.4s all;
+}
+
+.moderator-TC-card.active {
+    margin-bottom: 15px;
+    height: fit-content;
+    width: fit-content;
+    opacity: 1;
+    transition: 0.5s all;
 }
 
 .card-header {
@@ -335,7 +347,7 @@ a:-webkit-any-link {
 
 .card-moderator-1-f {
     overflow: hidden;
-    height: 400px;
+    height: 330px;
 }
 
 .card-moderator-2{

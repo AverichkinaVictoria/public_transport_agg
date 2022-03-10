@@ -1,11 +1,32 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import menu_but from "../UI/menu_but.svg";
 import search_but from "../UI/search_but.svg";
 import eng_lan from "../UI/uk_flag.svg";
 import account_img from "../UI/account_img.jpg";
 import '../styles/styles_for_pages/extra.css'
+import {
+    MANAGER_MAIN_PROFILE_ROUTE,
+    MANAGER_MAIN_ROUTE,
+    MODERATOR_MAIN_PROFILE_ROUTE,
+    MODERATOR_MAIN_TC_ROUTE
+} from "../utils/consts";
+import {useNavigate} from "react-router";
+import {Context} from "../index";
 
 const Extra = () => {
+    let navigate = useNavigate()
+    const {user} = useContext(Context)
+
+    const moveMainProfile = async() => {
+        if (user.role==='manager') {
+            console.log('manager')
+            navigate(MANAGER_MAIN_PROFILE_ROUTE)
+        } else if (user.role==='moderator') {
+            console.log('moderator')
+            navigate(MODERATOR_MAIN_PROFILE_ROUTE)
+        }
+    }
+
     return (
             <div className="root">
                 <header className="MuiPaper-root MuiPaper-elevation  MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-ManagerHeader">
@@ -35,7 +56,7 @@ const Extra = () => {
                             </button>
 
                             <button className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-user-button"
-                                    tabIndex="0" type="button">
+                                    tabIndex="0" type="button" onClick={moveMainProfile}>
                                 <div className="MuiAvatar-root MuiAvatar-circular css-div-avatar">
                                     <img alt="photoURL" src={account_img} className="MuiAvatar-img css-image-avatar"/>
                                 </div>

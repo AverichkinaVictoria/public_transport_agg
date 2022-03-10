@@ -104,7 +104,7 @@ const ModeratorManagers = observer(() => {
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Decline",
+                                                   tooltip: "Delete",
                                                    onClick: (e, data) => {
                                                        console.log(data.name)
                                                        //серверные запросы на удаление

@@ -1,7 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/styles_for_pages/Authorization.css'
+import {passwordReset, sendReset} from "../http/userAPI";
 
 const PasswordResetChange = () => {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const ResetPass = async () => {
+        if (!(email==='')&(!(password===''))) {
+            const res = passwordReset(email, password).then(function (response){
+                console.log('SEND RESET>>>')
+                console.log(response)
+            })
+        }
+    }
+
     return (
         <div className="password-reset-change-main">
             <div className="password-reset-change-header">
@@ -12,18 +26,18 @@ const PasswordResetChange = () => {
                 <div className="padds"> </div>
                 <div className="password-reset-change-form-control">
                     <h2 className="password-reset-change-form-control-h2">New password</h2>
-                    <input type="password" id="inputPassword1" className="password-reset-change-form-control-input" placeholder="" required=""
-                           autoFocus="" />
+                    <input type="email" id="inputEmail" className="password-reset-form-control-input" placeholder="" required=""
+                           autoFocus="" value={email || ''} onChange={e => setEmail(e.target.value)}/>
                 </div>
 
                 <div className="password-reset-change-form-control">
                     <h2 className="password-reset-change-form-control-h2">Re-enter the new password</h2>
                     <input type="password" id="inputPassword2" className="password-reset-change-form-control-input" placeholder="" required=""
-                           autoFocus="" />
+                           autoFocus="" value={password || ''} onChange={e => setPassword(e.target.value)}/>
                 </div>
 
                 <div className="password-reset-change-form-control">
-                    <button className="password-reset-change-form-button">
+                    <button className="password-reset-change-form-button" onClick={ResetPass}>
                         Save
                     </button>
                 </div>
