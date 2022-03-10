@@ -45,3 +45,8 @@ export const putCompaniesFiles1 = async (url,fname,file) => {
     const response = await axios.post(url, {file_name:fname, file: file})
     return response
 }
+
+export const getHelpDesk = async () => {
+    const response = await $authHostR.get('api/v1/helpdesk/reports')
+    return response
+}

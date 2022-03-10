@@ -5,7 +5,8 @@ import jwt_decode from 'jwt-decode'
 export const registration = async (user_email, user_password) => {
     const {data} = await $host.post('api/v1/auth/register', {
         email: user_email.toString(),
-        password: user_password.toString()
+        password: user_password.toString(),
+        type: 'manager'
     })
     // console.log("DATA")
     // console.log(data)

@@ -31,7 +31,7 @@ const Auth = observer(() => {
             user.setRole(infoUserCurrent.data.type)
             user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
             localStorage.setItem('role', infoUserCurrent.data.type)
-            console.log('USER')
+            console.log('USER TYPE>>>')
             console.log(infoUserCurrent.data.type)
             if (infoUserCurrent.data.type==='manager') {
                 console.log('manager')

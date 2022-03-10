@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import profilePic from "../../../UI/account_img.jpg";
 import {useNavigate} from "react-router";
 import {AUTH_ROUTE, MANAGER_MAIN_ROUTE, PASSWORD_RESET_ROUTE} from "../../../utils/consts";
+import {getCompaniesFiles, getHelpDesk} from "../../../http/moderatorAPI";
 
 const ProfileCard = ({user}) => {
     const [firstName, setFirstName] = useState(user.user.firstName)
@@ -19,6 +20,14 @@ const ProfileCard = ({user}) => {
         setFile(e.target.files[0])
         setImg(URL.createObjectURL(e.target.files[0])
         )
+    }
+
+    const saveChanges = () => {
+        //сбросить токен
+        getHelpDesk().then(function (response){
+            console.log("HELPDESK>>>")
+            console.log(response)
+        })
     }
 
     const resetPassword = () => {
@@ -81,7 +90,7 @@ const ProfileCard = ({user}) => {
                            autoFocus="" value={phone || ''} onChange={e => setPhone(e.target.value)}/>
                 </div>
 
-                    <button className="moderator-submit-profile">
+                    <button className="moderator-submit-profile" onClick={saveChanges}>
                         Save changes
                     </button>
                 <button className="moderator-submit-profile" onClick={resetPassword}>
