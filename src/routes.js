@@ -4,9 +4,10 @@ import {
     MANAGER_MAIN_PROFILE_ROUTE,
     MANAGER_MAIN_ROUTE,
     MANAGER_MAIN_ROUTES_ROUTE,
+    MANAGER_MAIN_ROUTE_EDIT_ROUTE,
     MANAGER_MAIN_SUPPORT_ROUTE,
     MANAGER_MAIN_TC_ROUTE,
-    MANAGER_MAIN_VEHICLES_ROUTE, MODERATOR_MAIN_FEEDBACK_ROUTE,
+    MANAGER_MAIN_VEHICLES_ROUTE, MANAGER_MAIN_VEHICLE_EDIT_ROUTE, MODERATOR_MAIN_FEEDBACK_ROUTE,
     MODERATOR_MAIN_MANAGERS_ROUTE, MODERATOR_MAIN_PROFILE_ROUTE,
     MODERATOR_MAIN_ROUTE, MODERATOR_MAIN_SUPPORT_ROUTE,
     MODERATOR_MAIN_TC_ROUTE,
@@ -20,7 +21,7 @@ import Registration from "./pages/Registration";
 import PasswordReset from "./pages/PasswordReset";
 import PasswordResetChange from "./pages/PasswordResetChange";
 import ManagerMain from "./pages/manager/ManagerMain";
-import Manager_main_vehicles from "./pages/manager/Manager_main_vehicles";
+import ManagerMainVehicles from "./pages/manager/ManagerMainVehicles";
 import ManagerMainFeedback from "./pages/manager/ManagerMainFeedback";
 import ManagerMainProfile from "./pages/manager/ManagerMainProfile";
 import ManagerMainRoutes from "./pages/manager/ManagerMainRoutes";
@@ -33,6 +34,8 @@ import ModeratorUsers from "./pages/moderator/ModeratorUsers";
 import ModeratorFeedbacks from "./pages/moderator/ModeratorFeedbacks";
 import ModeratorProfile from "./pages/moderator/ModeratorProfile";
 import ModeratorSupportService from "./pages/moderator/ModeratorSupportService";
+import ManagerMainRouteEdit from "./pages/manager/ManagerMainRouteEdit";
+import ManagerMainVehicleEdit from "./pages/manager/ManagerMainVehicleEdit";
 
 export const authRoutesModerator = [
     {
@@ -69,7 +72,7 @@ export const authRoutesModerator = [
 export const authRoutesManager = [
     {
         path: MANAGER_MAIN_VEHICLES_ROUTE,
-        Component: Manager_main_vehicles
+        Component: ManagerMainVehicles
     },
     {
         path: MANAGER_MAIN_ROUTE,
@@ -94,6 +97,14 @@ export const authRoutesManager = [
     {
         path: MANAGER_MAIN_TC_ROUTE,
         Component: ManagerMainTC
+    },
+    {
+        path: MANAGER_MAIN_ROUTE_EDIT_ROUTE,
+        Component: ManagerMainRouteEdit
+    },
+    {
+        path: MANAGER_MAIN_VEHICLE_EDIT_ROUTE,
+        Component: ManagerMainVehicleEdit
     }
 ]
 
