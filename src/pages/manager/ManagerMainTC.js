@@ -1,23 +1,8 @@
 import React from 'react';
 import '../../styles/styles_for_pages/Manager.css'
-import {
-    AUTH_ROUTE,
-    MANAGER_MAIN_FEEDBACK_ROUTE,
-    MANAGER_MAIN_PROFILE_ROUTE,
-    MANAGER_MAIN_ROUTE,
-    MANAGER_MAIN_ROUTES_ROUTE, MANAGER_MAIN_SUPPORT_ROUTE, MANAGER_MAIN_TC_ROUTE,
-    MANAGER_MAIN_VEHICLES_ROUTE
-} from "../../utils/consts";
-import statictic_icon from "../../UI/statistic_icon.svg";
-import vehicle_icon from "../../UI/Vehicles_icon.svg";
-import routes_icon from "../../UI/routes_icon.svg";
-import feedback_icon from "../../UI/feedback_icon.svg";
-import trans_company_icon from "../../UI/trans_company_icon.svg";
-import profile_icon from "../../UI/profile_icon.svg";
-import support_icon from "../../UI/support_icon.svg";
-import logout_icon from "../../UI/logout_icon.svg";
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
+import * as consts from "../../utils/ConstantsManager";
 
 const ManagerMainTc = () => {
     return (
@@ -26,8 +11,26 @@ const ManagerMainTc = () => {
                 <MenuBarManager></MenuBarManager>
                 <div className="content">
                     <Extra></Extra>
-                    <div className="content-page">
-                        Transport Company
+                    <div className="content-page-profile">
+                        <div className="left">
+                            <p><img src={consts.TRANSPORT_COMPANY.icon} alt='icon'/></p>
+                            <p><button type="submit">Load icon</button></p>
+                        </div>
+                        <div className="right">
+                            <p>Transport company</p>
+                            <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.name} placeholder="Name" /></p>
+                            <p>Description</p>
+                            <p><textarea defaultValue={consts.TRANSPORT_COMPANY.description} rows="10" cols="40" placeholder='Description' /></p>
+                            <p>Website</p>
+                            <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.website} placeholder='Website' /></p>
+                            <p>Phone</p>
+                            <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.phone} placeholder='Phone' /></p>
+                            <p>Payment details</p>
+                            <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.payment_details} placeholder='Payment details' /></p>
+                            <p>Tax number</p>
+                            <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.tax_number} placeholder='Tax number' /></p>
+                            <p><button type="submit">Save changes</button></p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,7 @@ import trans_company_icon from "../../../UI/trans_company_icon.svg";
 import profile_icon from "../../../UI/profile_icon.svg";
 import support_icon from "../../../UI/support_icon.svg";
 import logout_icon from "../../../UI/logout_icon.svg";
+import * as consts from "../../../utils/ConstantsManager";
 
 const MenuBarManager = () => {
     return (
@@ -23,10 +24,10 @@ const MenuBarManager = () => {
             <ul className="sidebar">
                 <h1 className="h1-Manager">Public Transport</h1>
                 <li className="li-ManagerMain">
-                    <a className="a-ManagerMain" href={MANAGER_MAIN_PROFILE_ROUTE}><span>First name<br/>
-                    Middle name<br/>
-                    Last name<br/>
-                    email@mail.ru
+                <a className="a-ManagerMain" href={MANAGER_MAIN_PROFILE_ROUTE}><span>{consts.MANAGER_PROFILE.first_name}<br/>
+                    {consts.MANAGER_PROFILE.middle_name}<br/>
+                    {consts.MANAGER_PROFILE.last_name}<br/>
+                    {consts.MANAGER_PROFILE.email}
                 </span></a>
                 </li>
                 <li className="li-ManagerMain">
