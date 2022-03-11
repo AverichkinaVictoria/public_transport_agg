@@ -1,23 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import '../../styles/styles_for_pages/Manager.css'
-import {
-    AUTH_ROUTE,
-    MANAGER_MAIN_FEEDBACK_ROUTE,
-    MANAGER_MAIN_PROFILE_ROUTE,
-    MANAGER_MAIN_ROUTE,
-    MANAGER_MAIN_ROUTES_ROUTE, MANAGER_MAIN_SUPPORT_ROUTE, MANAGER_MAIN_TC_ROUTE,
-    MANAGER_MAIN_VEHICLES_ROUTE
-} from "../../utils/consts";
-import statictic_icon from "../../UI/statistic_icon.svg";
-import vehicle_icon from "../../UI/Vehicles_icon.svg";
-import routes_icon from "../../UI/routes_icon.svg";
-import feedback_icon from "../../UI/feedback_icon.svg";
-import trans_company_icon from "../../UI/trans_company_icon.svg";
-import profile_icon from "../../UI/profile_icon.svg";
-import support_icon from "../../UI/support_icon.svg";
-import logout_icon from "../../UI/logout_icon.svg";
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
+import { observer } from 'mobx-react-lite';
+import Context from '@mui/base/TabsUnstyled/TabsContext';
+import { getCurrentUser } from '../../http/userAPI';
+import * as consts from "../../utils/ConstantsManager";
 
 const ManagerMainProfile = () => {
     return (
@@ -26,13 +14,34 @@ const ManagerMainProfile = () => {
                 <MenuBarManager></MenuBarManager>
                 <div className="content">
                     <Extra></Extra>
-                    <div className="content-page">
-                        Profile
+                    <div className="content-page-profile">
+                        <div className="left">
+                            <p><img src={consts.MANAGER_PROFILE.icon} alt='icon'/></p>
+                            <p><button type="submit">Load icon</button></p>
+                        </div>
+                        <div className="right">
+                            <p>First name</p>
+                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.first_name} placeholder="First name" /></p>
+                            <p>Middle name</p>
+                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.middle_name} placeholder="Middle name" /></p>
+                            <p>Last name</p>
+                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.last_name} placeholder="Last name" /></p>
+                            <p>E-mail</p>
+                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.email} placeholder="E-mail" /></p>
+                            <p>Phone</p>
+                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.phone} placeholder="Phone" /></p>
+                            <p>Company</p>
+                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.company} placeholder="Company" /></p>
+                            <p><input type="text" placeholder="Change password" /></p>
+                            <p><button type="submit">Save changes</button></p>
+                        </div>
+                    </div>
+                    <div className="bottom-profile">
                     </div>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default ManagerMainProfile;
