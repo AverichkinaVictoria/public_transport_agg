@@ -39,6 +39,7 @@ export const check = async () => {
 export const getCurrentUser = async () => {
     const data = await $authHostR.get('api/v1/users/current')
     localStorage.setItem('id', data.data.id)
+    localStorage.setItem('email', data.data.email)
     return data
 }
 

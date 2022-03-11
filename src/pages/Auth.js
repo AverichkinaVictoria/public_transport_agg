@@ -13,6 +13,8 @@ import {observer} from "mobx-react-lite";
 import {check, getCurrentUser, login} from "../http/userAPI";
 import {getRoutes} from "../http/transportCompanyAPI";
 import registration from "./Registration";
+import {addUser, getCompaniesFiles, getCurrentUserProfile, getUsersList} from "../http/moderatorAPI";
+import {toJS} from "mobx";
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -29,10 +31,24 @@ const Auth = observer(() => {
             user.setIsAuth(true)
             const infoUserCurrent = await getCurrentUser()
             user.setRole(infoUserCurrent.data.type)
-            user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
+
+            console.log(infoUserCurrent.data)
+            //Сделать проверку на то существует ли в базе пользователь
+
+            const ans = addUser(parseInt(infoUserCurrent.data.id),'','','',infoUserCurrent.data.email,'','', infoUserCurrent.data.type,0,'').then(function (response){
+                console.log(response)
+            }).catch(function(){console.log('ERROR!!!')})
+
+            const ans1 = getCurrentUserProfile(infoUserCurrent.data.email).then(function (response){
+                user.setUser(response.data)
+                console.log('THIS USER>>>')
+                console.log(toJS(user.user))
+            })
+
+
+            // user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
             localStorage.setItem('role', infoUserCurrent.data.type)
-            console.log('USER TYPE>>>')
-            console.log(infoUserCurrent.data.type)
+
             if (infoUserCurrent.data.type==='manager') {
                 console.log('manager')
                 navigate(MANAGER_MAIN_ROUTE)

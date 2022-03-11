@@ -5,6 +5,8 @@ import {observer} from "mobx-react-lite"
 import {Context} from "./index";
 import {Spinner} from "react-bootstrap";
 import {check, getUserInfo} from "./http/userAPI";
+import {getCurrentUserProfile} from "./http/moderatorAPI";
+import {toJS} from "mobx";
 
 const App = observer(() => {
     const {user} = useContext(Context)
@@ -14,7 +16,12 @@ const App = observer(() => {
 
     useEffect(() => {
         check().then(data => {
-            user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
+            const ans1 = getCurrentUserProfile(localStorage.getItem('email')).then(function (response){
+                user.setUser(response.data)
+                console.log('THIS USER from USE EFFECT>>>')
+                console.log(toJS(user.user))
+            }).catch(function(){})
+            // user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
             console.log(user.user)
             user.setIsAuth(true)
             user.setRole(localStorage.getItem('role'))

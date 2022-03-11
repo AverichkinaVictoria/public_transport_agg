@@ -28,6 +28,8 @@ import MaterialTable from "material-table";
 import yes_bttn from "../../UI/yes_button.svg";
 import no_bttn from "../../UI/no_button.svg";
 import documents_bttn from "../../UI/documents.svg";
+import {deleteUser, getCurrentUserProfile, getUsersList} from "../../http/moderatorAPI";
+import {toJS} from "mobx";
 
 const ModeratorManagers = observer(() => {
     const [tableData,setTableData] = useState([])
@@ -59,7 +61,8 @@ const ModeratorManagers = observer(() => {
         {title: 'Middle name', field: 'middleName',sorting: false},
         {title: 'Last name', field: 'lastName'},
         {title: 'Phone number', field: 'phone', sorting: false},
-        {title: 'Email', field: 'email'}
+        {title: 'Email', field: 'email'},
+        {title: 'Company', field: 'companyName'}
     ]
 
     useEffect(() => {
@@ -68,13 +71,26 @@ const ModeratorManagers = observer(() => {
         //     console.log('USE EFFECT MANAGERS>>>')
         // }).finally()
 
-        setTableData([
-            {id: 1, role: 'user', firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 2, role: 'user', firstName: 'Victoria2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 3, role: 'manager', firstName: 'Victoria3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 4, role: 'user', firstName: 'Victoria4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 5, role: 'manager', firstName: 'Victoria5', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
-        ])
+        // setTableData([
+        //     {id: 1, role: 'user', firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 2, role: 'user', firstName: 'Victoria2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 3, role: 'manager', firstName: 'Victoria3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 4, role: 'user', firstName: 'Victoria4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 5, role: 'manager', firstName: 'Victoria5', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
+        // ])
+
+        getUsersList().then(data => {
+            console.log('USERS LIST>>>')
+            console.log(data.data)
+            const arr = []
+            data.data.forEach(function(entry) {
+                if (entry.userType==='manager') {
+                    arr.push(entry)
+                }
+            });
+            console.log(arr)
+            setTableData(arr)
+        }).finally()
     }, [])
 
 
@@ -106,8 +122,14 @@ const ModeratorManagers = observer(() => {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
                                                    tooltip: "Delete",
                                                    onClick: (e, data) => {
-                                                       console.log(data.name)
+                                                       console.log(data.id)
                                                        //серверные запросы на удаление
+                                                       const ans1 = deleteUser(data.id).then(function (response){
+                                                           console.log('DELETE RES >>>')
+                                                           console.log(response)
+                                                       })
+
+
 
                                                        const updatedData = [...tableData]
                                                        const index = tableData.indexOf(data);

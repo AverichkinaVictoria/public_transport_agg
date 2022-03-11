@@ -9,6 +9,8 @@ import ProfileCard from "./components/profileCard";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {getCurrentUser} from "../../http/userAPI";
+import {getCurrentUserProfile} from "../../http/moderatorAPI";
+import {toJS} from "mobx";
 
 const ModeratorProfile = observer(() => {
     const {user} = useContext(Context)
@@ -16,10 +18,11 @@ const ModeratorProfile = observer(() => {
     const {usersArr} = useContext(Context)
 
     useEffect(() => {
-        getCurrentUser().then(data => {
-            usersArr.setTest(data.data)
-            console.log('USE EFFECT PROFILE>>>')
-        }).finally()
+        const ans1 = getCurrentUserProfile(localStorage.getItem('email')).then(function (response){
+            user.setUser(response.data)
+            console.log('THIS USER>>>')
+            console.log(toJS(user.user))
+        })
     }, [])
 
     return (
@@ -30,7 +33,7 @@ const ModeratorProfile = observer(() => {
                     <Extra></Extra>
                     <div className="content-page">
 
-                        <ProfileCard user={user}></ProfileCard>
+                        <ProfileCard></ProfileCard>
 
                     </div>
                     <div className="bottom-profile">

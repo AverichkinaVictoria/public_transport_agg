@@ -23,6 +23,7 @@ import Remove from "@material-ui/icons/Remove";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import MaterialTable from "material-table";
 import no_bttn from "../../UI/no_button.svg";
+import {deleteUser, getUsersList} from "../../http/moderatorAPI";
 
 const ModeratorUsers = observer(() => {
     const {usersArr} = useContext(Context)
@@ -59,17 +60,26 @@ const ModeratorUsers = observer(() => {
 
 
     useEffect(() => {
-        // getCurrentUser().then(data => {
-        //     usersArr.setTest(data.data)
-        //     console.log('USE EFFECT USERS>>>')
-        // }).finally()
+        getUsersList().then(data => {
+            console.log('USERS LIST>>>')
+            console.log(data.data)
+            const arr = []
+            data.data.forEach(function(entry) {
+                if (entry.userType==='passenger') {
+                    arr.push(entry)
+                }
+            });
+            console.log(arr)
+            setTableData(arr)
+        }).finally()
 
-        setTableData([
-            {id: 1, role: 'user', firstName: 'Nina1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 2, role: 'user', firstName: 'Nina2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 3, role: 'manager', firstName: 'Nina3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 4, role: 'user', firstName: 'Nina4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
-        ])
+
+        // setTableData([
+        //     {id: 1, role: 'user', firstName: 'Nina1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 2, role: 'user', firstName: 'Nina2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 3, role: 'manager', firstName: 'Nina3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 4, role: 'user', firstName: 'Nina4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
+        // ])
     }, [])
 
     return (
@@ -101,6 +111,10 @@ const ModeratorUsers = observer(() => {
                                                    onClick: (e, data) => {
                                                        console.log(data.name)
                                                        //серверные запросы на удаление
+                                                       const ans1 = deleteUser(data.id).then(function (response){
+                                                           console.log('DELETE RES >>>')
+                                                           console.log(response)
+                                                       })
 
                                                        const updatedData = [...tableData]
                                                        const index = tableData.indexOf(data);
