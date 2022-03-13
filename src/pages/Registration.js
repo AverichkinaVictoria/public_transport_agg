@@ -40,45 +40,48 @@ const Registration = () => {
     }
 
     return (
-        <div className="registration-main">
-            <div className="registration-header">
-                <h1 className="registration-header-h1">PUBLIC TRANSPORT</h1>
-            </div>
-
-            <div className="registration-form">
-                <div className="padds"> </div>
-
-                <div className="registration-form-control">
-                    <h2 className="registration-form-control-h2">Email</h2>
-                    <input type="email" id="inputEmail" className="registration-form-control-input" placeholder="" required=""
-                           autoFocus="" value={email || ''} onChange={e => setEmail(e.target.value)} />
+        <div className="reg-main-back">
+            <div className="registration-main">
+                <div className="registration-header">
+                    <h1 className="registration-header-h1">PUBLIC TRANSPORT</h1>
                 </div>
 
+                <div className="registration-form">
+                    <div className="padds"> </div>
 
-                <div className="registration-form-control">
-                    <h2 className="registration-form-control-h2">New password</h2>
-                    <input type="password" id="inputPassword1" className="registration-form-control-input" placeholder="" required=""
-                           autoFocus="" value={password || ''} onChange={e => setPassword(e.target.value)}/>
+                    <div className="registration-form-control">
+                        <h2 className="registration-form-control-h2">Email</h2>
+                        <input type="email" id="inputEmail" className="registration-form-control-input" placeholder="" required=""
+                               autoFocus="" value={email || ''} onChange={e => setEmail(e.target.value)} />
+                    </div>
+
+
+                    <div className="registration-form-control">
+                        <h2 className="registration-form-control-h2">New password</h2>
+                        <input type="password" id="inputPassword1" className="registration-form-control-input" placeholder="" required=""
+                               autoFocus="" value={password || ''} onChange={e => setPassword(e.target.value)}/>
+                    </div>
+
+                    <div className="registration-form-control">
+                        <h2 className="registration-form-control-h2">Re-enter the new password</h2>
+                        <input type="password" id="inputPassword2" className="registration-form-control-input" placeholder="" required=""
+                               autoFocus="" value={password2 || ''} onChange={e => setPassword2(e.target.value)}/>
+                    </div>
+
+                    <div className="registration-form-control">
+                        <button className="registration-form-button"
+                                onClick={registration_user}>
+                            Sign up
+                        </button>
+                        {errorMessage && (
+                            <p className="error"> {errorMessage} </p>
+                        )}
+                    </div>
+
                 </div>
-
-                <div className="registration-form-control">
-                    <h2 className="registration-form-control-h2">Re-enter the new password</h2>
-                    <input type="password" id="inputPassword2" className="registration-form-control-input" placeholder="" required=""
-                           autoFocus="" value={password2 || ''} onChange={e => setPassword2(e.target.value)}/>
-                </div>
-
-                <div className="registration-form-control">
-                    <button className="registration-form-button"
-                    onClick={registration_user}>
-                        Sign up
-                    </button>
-                    {errorMessage && (
-                        <p className="error"> {errorMessage} </p>
-                    )}
-                </div>
-
             </div>
         </div>
+
     );
 };
 
