@@ -15,14 +15,14 @@ const App = observer(() => {
 
 
     useEffect(() => {
+        // user.setUser(localStorage.getItem('user'))
         check().then(data => {
             const ans1 = getCurrentUserProfile(localStorage.getItem('email')).then(function (response){
                 user.setUser(response.data)
                 console.log('THIS USER from USE EFFECT>>>')
                 console.log(toJS(user.user))
-            }).catch(function(){})
+            }).catch(function(){console.log('ERROR ON CHECKING USER>>>')})
             // user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
-            console.log(user.user)
             user.setIsAuth(true)
             user.setRole(localStorage.getItem('role'))
             console.log('CHECKING>>>')

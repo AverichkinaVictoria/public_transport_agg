@@ -12,7 +12,7 @@ export const getCompaniesRequests = async () => {
 }
 
 export const postCompaniesRequests = async (id,isApproved) => {
-    const response = await $authHost.post('api/v1/companies/requests/'+id+'?approve='+isApproved,{})
+    const response = await $authHost.post('api/v1/companies/requests/'+id+'?approve='+isApproved)
     return response
 }
 
@@ -35,9 +35,9 @@ export const getCompaniesFiles = async (id) => {
     return response
 }
 
-export const putCompaniesFiles = async () => {
+export const putCompaniesFiles = async (name_file) => {
     const response = await $authHostR.post('api/v1/media/upload', {name:
-    'test doc2', aclWatchers: ['manager', 'moderator']})
+        name_file, aclWatchers: ['manager', 'moderator']})
     return response
 }
 
@@ -58,6 +58,7 @@ export const getUsersList = async () => {
 
 export const getCurrentUserProfile = async (user_email) => {
     const response = await $authHostE.get('api/v1/User/GetByEmail?email='+user_email.toString())
+    localStorage.setItem('user', response.data)
     return response
 }
 
@@ -95,7 +96,7 @@ export const postFeedbacks = async () => {
 }
 
 export const putCurrentUserProfile = async (user_id,user_firstName,user_lastName,user_middleName,user_email,user_phone,user_companyId,user_companyName,user_type,img_url) => {
-    const response = await $authHostE.put('api/v1/User/UpdateUserByEmail?email='+localStorage.getItem('email').toString(), {
+    const response = await $authHostE.put('api/v1/User/UpdateUserById?id='+user_id, {
 
         id: user_id,
         firstName: user_firstName.toString(),

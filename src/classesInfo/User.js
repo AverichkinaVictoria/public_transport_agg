@@ -10,6 +10,7 @@ export default class User {
             {id: 5, role: 'manager', firstName: 'Victoria5', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
         ]
         this._test = []
+        this._img = 'none'
 
         makeAutoObservable(this)
     }
@@ -20,6 +21,15 @@ export default class User {
 
     setTest(test) {
         this._test = test
+    }
+
+    setImg(img) {
+        this._img = img
+    }
+
+
+    get img() {
+        return this._img
     }
 
 

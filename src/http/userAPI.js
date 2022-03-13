@@ -24,6 +24,8 @@ export const login = async (user_email, user_password) => {
     localStorage.setItem('token', data.token.accessToken)
     localStorage.setItem('refreshToken', data.token.refreshToken)
     localStorage.setItem('expiresAt', data.token.expiresAt)
+    // console.log("THIS>>>")
+    // console.log(data)
     return data
 }
 

@@ -28,14 +28,18 @@ const Auth = observer(() => {
         try {
             setErrorMessage('');
             const res = await login(email, password)
+            console.log("LOGIN RES>>>")
+            console.log(res)
             user.setIsAuth(true)
             const infoUserCurrent = await getCurrentUser()
             user.setRole(infoUserCurrent.data.type)
 
             console.log(infoUserCurrent.data)
+            console.log('TYPE>>>')
+            console.log(typeof parseInt(infoUserCurrent.data.id))
             //Сделать проверку на то существует ли в базе пользователь
 
-            const ans = addUser(parseInt(infoUserCurrent.data.id),'','','',infoUserCurrent.data.email,'','', infoUserCurrent.data.type,0,'').then(function (response){
+            const ans = addUser(infoUserCurrent.data.id,'','','',infoUserCurrent.data.email,'','', infoUserCurrent.data.type,0,'').then(function (response){
                 console.log(response)
             }).catch(function(){console.log('ERROR!!!')})
 

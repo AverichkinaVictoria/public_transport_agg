@@ -119,7 +119,9 @@ const ModeratorTc = observer(() => {
             const arr = []
             data.data.list.forEach(function(entry) {
                 if (!(entry.request===null)) {
-                    arr.push(entry)
+                    if (entry.request.state==='Created') {
+                        arr.push(entry)
+                    }
                 }
             });
             console.log(arr)
@@ -154,7 +156,11 @@ const ModeratorTc = observer(() => {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={yes_bttn} style={{height: "35px", width: '35px'}}/></button>,
                                                    tooltip: "Accept",
                                                    onClick: (e, data) => {
-                                                       const req = postCompaniesRequests(data.request.request_id, true)
+
+                                                       const typ = true
+                                                       console.log('TYPE OF>>>')
+                                                       console.log(typeof parseInt(data.request.request_id))
+                                                       const req = postCompaniesRequests(data.request.request_id, typ)
                                                        console.log("PRINTING DATA>>>")
 
                                                        console.log(req)
