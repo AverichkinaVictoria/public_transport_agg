@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import '../../../styles/styles_for_pages/Moderator.css'
 import {
     AUTH_ROUTE, MODERATOR_MAIN_FEEDBACK_ROUTE,
@@ -18,10 +18,13 @@ import feedbacks_icon from "../../../UI/feedbacks_icon.svg";
 import {Context} from "../../../index";
 import {observer} from "mobx-react-lite";
 import {useNavigate} from "react-router";
+import { useTranslation, Trans } from 'react-i18next';
 
 const MenuBarMain = observer(() => {
+    const { t,i18n  } = useTranslation();
     const {user} = useContext(Context)
     let navigate = useNavigate()
+
 
     const logout = () => {
         user.setUser({})
@@ -83,7 +86,9 @@ const MenuBarMain = observer(() => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveMainTCRoute}>
                         <img src={trans_company_icon} className="icons" alt="menu"/>
-                        Transport companies
+                            {/*{lang.moderator_menu1}*/}
+                            {t('menu.moderator_menu1')}
+                        {/*Transport companies*/}
                         </a>
                     </span>
                 </li>
@@ -92,7 +97,9 @@ const MenuBarMain = observer(() => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagers}>
                         <img src={managers_icon} className="icons" alt="menu"/>
-                        Managers
+                            {/*{lang.moderator_menu2}*/}
+                        {/*Managers*/}
+                            {t('menu.moderator_menu2')}
                         </a>
                     </span>
                 </li>
@@ -101,7 +108,9 @@ const MenuBarMain = observer(() => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveMainUsers}>
                         <img src={users_icon} className="icons" alt="menu"/>
-                        Users
+                            {/*{lang.moderator_menu3}*/}
+                        {/*Users*/}
+                            {t('menu.moderator_menu3')}
                         </a>
                     </span>
                 </li>
@@ -110,7 +119,9 @@ const MenuBarMain = observer(() => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveMainFeedBack}>
                         <img src={feedbacks_icon} className="icons" alt="menu"/>
-                        Feedbacks
+                        {/*Feedbacks*/}
+                            {/*{lang.moderator_menu4}*/}
+                            {t('menu.moderator_menu4')}
                         </a>
                     </span>
                 </li>
@@ -119,7 +130,9 @@ const MenuBarMain = observer(() => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveMainProfile}>
                         <img src={profile_icon} className="icons" alt="menu"/>
-                        Profile
+                        {/*Profile*/}
+                        {/*    {lang.moderator_menu5}*/}
+                            {t('menu.moderator_menu5')}
                         </a>
                     </span>
                 </li>
@@ -128,7 +141,10 @@ const MenuBarMain = observer(() => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveMainSupport}>
                         <img src={support_icon} className="icons" alt="menu"/>
-                        Support service</a>
+                        {/*Support service*/}
+                        {/*    {lang.moderator_menu6}*/}
+                            {t('menu.moderator_menu6')}
+                        </a>
                     </span>
                 </li>
 
@@ -136,7 +152,9 @@ const MenuBarMain = observer(() => {
                     <span>
                         <a className="a-ManagerMain" onClick={logout}>
                         <img src={logout_icon} className="icons" alt="menu"/>
-                        Log out
+                            {/*{lang.moderator_menu7}*/}
+                        {/*Log out*/}
+                            {t('menu.moderator_menu7')}
                         </a>
                     </span>
                 </li>

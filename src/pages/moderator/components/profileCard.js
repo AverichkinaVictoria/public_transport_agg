@@ -13,6 +13,7 @@ import {Context} from "../../../index";
 import {toJS} from "mobx";
 import {observer} from "mobx-react-lite";
 import axios from "axios";
+import {useTranslation} from "react-i18next";
 
 const ProfileCard = observer((user_img) => {
     const {user} = useContext(Context)
@@ -23,10 +24,11 @@ const ProfileCard = observer((user_img) => {
     const [email, setEmail] = useState(toJS(user.user).email)
     const [phone, setPhone] = useState(toJS(user.user).phone)
     const [file, setFile] = useState(null)
-    const [img, setImg] = useState(toJS(user.user).imageUrl)
+    const [img, setImg] = useState(profilePic)
     const [img_id, setImg_id] = useState(profilePic)
     const [errorMessage, setErrorMessage] = useState('');
     let navigate = useNavigate()
+    const { t,i18n  } = useTranslation();
 
     useEffect(() => {
         user.setUser(localStorage.getItem('user'))
@@ -40,7 +42,10 @@ const ProfileCard = observer((user_img) => {
             setLastName(response.data.lastName)
             setEmail(response.data.email)
             setPhone(response.data.phone)
-            setImg(response.data.imageUrl)
+            // setImg(response.data.imageUrl)
+            getCompaniesFiles(response.data.imageUrl).then(function (res){
+                setImg(res.data.url)
+            })
         })
     }, [])
 
@@ -60,17 +65,19 @@ const ProfileCard = observer((user_img) => {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(function (res){
+                console.log("RESULT>>>")
+                console.log(res.data)
 
                 setImg_id(res.data.id)
 
                 getCompaniesFiles(res.data.id).then(function (response){
 
-                    setImg(response.data.url)
+                    setImg(response)
                     console.log("SMTH>>>")
                     console.log(response.data.url)
 
                     localStorage.setItem('user_img', response.data.url)
-                    const ans1 = putCurrentUserProfile(localStorage.getItem('id'),firstName,lastName,middleName,email,phone,0,'',localStorage.getItem('role'),response.data.url).then(function (response){
+                    const ans1 = putCurrentUserProfile(localStorage.getItem('id'),firstName,lastName,middleName,email,phone,0,'',localStorage.getItem('role'),res.data.id).then(function (response){
 
                         const ans1 = getCurrentUserProfile(email).then(function (response){
                             user.setUser(response.data)
@@ -144,47 +151,50 @@ const ProfileCard = observer((user_img) => {
 
                     <label className="moderator-load-img-profile">
                         <input type="file" name="myImage" accept="image/x-png,image/jpeg, image/jpg" onChange={selectFile} />
-                        Load image
+                        {/*Load image*/}
+                        {t('profile.moderator_load')}
                     </label>
 
 
             </div>
             <div className="profile-fields-moderator">
                 <div className="profile-field">
-                    <h2 className="profile-field-h2">First name</h2>
+                    <h2 className="profile-field-h2">{t('profile.moderator_first_name')}</h2>
                     <input type="text" id="first-name" className="profile-field-input" placeholder={user.user.firstName} required=""
                            autoFocus="" value={firstName || ''} onChange={e => setFirstName(e.target.value)}/>
                 </div>
 
                 <div className="profile-field">
-                    <h2 className="profile-field-h2">Middle name</h2>
+                    <h2 className="profile-field-h2">{t('profile.moderator_middle_name')}</h2>
                     <input type="text" id="middle-name" className="profile-field-input" placeholder={user.user.middleName} required=""
                            autoFocus="" value={middleName || ''} onChange={e => setMiddleName(e.target.value)}/>
                 </div>
 
                 <div className="profile-field">
-                    <h2 className="profile-field-h2">Last name</h2>
+                    <h2 className="profile-field-h2">{t('profile.moderator_last_name')}</h2>
                     <input type="text" id="last-name" className="profile-field-input" placeholder={user.user.lastName} required=""
                            autoFocus="" value={lastName || ''} onChange={e => setLastName(e.target.value)}/>
                 </div>
 
                 <div className="profile-field">
-                    <h2 className="profile-field-h2">Email</h2>
+                    <h2 className="profile-field-h2">{t('profile.moderator_email')}</h2>
                     <input readOnly type="text" id="last-name" className="profile-field-input" placeholder={user.user.email} required=""
                            autoFocus="" value={email || ''} onChange={e => setEmail(e.target.value)}/>
                 </div>
 
                 <div className="profile-field">
-                    <h2 className="profile-field-h2">Phone</h2>
+                    <h2 className="profile-field-h2">{t('profile.moderator_phone')}</h2>
                     <input type="text" id="last-name" className="profile-field-input" placeholder={user.user.phone} required=""
                            autoFocus="" value={phone || ''} onChange={e => setPhone(e.target.value)}/>
                 </div>
 
                     <button className="moderator-submit-profile" onClick={saveChanges}>
-                        Save changes
+                        {/*Save changes*/}
+                        {t('profile.moderator_save')}
                     </button>
                 <button className="moderator-submit-profile" onClick={resetPassword}>
-                    Reset password
+                    {/*Reset password*/}
+                    {t('profile.moderator_change_password')}
                 </button>
 
                 </div>

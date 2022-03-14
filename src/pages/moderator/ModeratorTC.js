@@ -36,11 +36,13 @@ import {
     putCompanies, putCompaniesFiles
 } from "../../http/moderatorAPI";
 import axios from "axios";
+import {useTranslation} from "react-i18next";
 
 
 
 
 const ModeratorTc = observer(() => {
+    const { t,i18n  } = useTranslation();
     const [tableData,setTableData] = useState([])
     const [tableDataAll,setTableDataAll] = useState([])
 
@@ -66,18 +68,18 @@ const ModeratorTc = observer(() => {
 
     const columns = [
         {title: "id", field: "company.id", hidden: true},
-        {title: 'Name', field: 'company.name' },
-        {title: 'Address', field: 'company.address'},
-        {title: 'Phone number', field: 'company.phone', sorting: false},
-        {title: 'Website', field: 'company.website'}
+        {title: t('tc.moderator_name'), field: 'company.name' },
+        {title: t('tc.moderator_address'), field: 'company.address'},
+        {title: t('tc.moderator_phone'), field: 'company.phone', sorting: false},
+        {title: t('tc.moderator_website'), field: 'company.website'}
     ]
 
     const columnsAll = [
         {title: "id", field: "id", hidden: true},
-        {title: 'Name', field: 'name' },
-        {title: 'Address', field: 'address'},
-        {title: 'Phone number', field: 'phone', sorting: false},
-        {title: 'Website', field: 'website'}
+        {title: t('tc.moderator_name'), field: 'name' },
+        {title: t('tc.moderator_address'), field: 'address'},
+        {title: t('tc.moderator_phone'), field: 'phone', sorting: false},
+        {title: t('tc.moderator_website'), field: 'website'}
     ]
 
 
@@ -144,17 +146,33 @@ const ModeratorTc = observer(() => {
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
                                 <div className="inside-title-header">
-                                    For moderation:
+                                    {/*For moderation:*/}
+                                    {t('tc.moderator_for_moderation')}
 
                                 </div>
                             </div>
                         </div>
                         <div className='moderator-table'>
-                            <MaterialTable icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                            <MaterialTable localization={{
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows')
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('feedbacks.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('tc.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={yes_bttn} style={{height: "35px", width: '35px'}}/></button>,
-                                                   tooltip: "Accept",
+                                                   tooltip: t('tc.moderator_accept'),
                                                    onClick: (e, data) => {
 
                                                        const typ = true
@@ -181,7 +199,7 @@ const ModeratorTc = observer(() => {
                                                },
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Decline",
+                                                   tooltip: t('tc.moderator_decline'),
                                                    onClick: (e, data) => {
                                                        const req = postCompaniesRequests(data.request.request_id, false)
                                                        console.log("PRINTING DATA>>>")
@@ -203,7 +221,7 @@ const ModeratorTc = observer(() => {
                                                },
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={documents_bttn} style={{height: "35px", width: '35px'}}/></button>,
-                                                   tooltip: "Show documents",
+                                                   tooltip: t('tc.moderator_show_doc'),
                                                    onClick: (e, data) => {
                                                        console.log(data.request.document_id)
 
@@ -225,17 +243,32 @@ const ModeratorTc = observer(() => {
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
                                 <div className="inside-title-header">
-                                    All:
+                                    {/*All:*/}
+                                    { t('tc.moderator_all')}
                                 </div>
                             </div>
                         </div>
 
                         <div className='moderator-table'>
-                            <MaterialTable icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0,fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                            <MaterialTable localization={{
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}'
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('feedbacks.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('tc.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0,fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Delete",
+                                                   tooltip: t('tc.moderator_delete'),
                                                    onClick: (e, data) => {
                                                        const req = putCompanies(data.id, false, data.code, data.name, data.address, data.phone, data.website, data.description)
                                                        console.log(req)

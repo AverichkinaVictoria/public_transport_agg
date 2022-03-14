@@ -1,8 +1,11 @@
 import React from 'react';
 import no_bttn from "../../../UI/no_button.svg";
 import star from "../../../UI/Star.svg";
+import {observer} from "mobx-react-lite";
+import { useTranslation, Trans } from 'react-i18next';
 
-const CardFeedbacks = ({feedbacksAll, feedbacks}) => {
+const CardFeedbacks = observer(({feedbacksAll, feedbacks}) => {
+    const { t,i18n  } = useTranslation();
     const no_click = async () => {
         //запрос на удаление по id
         const index = feedbacksAll.feedbacks.indexOf(feedbacks);
@@ -12,6 +15,37 @@ const CardFeedbacks = ({feedbacksAll, feedbacks}) => {
         console.log('no')
 
     }
+
+    let lang = {
+        english: {
+            moderator_first_name: 'First name:',
+            moderator_last_name: 'Last name:',
+            moderator_middle_name: 'Middle name:',
+            moderator_email: 'Email:',
+            moderator_company: 'Company:',
+            moderator_vehicle: 'Vehicle:',
+            moderator_departure: 'Departure:',
+            moderator_arrival: 'Arrival:',
+            moderator_rating: 'Rating:'
+        },
+        russian: {
+            moderator_first_name: 'Имя:',
+            moderator_last_name: 'Фамилия:',
+            moderator_middle_name: 'Отчество:',
+            moderator_email: 'Email:',
+            moderator_company: 'Компания:',
+            moderator_vehicle: 'Транспортное средство:',
+            moderator_departure: 'Отправление:',
+            moderator_arrival: 'Прибытие:',
+            moderator_rating: 'Оценка:'
+        }
+    };
+
+
+    // localStorage.getItem('language') === "eng"
+    //     ? (lang = lang.english)
+    //     : (lang = lang.russian);
+    // console.log(localStorage.getItem('language'))
 
     return (
         <div className="moderator-TC-card">
@@ -23,7 +57,7 @@ const CardFeedbacks = ({feedbacksAll, feedbacks}) => {
                         <div className="card-moderator-1-f">
                             <div className="card-moderator-2">
                                 <div className="card-moderator-3" >
-                                    <p>First name:</p>
+                                    <p> {t('feedbacks.moderator_first_name')}</p>
                                     <p>Middle name:</p>
                                     <p>Last name:</p>
                                     <p>Email:</p>
@@ -64,6 +98,6 @@ const CardFeedbacks = ({feedbacksAll, feedbacks}) => {
             </div>
         </div>
     );
-};
+});
 
 export default CardFeedbacks;

@@ -41,6 +41,7 @@ const Auth = observer(() => {
 
             const ans = addUser(infoUserCurrent.data.id,'','','',infoUserCurrent.data.email,'','', infoUserCurrent.data.type,0,'').then(function (response){
                 console.log(response)
+                console.log('Added')
             }).catch(function(){console.log('ERROR!!!')})
 
             const ans1 = getCurrentUserProfile(infoUserCurrent.data.email).then(function (response){

@@ -25,10 +25,12 @@ import Remove from "@material-ui/icons/Remove";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import documents_bttn from "../../UI/documents.svg";
 import star from "../../UI/Star.svg";
+import {useTranslation} from "react-i18next";
 
 const ModeratorSupportService = observer(() => {
 
     const {usersArr} = useContext(Context)
+    const { t,i18n  } = useTranslation();
 
     const [tableData,setTableData] = useState([])
     const [reportCur,setReportCur] = useState({})
@@ -63,12 +65,12 @@ const ModeratorSupportService = observer(() => {
 
     const columns = [
         {title: "id", field: "id", hidden: true},
-        {title: 'Type', field: 'type' },
-        {title: 'First name', field: 'firstName', grouping: false },
-        {title: 'Middle name', field: 'middleName',sorting: false,grouping: false},
-        {title: 'Last name', field: 'lastName',grouping: false},
-        {title: 'Phone number', field: 'phone', sorting: false,grouping: false},
-        {title: 'Email', field: 'email',grouping: false},
+        {title: t('support.moderator_type'), field: 'type' },
+        {title: t('support.moderator_first_name'), field: 'firstName', grouping: false },
+        {title: t('support.moderator_middle_name'), field: 'middleName',sorting: false,grouping: false},
+        {title: t('support.moderator_last_name'), field: 'lastName',grouping: false},
+        {title: t('support.moderator_phone'), field: 'phone', sorting: false,grouping: false},
+        {title: t('support.moderator_email'), field: 'email',grouping: false},
         {title: 'Report', field: 'description', hidden: true}
     ]
 
@@ -102,7 +104,8 @@ const ModeratorSupportService = observer(() => {
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
                                 <div className="inside-title-header">
-                                    All reports:
+                                    {/*All reports:*/}
+                                    {t('support.moderator_all_reports')}
                                 </div>
                             </div>
                         </div>
@@ -114,11 +117,11 @@ const ModeratorSupportService = observer(() => {
                                 <div className="card-moderator-1-f">
                                     <div className="card-moderator-2">
                                         <div className="card-moderator-3" >
-                                            <p>First name:</p>
-                                            <p>Middle name:</p>
-                                            <p>Last name:</p>
-                                            <p>Email:</p>
-                                            <p>Phone:</p>
+                                            <p>{t('support.moderator_first_name')}:</p>
+                                            <p>{t('support.moderator_middle_name')}:</p>
+                                            <p>{t('support.moderator_last_name')}:</p>
+                                            <p>{t('support.moderator_email')}:</p>
+                                            <p>{t('support.moderator_phone')}:</p>
                                         </div>
                                         <div className="card-moderator-4">
                                             <p>{reportCur.firstName}</p>
@@ -145,11 +148,29 @@ const ModeratorSupportService = observer(() => {
 
 
                         <div className='moderator-table'>
-                            <MaterialTable icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped', grouping: true}}
+                            <MaterialTable localization={{
+                                grouping: {
+                                    placeholder: t('support.moderator_group'),
+                                },
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows'),
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('tc.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('support.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped', grouping: true}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Delete",
+                                                   tooltip: t('feedbacks.moderator_delete_feedback'),
                                                    onClick: (e, data) => {
                                                        console.log(data.name)
                                                        //серверные запросы на удаление
@@ -168,7 +189,7 @@ const ModeratorSupportService = observer(() => {
                                                },
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={documents_bttn} style={{height: "35px", width: '35px'}}/></button>,
-                                                   tooltip: "Show feedback",
+                                                   tooltip: t('support.moderator_show'),
                                                    onClick: (e, data) => {
 
                                                        setReportCur(data)

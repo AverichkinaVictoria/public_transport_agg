@@ -24,10 +24,12 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 import MaterialTable from "material-table";
 import no_bttn from "../../UI/no_button.svg";
 import {deleteUser, getUsersList} from "../../http/moderatorAPI";
+import {useTranslation} from "react-i18next";
 
 const ModeratorUsers = observer(() => {
     const {usersArr} = useContext(Context)
     const [tableData,setTableData] = useState([])
+    const { t,i18n  } = useTranslation();
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -51,11 +53,11 @@ const ModeratorUsers = observer(() => {
 
     const columns = [
         {title: "id", field: "id", hidden: true},
-        {title: 'First name', field: 'firstName' },
-        {title: 'Middle name', field: 'middleName',sorting: false},
-        {title: 'Last name', field: 'lastName'},
-        {title: 'Phone number', field: 'phone', sorting: false},
-        {title: 'Email', field: 'email'}
+        {title: t('users.moderator_first_name'), field: 'firstName' },
+        {title: t('users.moderator_middle_name'), field: 'middleName',sorting: false},
+        {title: t('users.moderator_last_name'), field: 'lastName'},
+        {title: t('users.moderator_email'), field: 'phone', sorting: false},
+        {title: t('users.moderator_phone'), field: 'email'}
     ]
 
 
@@ -93,7 +95,8 @@ const ModeratorUsers = observer(() => {
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
                                 <div className="inside-title-header">
-                                    All users:
+                                    {/*All users:*/}
+                                    {t('users.moderator_all_managers')}
                                 </div>
                             </div>
                         </div>
@@ -103,11 +106,26 @@ const ModeratorUsers = observer(() => {
                         {/*)}*/}
 
                         <div className='moderator-table'>
-                            <MaterialTable icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                            <MaterialTable localization={{
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows')
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('tc.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('users.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Delete",
+                                                   tooltip: t('feedbacks.moderator_delete_feedback'),
                                                    onClick: (e, data) => {
                                                        console.log(data.name)
                                                        //серверные запросы на удаление

@@ -16,6 +16,8 @@ const App = observer(() => {
 
     useEffect(() => {
         // user.setUser(localStorage.getItem('user'))
+        const a = (localStorage.getItem('language') == null) ? localStorage.setItem('language', 'eng') : false;
+
         check().then(data => {
             const ans1 = getCurrentUserProfile(localStorage.getItem('email')).then(function (response){
                 user.setUser(response.data)

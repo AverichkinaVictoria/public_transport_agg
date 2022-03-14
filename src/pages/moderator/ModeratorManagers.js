@@ -30,10 +30,12 @@ import no_bttn from "../../UI/no_button.svg";
 import documents_bttn from "../../UI/documents.svg";
 import {deleteUser, getCurrentUserProfile, getUsersList} from "../../http/moderatorAPI";
 import {toJS} from "mobx";
+import {useTranslation} from "react-i18next";
 
 const ModeratorManagers = observer(() => {
     const [tableData,setTableData] = useState([])
     const {usersArr} = useContext(Context)
+    const { t,i18n  } = useTranslation();
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -57,12 +59,12 @@ const ModeratorManagers = observer(() => {
 
     const columns = [
         {title: "id", field: "id", hidden: true},
-        {title: 'First name', field: 'firstName' },
-        {title: 'Middle name', field: 'middleName',sorting: false},
-        {title: 'Last name', field: 'lastName'},
-        {title: 'Phone number', field: 'phone', sorting: false},
-        {title: 'Email', field: 'email'},
-        {title: 'Company', field: 'companyName'}
+        {title: t('managers.moderator_first_name'), field: 'firstName' },
+        {title: t('managers.moderator_middle_name'), field: 'middleName',sorting: false},
+        {title: t('managers.moderator_last_name'), field: 'lastName'},
+        {title: t('managers.moderator_email'), field: 'phone', sorting: false},
+        {title: t('managers.moderator_company'), field: 'email'},
+        {title: t('managers.moderator_phone'), field: 'companyName'}
     ]
 
     useEffect(() => {
@@ -106,7 +108,8 @@ const ModeratorManagers = observer(() => {
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
                                 <div className="inside-title-header">
-                                    All managers:
+                                    {/*All managers:*/}
+                                    {t('managers.moderator_all_managers')}
                                 </div>
                             </div>
                         </div>
@@ -116,11 +119,26 @@ const ModeratorManagers = observer(() => {
                         {/*)}*/}
 
                         <div className='moderator-table'>
-                            <MaterialTable icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                            <MaterialTable localization={{
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows')
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('tc.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('managers.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Delete",
+                                                   tooltip: t('feedbacks.moderator_delete_feedback'),
                                                    onClick: (e, data) => {
                                                        console.log(data.id)
                                                        //серверные запросы на удаление

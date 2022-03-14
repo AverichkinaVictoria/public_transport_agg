@@ -5,6 +5,7 @@ import UserInfo from "./classesInfo/UserInfo";
 import TC from "./classesInfo/TC";
 import User from "./classesInfo/User";
 import Feedbacks from "./classesInfo/Feedbacks";
+import './i18n';
 
 export const Context = createContext(null)
 

@@ -11,6 +11,7 @@ export default class User {
         ]
         this._test = []
         this._img = 'none'
+        this._language = []
 
         makeAutoObservable(this)
     }
@@ -25,6 +26,15 @@ export default class User {
 
     setImg(img) {
         this._img = img
+    }
+
+    setLanguage(lan) {
+        this._language = lan
+    }
+
+
+    get language() {
+        return this._language
     }
 
 
