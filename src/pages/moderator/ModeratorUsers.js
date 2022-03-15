@@ -56,8 +56,8 @@ const ModeratorUsers = observer(() => {
         {title: t('users.moderator_first_name'), field: 'firstName' },
         {title: t('users.moderator_middle_name'), field: 'middleName',sorting: false},
         {title: t('users.moderator_last_name'), field: 'lastName'},
-        {title: t('users.moderator_email'), field: 'phone', sorting: false},
-        {title: t('users.moderator_phone'), field: 'email'}
+        {title: t('users.moderator_email'), field: 'email', sorting: false},
+        {title: t('users.moderator_phone'), field: 'phone'}
     ]
 
 
