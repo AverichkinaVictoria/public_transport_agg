@@ -72,7 +72,7 @@ const ProfileCard = observer((user_img) => {
 
                 getCompaniesFiles(res.data.id).then(function (response){
 
-                    setImg(response)
+                    setImg(response.data.url)
                     console.log("SMTH>>>")
                     console.log(response.data.url)
 

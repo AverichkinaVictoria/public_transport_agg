@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter, HashRouter} from 'react-router-dom'
 import AppRouter from "./components/AppRouter";
 import {observer} from "mobx-react-lite"
 import {Context} from "./index";
@@ -43,9 +43,9 @@ const App = observer(() => {
     }
 
     return (
-          <BrowserRouter>
+          <HashRouter>
             <AppRouter />
-          </BrowserRouter>
+          </HashRouter>
         );
 });
 

@@ -24,6 +24,14 @@ const Auth = observer(() => {
     const [errorMessage, setErrorMessage] = useState('');
     let navigate = useNavigate()
 
+    const resetPass = () => {
+        navigate(PASSWORD_RESET_ROUTE)
+    }
+
+    const register = () => {
+        navigate(REGISTER_ROUTE)
+    }
+
     const signIn = async () => {
         try {
             setErrorMessage('');
@@ -97,10 +105,10 @@ const Auth = observer(() => {
 
                     <div className="auth-main-form-control-password-reg">
                         <div className="label-link-left">
-                            <a  className="password-a" href={PASSWORD_RESET_ROUTE} >Forgot password?</a>
+                            <a  className="password-a" /*href={PASSWORD_RESET_ROUTE}*/ onClick={resetPass}>Forgot password?</a>
                         </div>
                         <div className="label-link-right">
-                            <a className="password-a" href={REGISTER_ROUTE} >Sign up</a>
+                            <a className="password-a"  /*href={REGISTER_ROUTE}*/ onClick={register}>Sign up</a>
                         </div>
                     </div>
 
