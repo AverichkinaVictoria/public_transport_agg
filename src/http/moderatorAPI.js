@@ -52,33 +52,33 @@ export const getHelpDesk = async () => {
 }
 
 export const getUsersList = async () => {
-    const response = await $authHostE.get('api/v1/User')
+    const response = await $authHostE.get('api/v1/user')
     return response
 }
 
 export const getCurrentUserProfile = async (user_email) => {
-    const response = await $authHostE.get('api/v1/User/GetByEmail?email='+user_email.toString())
+    const response = await $authHostE.get('api/v1/user/getbyemail?email='+user_email.toString())
     localStorage.setItem('user', response.data)
     return response
 }
 
 export const deleteUser = async (user_id) => {
-    const response = await $authHostE.delete('api/v1/User/RemoveById?id='+user_id)
+    const response = await $authHostE.delete('api/v1/user/removebyid?id='+user_id)
     return response
 }
 
 export const deleteFeedback = async (feedback_id) => {
-    const response = await $authHostE.delete('api/v1/Comment/RemoveById?id='+feedback_id)
+    const response = await $authHostE.delete('api/v1/comment/removebyid?id='+feedback_id)
     return response
 }
 
 export const getAllFeedbacks = async () => {
-    const response = await $authHostE.get('api/v1/Comment/GetAll')
+    const response = await $authHostE.get('api/v1/comment/getall')
     return response
 }
 
 export const postFeedbacks = async () => {
-    const response = await $authHostE.post('api/v1/Comment/AddComment',{
+    const response = await $authHostE.post('api/v1/comment/addcomment',{
         id: 0,
         firstName: "Nina",
         lastName: "Nikolaeva",
@@ -96,7 +96,7 @@ export const postFeedbacks = async () => {
 }
 
 export const putCurrentUserProfile = async (user_id,user_firstName,user_lastName,user_middleName,user_email,user_phone,user_companyId,user_companyName,user_type,img_url) => {
-    const response = await $authHostE.put('api/v1/User/UpdateUserById?id='+user_id, {
+    const response = await $authHostE.put('api/v1/user/updateuserbyid?id='+user_id, {
 
         id: user_id,
         firstName: user_firstName.toString(),
@@ -115,7 +115,7 @@ export const putCurrentUserProfile = async (user_id,user_firstName,user_lastName
 }
 
 export const addUser= async (user_id,user_firstName,user_lastName,user_middleName,user_email,user_phone,img_url, user_type, user_companyId,user_companyName) => {
-    const response = await $authHostE.post('api/v1/User/AddUser',
+    const response = await $authHostE.post('api/v1/user/adduser',
         {
             id: user_id,
             firstName: user_firstName.toString(),

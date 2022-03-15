@@ -33,19 +33,24 @@ const ProfileCard = observer((user_img) => {
     useEffect(() => {
         user.setUser(localStorage.getItem('user'))
         const ans1 = getCurrentUserProfile(localStorage.getItem('email')).then(function (response){
-            user.setUser(response.data)
-            // user.setImg('smth')
-            console.log('THIS USER>>>')
-            console.log(response.data)
-            setFirstName(response.data.firstName)
-            setMiddleName(response.data.middleName)
-            setLastName(response.data.lastName)
-            setEmail(response.data.email)
-            setPhone(response.data.phone)
-            // setImg(response.data.imageUrl)
-            getCompaniesFiles(response.data.imageUrl).then(function (res){
-                setImg(res.data.url)
-            })
+            try {
+                user.setUser(response.data)
+                // user.setImg('smth')
+                console.log('THIS USER>>>')
+                console.log(response.data)
+                setFirstName(response.data.firstName)
+                setMiddleName(response.data.middleName)
+                setLastName(response.data.lastName)
+                setEmail(response.data.email)
+                setPhone(response.data.phone)
+                // setImg(response.data.imageUrl)
+                getCompaniesFiles(response.data.imageUrl).then(function (res){
+                    setImg(res.data.url)
+                })
+            } catch (e) {
+                console.log(e)
+            }
+
         })
     }, [])
 

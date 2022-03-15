@@ -252,7 +252,8 @@ const ModeratorTc = observer(() => {
                         <div className='moderator-table'>
                             <MaterialTable localization={{
                                 pagination: {
-                                    labelDisplayedRows: '{from}-{to} of {count}'
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows')
                                 },
                                 toolbar: {
                                     nRowsSelected: '{0} row(s) selected',
