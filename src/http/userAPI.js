@@ -24,6 +24,8 @@ export const login = async (user_email, user_password) => {
     localStorage.setItem('token', data.token.accessToken)
     localStorage.setItem('refreshToken', data.token.refreshToken)
     localStorage.setItem('expiresAt', data.token.expiresAt)
+    // console.log("THIS>>>")
+    // console.log(data)
     return data
 }
 
@@ -39,6 +41,7 @@ export const check = async () => {
 export const getCurrentUser = async () => {
     const data = await $authHostR.get('api/v1/users/current')
     localStorage.setItem('id', data.data.id)
+    localStorage.setItem('email', data.data.email)
     return data
 }
 

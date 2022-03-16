@@ -13,6 +13,8 @@ import {observer} from "mobx-react-lite";
 import {check, getCurrentUser, login} from "../http/userAPI";
 import {getRoutes} from "../http/transportCompanyAPI";
 import registration from "./Registration";
+import {addUser, getCompaniesFiles, getCurrentUserProfile, getUsersList} from "../http/moderatorAPI";
+import {toJS} from "mobx";
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -22,17 +24,44 @@ const Auth = observer(() => {
     const [errorMessage, setErrorMessage] = useState('');
     let navigate = useNavigate()
 
+    const resetPass = () => {
+        navigate(PASSWORD_RESET_ROUTE)
+    }
+
+    const register = () => {
+        navigate(REGISTER_ROUTE)
+    }
+
     const signIn = async () => {
         try {
             setErrorMessage('');
             const res = await login(email, password)
+            console.log("LOGIN RES>>>")
+            console.log(res)
             user.setIsAuth(true)
             const infoUserCurrent = await getCurrentUser()
             user.setRole(infoUserCurrent.data.type)
-            user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
+
+            console.log(infoUserCurrent.data)
+            console.log('TYPE>>>')
+            console.log(typeof parseInt(infoUserCurrent.data.id))
+            //Сделать проверку на то существует ли в базе пользователь
+
+            const ans = addUser(infoUserCurrent.data.id,'','','',infoUserCurrent.data.email,'','', infoUserCurrent.data.type,0,'').then(function (response){
+                console.log(response)
+                console.log('Added')
+            }).catch(function(){console.log('ERROR!!!')})
+
+            const ans1 = getCurrentUserProfile(infoUserCurrent.data.email).then(function (response){
+                user.setUser(response.data)
+                console.log('THIS USER>>>')
+                console.log(toJS(user.user))
+            })
+
+
+            // user.setUser({id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'})
             localStorage.setItem('role', infoUserCurrent.data.type)
-            console.log('USER TYPE>>>')
-            console.log(infoUserCurrent.data.type)
+
             if (infoUserCurrent.data.type==='manager') {
                 console.log('manager')
                 navigate(MANAGER_MAIN_ROUTE)
@@ -76,10 +105,10 @@ const Auth = observer(() => {
 
                     <div className="auth-main-form-control-password-reg">
                         <div className="label-link-left">
-                            <a  className="password-a" href={PASSWORD_RESET_ROUTE} >Forgot password?</a>
+                            <a  className="password-a" /*href={PASSWORD_RESET_ROUTE}*/ onClick={resetPass}>Forgot password?</a>
                         </div>
                         <div className="label-link-right">
-                            <a className="password-a" href={REGISTER_ROUTE} >Sign up</a>
+                            <a className="password-a"  /*href={REGISTER_ROUTE}*/ onClick={register}>Sign up</a>
                         </div>
                     </div>
 

@@ -28,10 +28,14 @@ import MaterialTable from "material-table";
 import yes_bttn from "../../UI/yes_button.svg";
 import no_bttn from "../../UI/no_button.svg";
 import documents_bttn from "../../UI/documents.svg";
+import {deleteUser, getCurrentUserProfile, getUsersList} from "../../http/moderatorAPI";
+import {toJS} from "mobx";
+import {useTranslation} from "react-i18next";
 
 const ModeratorManagers = observer(() => {
     const [tableData,setTableData] = useState([])
     const {usersArr} = useContext(Context)
+    const { t,i18n  } = useTranslation();
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -55,11 +59,12 @@ const ModeratorManagers = observer(() => {
 
     const columns = [
         {title: "id", field: "id", hidden: true},
-        {title: 'First name', field: 'firstName' },
-        {title: 'Middle name', field: 'middleName',sorting: false},
-        {title: 'Last name', field: 'lastName'},
-        {title: 'Phone number', field: 'phone', sorting: false},
-        {title: 'Email', field: 'email'}
+        {title: t('managers.moderator_first_name'), field: 'firstName' },
+        {title: t('managers.moderator_middle_name'), field: 'middleName',sorting: false},
+        {title: t('managers.moderator_last_name'), field: 'lastName'},
+        {title: t('managers.moderator_email'), field: 'email', sorting: false},
+        {title: t('managers.moderator_company'), field: 'companyName'},
+        {title: t('managers.moderator_phone'), field: 'phone'}
     ]
 
     useEffect(() => {
@@ -68,13 +73,26 @@ const ModeratorManagers = observer(() => {
         //     console.log('USE EFFECT MANAGERS>>>')
         // }).finally()
 
-        setTableData([
-            {id: 1, role: 'user', firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 2, role: 'user', firstName: 'Victoria2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 3, role: 'manager', firstName: 'Victoria3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 4, role: 'user', firstName: 'Victoria4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 5, role: 'manager', firstName: 'Victoria5', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
-        ])
+        // setTableData([
+        //     {id: 1, role: 'user', firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 2, role: 'user', firstName: 'Victoria2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 3, role: 'manager', firstName: 'Victoria3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 4, role: 'user', firstName: 'Victoria4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 5, role: 'manager', firstName: 'Victoria5', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
+        // ])
+
+        getUsersList().then(data => {
+            console.log('USERS LIST>>>')
+            console.log(data.data)
+            const arr = []
+            data.data.forEach(function(entry) {
+                if (entry.userType==='manager') {
+                    arr.push(entry)
+                }
+            });
+            console.log(arr)
+            setTableData(arr)
+        }).finally()
     }, [])
 
 
@@ -90,7 +108,8 @@ const ModeratorManagers = observer(() => {
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
                                 <div className="inside-title-header">
-                                    All managers:
+                                    {/*All managers:*/}
+                                    {t('managers.moderator_all_managers')}
                                 </div>
                             </div>
                         </div>
@@ -100,14 +119,35 @@ const ModeratorManagers = observer(() => {
                         {/*)}*/}
 
                         <div className='moderator-table'>
-                            <MaterialTable icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                            <MaterialTable localization={{
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows')
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('tc.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('managers.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Delete",
+                                                   tooltip: t('feedbacks.moderator_delete_feedback'),
                                                    onClick: (e, data) => {
-                                                       console.log(data.name)
+                                                       console.log(data.id)
                                                        //серверные запросы на удаление
+                                                       const ans1 = deleteUser(data.id).then(function (response){
+                                                           console.log('DELETE RES >>>')
+                                                           console.log(response)
+                                                       })
+
+
 
                                                        const updatedData = [...tableData]
                                                        const index = tableData.indexOf(data);

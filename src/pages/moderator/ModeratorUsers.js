@@ -23,10 +23,13 @@ import Remove from "@material-ui/icons/Remove";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import MaterialTable from "material-table";
 import no_bttn from "../../UI/no_button.svg";
+import {deleteUser, getUsersList} from "../../http/moderatorAPI";
+import {useTranslation} from "react-i18next";
 
 const ModeratorUsers = observer(() => {
     const {usersArr} = useContext(Context)
     const [tableData,setTableData] = useState([])
+    const { t,i18n  } = useTranslation();
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -50,26 +53,35 @@ const ModeratorUsers = observer(() => {
 
     const columns = [
         {title: "id", field: "id", hidden: true},
-        {title: 'First name', field: 'firstName' },
-        {title: 'Middle name', field: 'middleName',sorting: false},
-        {title: 'Last name', field: 'lastName'},
-        {title: 'Phone number', field: 'phone', sorting: false},
-        {title: 'Email', field: 'email'}
+        {title: t('users.moderator_first_name'), field: 'firstName' },
+        {title: t('users.moderator_middle_name'), field: 'middleName',sorting: false},
+        {title: t('users.moderator_last_name'), field: 'lastName'},
+        {title: t('users.moderator_email'), field: 'email', sorting: false},
+        {title: t('users.moderator_phone'), field: 'phone'}
     ]
 
 
     useEffect(() => {
-        // getCurrentUser().then(data => {
-        //     usersArr.setTest(data.data)
-        //     console.log('USE EFFECT USERS>>>')
-        // }).finally()
+        getUsersList().then(data => {
+            console.log('USERS LIST>>>')
+            console.log(data.data)
+            const arr = []
+            data.data.forEach(function(entry) {
+                if (entry.userType==='passenger') {
+                    arr.push(entry)
+                }
+            });
+            console.log(arr)
+            setTableData(arr)
+        }).finally()
 
-        setTableData([
-            {id: 1, role: 'user', firstName: 'Nina1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 2, role: 'user', firstName: 'Nina2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 3, role: 'manager', firstName: 'Nina3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
-            {id: 4, role: 'user', firstName: 'Nina4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
-        ])
+
+        // setTableData([
+        //     {id: 1, role: 'user', firstName: 'Nina1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 2, role: 'user', firstName: 'Nina2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 3, role: 'manager', firstName: 'Nina3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'},
+        //     {id: 4, role: 'user', firstName: 'Nina4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", phone: '+79881738499'}
+        // ])
     }, [])
 
     return (
@@ -83,7 +95,8 @@ const ModeratorUsers = observer(() => {
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
                                 <div className="inside-title-header">
-                                    All users:
+                                    {/*All users:*/}
+                                    {t('users.moderator_all_managers')}
                                 </div>
                             </div>
                         </div>
@@ -93,14 +106,33 @@ const ModeratorUsers = observer(() => {
                         {/*)}*/}
 
                         <div className='moderator-table'>
-                            <MaterialTable icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                            <MaterialTable localization={{
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows')
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('tc.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('users.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Delete",
+                                                   tooltip: t('feedbacks.moderator_delete_feedback'),
                                                    onClick: (e, data) => {
                                                        console.log(data.name)
                                                        //серверные запросы на удаление
+                                                       const ans1 = deleteUser(data.id).then(function (response){
+                                                           console.log('DELETE RES >>>')
+                                                           console.log(response)
+                                                       })
 
                                                        const updatedData = [...tableData]
                                                        const index = tableData.indexOf(data);

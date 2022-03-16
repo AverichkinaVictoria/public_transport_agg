@@ -29,6 +29,8 @@ import documents_bttn from "../../UI/documents.svg";
 import {MODERATOR_MAIN_SHOW_FEEDBACK, MODERATOR_MAIN_TC_ROUTE} from "../../utils/consts";
 import {useNavigate} from "react-router";
 import star from "../../UI/Star.svg";
+import {deleteFeedback, deleteUser, getAllFeedbacks} from "../../http/moderatorAPI";
+import {useTranslation} from "react-i18next";
 
 const ModeratorFeedbacks = observer(() => {
     const {feedbacksArr} = useContext(Context)
@@ -41,6 +43,7 @@ const ModeratorFeedbacks = observer(() => {
 
     const [feedbackCur,setFeedbackCur] = useState({})
     const [feedbackVisible,setFeedbackVisible] = useState(false)
+    const { t,i18n  } = useTranslation();
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -64,30 +67,29 @@ const ModeratorFeedbacks = observer(() => {
 
     const columns = [
         {title: "id", field: "id", hidden: true},
-        {title: 'First name', field: 'firstName' },
-        {title: 'Middle name', field: 'middleName',sorting: false},
-        {title: 'Last name', field: 'lastName'},
-        {title: 'Email', field: 'email'},
-        {title: 'Company', field: 'tc'},
-        {title: 'Vehicle', field: 'vehicle'},
-        {title: 'Departure', field: 'departureCity'},
-        {title: 'Arrival', field: 'arrivalCity'},
-        {title: 'Rating', field: 'rating'},
-        {title: 'Feedback', field: 'desc', hidden: true}
+        {title: t('feedbacks.moderator_first_name'), field: 'firstName' },
+        {title: t('feedbacks.moderator_middle_name'), field: 'middleName',sorting: false},
+        {title: t('feedbacks.moderator_last_name'), field: 'lastName'},
+        {title: t('feedbacks.moderator_email'), field: 'email'},
+        {title: t('feedbacks.moderator_company'), field: 'companyName'},
+        {title: t('feedbacks.moderator_vehicle'), field: 'vehicle'},
+        {title: t('feedbacks.moderator_departure'), field: 'departure'},
+        {title: t('feedbacks.moderator_arrival'), field: 'arrival'},
+        {title: t('feedbacks.moderator_rating'), field: 'rating'},
+        {title: 'Feedback', field: 'feedback', hidden: true}
     ]
 
     useEffect(() => {
-        // getCurrentUser().then(data => {
-        //     usersArr.setTest(data.data)
-        //     console.log('USE EFFECT FEEDBACKS>>>')
-        // }).finally()
+        getAllFeedbacks().then(data => {
+            setTableData(data.data)
+        }).finally()
 
-        setTableData([
-            {id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 5, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше нЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдикогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
-            {id: 2, firstName: 'Victoria2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 3, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
-            {id: 3, firstName: 'Victoria3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 4, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
-            {id: 4, firstName: 'Victoria4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 2, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"}
-        ])
+        // setTableData([
+        //     {id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 5, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше нЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдикогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
+        //     {id: 2, firstName: 'Victoria2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 3, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
+        //     {id: 3, firstName: 'Victoria3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 4, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
+        //     {id: 4, firstName: 'Victoria4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 2, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"}
+        // ])
     }, [])
 
     const closeFeedback = () => {
@@ -109,7 +111,8 @@ const ModeratorFeedbacks = observer(() => {
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
                                 <div className="inside-title-header">
-                                    All feedbacks:
+                                    {/*All feedbacks:*/}
+                                    {t('feedbacks.moderator_all_feedbacks')}
                                 </div>
                             </div>
                         </div>
@@ -121,25 +124,25 @@ const ModeratorFeedbacks = observer(() => {
                                 <div className="card-moderator-1-f">
                                     <div className="card-moderator-2">
                                         <div className="card-moderator-3" >
-                                            <p>First name:</p>
-                                            <p>Middle name:</p>
-                                            <p>Last name:</p>
-                                            <p>Email:</p>
-                                            <p>Company:</p>
-                                            <p>Vehicle:</p>
-                                            <p>Departure:</p>
-                                            <p>Arrival:</p>
-                                            <p>Rating:</p>
+                                            <p>{t('feedbacks.moderator_first_name')}</p>
+                                            <p>{t('feedbacks.moderator_middle_name')}</p>
+                                            <p>{t('feedbacks.moderator_last_name')}</p>
+                                            <p>{t('feedbacks.moderator_email')}</p>
+                                            <p>{t('feedbacks.moderator_company')}</p>
+                                            <p>{t('feedbacks.moderator_vehicle')}</p>
+                                            <p>{t('feedbacks.moderator_departure')}</p>
+                                            <p>{t('feedbacks.moderator_arrival')}</p>
+                                            <p>{t('feedbacks.moderator_rating')}</p>
                                         </div>
                                         <div className="card-moderator-4">
                                             <p>{feedbackCur.firstName}</p>
                                             <p>{feedbackCur.middleName}</p>
                                             <p>{feedbackCur.lastName}</p>
                                             <p>{feedbackCur.email}</p>
-                                            <p>{feedbackCur.tc}</p>
+                                            <p>{feedbackCur.companyName}</p>
                                             <p>{feedbackCur.vehicle}</p>
-                                            <p>{feedbackCur.departureCity}</p>
-                                            <p>{feedbackCur.arrivalCity}</p>
+                                            <p>{feedbackCur.departure}</p>
+                                            <p>{feedbackCur.arrival}</p>
                                             {[...Array(feedbackCur.rating)].map((st) => {
                                                 return (
                                                     <img src={star} className="feedback-ic-star"/>
@@ -154,7 +157,7 @@ const ModeratorFeedbacks = observer(() => {
                             <div className="card-main">
 
                                 <div className="description-moderator">
-                                    <p>{feedbackCur.desc}</p>
+                                    <p>{feedbackCur.feedback}</p>
                                 </div>
                                 <div className="bttns-moderator">
                                     <button className="yes-no-bttn" onClick={closeFeedback} style={{background:"rgba(63, 165, 239, 0.26)"}} ><img src={no_bttn} /></button>
@@ -169,14 +172,33 @@ const ModeratorFeedbacks = observer(() => {
 
 
                         <div className='moderator-table'>
-                            <MaterialTable icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                            <MaterialTable localization={{
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows')
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('feedbacks.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('feedbacks.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: "Delete",
+                                                   tooltip: t('feedbacks.moderator_delete_feedback'),
                                                    onClick: (e, data) => {
                                                        console.log(data.name)
                                                        //серверные запросы на удаление
+                                                       const ans1 = deleteFeedback(data.id).then(function (response){
+                                                           console.log('DELETE RES >>>')
+                                                           console.log(response)
+                                                       })
 
                                                        const updatedData = [...tableData]
                                                        const index = tableData.indexOf(data);
@@ -192,9 +214,9 @@ const ModeratorFeedbacks = observer(() => {
                                                },
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={documents_bttn} style={{height: "35px", width: '35px'}}/></button>,
-                                                   tooltip: "Show feedback",
+                                                   tooltip: t('feedbacks.moderator_show_feedback'),
                                                    onClick: (e, data) => {
-                                                       console.log(data.desc)
+
                                                        setFeedbackCur(data)
                                                        setFeedbackVisible(true)
 

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import '../../styles/styles_for_pages/Moderator.css'
 import MenuBarMain from "./components/MenuBarMain";
 import Extra from "../extra";
@@ -9,17 +9,31 @@ import ProfileCard from "./components/profileCard";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {getCurrentUser} from "../../http/userAPI";
+import {getCompaniesFiles, getCurrentUserProfile} from "../../http/moderatorAPI";
+import {toJS} from "mobx";
 
 const ModeratorProfile = observer(() => {
     const {user} = useContext(Context)
 
+    // const [img, setImg] = useState('')
+
     const {usersArr} = useContext(Context)
 
     useEffect(() => {
-        getCurrentUser().then(data => {
-            usersArr.setTest(data.data)
-            console.log('USE EFFECT PROFILE>>>')
-        }).finally()
+        user.setUser(localStorage.getItem('user'))
+        const ans1 = getCurrentUserProfile(localStorage.getItem('email')).then(function (response){
+            user.setUser(response.data)
+            // user.setImg('smth')
+            console.log('THIS USER>>>')
+            console.log(toJS(user.user))
+            // getCompaniesFiles(response.data.imageUrl).then(function (response){
+            //     console.log('DATA URL RESPONSE>>>')
+            //     console.log(response.data.url)
+            //     // user.setImg(response.data.url)
+            //     console.log('DATA URL>>>')
+            //     console.log(user.img)
+            // })
+        })
     }, [])
 
     return (
@@ -30,7 +44,7 @@ const ModeratorProfile = observer(() => {
                     <Extra></Extra>
                     <div className="content-page">
 
-                        <ProfileCard user={user}></ProfileCard>
+                        <ProfileCard user_img={user.img}></ProfileCard>
 
                     </div>
                     <div className="bottom-profile">
