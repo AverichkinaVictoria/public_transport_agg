@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/styles_for_pages/Manager.css'
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
 import Vehicle from './components/Vehicle';
 import * as consts from "../../utils/ConstantsManager";
 import { useNavigate } from 'react-router';
-import { MANAGER_MAIN_VEHICLE_EDIT_ROUTE } from '../../utils/consts';
+import { MANAGER_MAIN_VEHICLE_CREATE_ROUTE, MANAGER_MAIN_VEHICLE_EDIT_ROUTE } from '../../utils/consts';
+import { getVehicles } from '../../http/managerAPI';
 
 const ManagerMainVehicles = () => {
+    useEffect(() => {
+        console.log("LOADING getVehicles>>>")
+        getVehicles().then(data => {
+            console.log(data.data)
+        }).finally()
+    })
+
     const navigate = useNavigate();
 
     function printVehicles() {
@@ -21,7 +29,7 @@ const ManagerMainVehicles = () => {
     }
 
     function createVehicle() {
-        navigate(MANAGER_MAIN_VEHICLE_EDIT_ROUTE, {state: {vehicle: consts.EMPTY_VEHICLE}});
+        navigate(MANAGER_MAIN_VEHICLE_CREATE_ROUTE);
     }
 
     return (

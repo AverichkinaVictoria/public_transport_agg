@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/styles_for_pages/Manager.css'
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
 import * as consts from "../../utils/ConstantsManager";
+import { getCompany } from '../../http/managerAPI';
 
 const ManagerMainTc = () => {
+    useEffect(() => {
+        console.log("LOADING getCompany>>>")
+        getCompany().then(data => {
+            console.log(data.data)
+        }).finally()
+    })
+
     return (
         <div className='manager-menu-bar'>
             <div className="container">

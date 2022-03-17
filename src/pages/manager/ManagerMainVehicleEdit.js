@@ -13,17 +13,16 @@ const ManagerMainVehicleEdit = () => {
                     <Extra></Extra>
                     <div className="content-page-profile">
                         <div>
-                            <p className="vehicle-number">Vehicle #{vehicle.id}</p>
-                            <p>Type</p>
+                            {/* <p className="vehicle-number">Vehicle #{vehicle.id}</p> */}
+                            {/* <p>Type</p>
                             <p><input type="text" placeholder="Type" defaultValue={vehicle.type}></input></p>
                             <p>Brand</p>
-                            <p><input type="text" placeholder="Brand" defaultValue={vehicle.brand}></input></p>
+                            <p><input type="text" placeholder="Brand" defaultValue={vehicle.brand}></input></p> */}
                             <p>Model</p>
                             <p><input type="text" placeholder="Model" defaultValue={vehicle.model}></input></p>
-                            <p>Year</p>
-                            <p><input type="text" placeholder="Year" defaultValue={vehicle.year}></input></p>
-                            <p>Number</p>
-                            <p><input type="text" placeholder="Number" defaultValue={vehicle.number}></input></p>
+                            <p>Production year</p>
+                            <p><input type="text" placeholder="Production year" defaultValue={vehicle.year}></input></p>
+                            
                             <p><button>Save changes</button></p>
                         </div>
                         <div>

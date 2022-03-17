@@ -12,6 +12,8 @@ export const MANAGER_MAIN_SUPPORT_ROUTE = '/manager_main_support'
 export const MANAGER_MAIN_TC_ROUTE = '/manager_main_TC'
 export const MANAGER_MAIN_VEHICLE_EDIT_ROUTE = '/manager_main_vehicle_edit'
 export const MANAGER_MAIN_ROUTE_EDIT_ROUTE = '/manager_main_route_edit'
+export const MANAGER_MAIN_ROUTE_CREATE_ROUTE = '/manager_main_route_create'
+export const MANAGER_MAIN_VEHICLE_CREATE_ROUTE = '/manager_main_vehicle_create'
 
 export const MODERATOR_MAIN_ROUTE = '/moderator_main'
 export const MODERATOR_MAIN_TC_ROUTE = '/moderator_main_TC'
