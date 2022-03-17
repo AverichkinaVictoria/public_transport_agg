@@ -15,13 +15,18 @@ const ManagerMainVehicleCreate = () => {
     const [cols, setCols] = useState('')
     const [seats, setSeats] = useState([])
 
-    const board = [[0, 2, 3, 0], [2, 2, 1, 0], [0, 0, 0, 0]]
-
     function createVehicle() {
         console.log('SEND VEHICLE >>>')
         console.log(model + ' ' + year)
         // console.log(postVehicle(model, year, seats))
         // navigate(MANAGER_MAIN_VEHICLES_ROUTE);
+    }
+
+    function renderSeats(rows, cols) {
+        setRows(rows)
+        setCols(cols)
+
+        
     }
 
     return (
@@ -40,7 +45,7 @@ const ManagerMainVehicleCreate = () => {
                             <p><input type="text" placeholder="Rows count" onChange={e => setRows(e.target.value)}></input></p>
                             <p>Columns count</p>
                             <p><input type="text" placeholder="Columns count" onChange={e => setCols(e.target.value)}></input></p>
-                            
+
                             <p><button onClick={() => createVehicle()}>Create vehicle</button></p>
                         </div>
                         <div className="seats">
