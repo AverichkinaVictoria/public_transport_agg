@@ -4,10 +4,11 @@ import {
     MANAGER_MAIN_PROFILE_ROUTE,
     MANAGER_MAIN_ROUTE,
     MANAGER_MAIN_ROUTES_ROUTE,
+    MANAGER_MAIN_ROUTE_CREATE_ROUTE,
     MANAGER_MAIN_ROUTE_EDIT_ROUTE,
     MANAGER_MAIN_SUPPORT_ROUTE,
     MANAGER_MAIN_TC_ROUTE,
-    MANAGER_MAIN_VEHICLES_ROUTE, MANAGER_MAIN_VEHICLE_EDIT_ROUTE, MODERATOR_MAIN_FEEDBACK_ROUTE,
+    MANAGER_MAIN_VEHICLES_ROUTE, MANAGER_MAIN_VEHICLE_CREATE_ROUTE, MANAGER_MAIN_VEHICLE_EDIT_ROUTE, MODERATOR_MAIN_FEEDBACK_ROUTE,
     MODERATOR_MAIN_MANAGERS_ROUTE, MODERATOR_MAIN_PROFILE_ROUTE,
     MODERATOR_MAIN_ROUTE, MODERATOR_MAIN_SUPPORT_ROUTE,
     MODERATOR_MAIN_TC_ROUTE,
@@ -36,6 +37,8 @@ import ModeratorProfile from "./pages/moderator/ModeratorProfile";
 import ModeratorSupportService from "./pages/moderator/ModeratorSupportService";
 import ManagerMainRouteEdit from "./pages/manager/ManagerMainRouteEdit";
 import ManagerMainVehicleEdit from "./pages/manager/ManagerMainVehicleEdit";
+import ManagerMainRouteCreate from "./pages/manager/ManagerMainRouteCreate";
+import ManagerMainVehicleCreate from "./pages/manager/ManagerMainVehicleCreate";
 
 export const authRoutesModerator = [
     {
@@ -105,6 +108,14 @@ export const authRoutesManager = [
     {
         path: MANAGER_MAIN_VEHICLE_EDIT_ROUTE,
         Component: ManagerMainVehicleEdit
+    },
+    {
+        path: MANAGER_MAIN_ROUTE_CREATE_ROUTE,
+        Component: ManagerMainRouteCreate
+    },
+    {
+        path: MANAGER_MAIN_VEHICLE_CREATE_ROUTE,
+        Component: ManagerMainVehicleCreate
     }
 ]
 

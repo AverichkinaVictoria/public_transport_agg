@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/styles_for_pages/Manager.css'
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
 import * as consts from "../../utils/ConstantsManager";
 import Route from './components/Route';
-import { MANAGER_MAIN_ROUTE_EDIT_ROUTE } from '../../utils/consts';
+import { MANAGER_MAIN_ROUTE_CREATE_ROUTE, MANAGER_MAIN_ROUTE_EDIT_ROUTE } from '../../utils/consts';
 import { useNavigate } from 'react-router';
+import { getRoutes } from '../../http/managerAPI';
 
 const ManagerMainRoutes = () => {
+    useEffect(() => {
+        console.log("GETTING ROUTES >>>")
+        getRoutes().then(data => {
+            console.log(data.data)
+        }).finally()
+    })
+
     const navigate = useNavigate();
 
     function printRoutes() {
@@ -21,7 +29,7 @@ const ManagerMainRoutes = () => {
     }
 
     function createRoute() {
-        navigate(MANAGER_MAIN_ROUTE_EDIT_ROUTE, {state: {route: consts.EMPTY_ROUTE}});
+        navigate(MANAGER_MAIN_ROUTE_CREATE_ROUTE);
     }
 
     return (
