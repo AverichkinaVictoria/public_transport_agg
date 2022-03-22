@@ -101,7 +101,10 @@ i18n
                         moderator_no_records: 'No records to display',
                         moderator_show: 'Show report',
                         moderator_group: 'Drag headers here to group by',
-                        moderator_rows: 'rows'
+                        moderator_rows: 'rows',
+                        moderator_status: 'Status',
+                        moderator_close_report: 'Close',
+                        moderator_process_report: 'Process'
 
                     }
                 }
@@ -190,7 +193,10 @@ i18n
                         moderator_no_records: 'Нет доступных жалоб',
                         moderator_show: 'Показать жалобу',
                         moderator_group: 'Перетащите название столбца для группирования',
-                        moderator_rows: 'строк'
+                        moderator_rows: 'строк',
+                        moderator_status: 'Статус',
+                        moderator_close_report: 'Закрыть',
+                        moderator_process_report: 'Рассмотреть'
 
                     }
                 }

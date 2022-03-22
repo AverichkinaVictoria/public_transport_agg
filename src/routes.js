@@ -14,7 +14,7 @@ import {
     MODERATOR_MAIN_USERS_ROUTE,
     PASSWORD_RESET_CHANGE_ROUTE,
     PASSWORD_RESET_ROUTE,
-    REGISTER_ROUTE
+    REGISTER_ROUTE, VALIDATION_PAGE, VALIDATION_PASSWORD_RESET
 } from "./utils/consts";
 import Auth from "./pages/Auth";
 import Registration from "./pages/Registration";
@@ -36,6 +36,8 @@ import ModeratorProfile from "./pages/moderator/ModeratorProfile";
 import ModeratorSupportService from "./pages/moderator/ModeratorSupportService";
 import ManagerMainRouteEdit from "./pages/manager/ManagerMainRouteEdit";
 import ManagerMainVehicleEdit from "./pages/manager/ManagerMainVehicleEdit";
+import ValidationReg from "./pages/moderator/Validation_reg";
+import PasswordResetValidation from "./pages/moderator/PasswordResetValidation";
 
 export const authRoutesModerator = [
     {
@@ -124,6 +126,14 @@ export const publicRoutes = [
     {
         path: PASSWORD_RESET_CHANGE_ROUTE,
         Component: PasswordResetChange
+    },
+    {
+        path: VALIDATION_PAGE,
+        Component: ValidationReg
+    },
+    {
+        path: VALIDATION_PASSWORD_RESET,
+        Component: PasswordResetValidation
     }
 
 

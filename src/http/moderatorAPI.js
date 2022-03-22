@@ -51,8 +51,24 @@ export const getHelpDesk = async () => {
     return response
 }
 
+export const changeHelpDesk = async (id, statusForChange, typeForChange) => {
+    const response = await $authHostR.patch('api/v1/helpdesk/reports/'+id, {
+        status: statusForChange,
+        type: typeForChange,
+        files: [
+            '144899549247705088'
+        ]
+    })
+    return response
+}
+
 export const getUsersList = async () => {
     const response = await $authHostE.get('api/v1/user')
+    return response
+}
+
+export const getUserByIDR = async (id) => {
+    const response = await $authHostE.get('api/v1/users/'+id)
     return response
 }
 
