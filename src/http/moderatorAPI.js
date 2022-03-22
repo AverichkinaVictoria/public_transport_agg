@@ -72,6 +72,11 @@ export const getUserByIDR = async (id) => {
     return response
 }
 
+export const getUserByIDE = async (id) => {
+    const response = await $authHostE.get('api/v1/user/getbyid?id='+id)
+    return response
+}
+
 export const getCurrentUserProfile = async (user_email) => {
     const response = await $authHostE.get('api/v1/user/getbyemail?email='+user_email.toString())
     localStorage.setItem('user', response.data)

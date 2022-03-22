@@ -11,7 +11,7 @@ import {
     addUser, changeHelpDesk,
     deleteUser, getCompaniesFiles,
     getCurrentUserProfile,
-    getHelpDesk,
+    getHelpDesk, getUserByIDE,
     getUserByIDR,
     getUsersList, postCompaniesRequests
 } from "../../http/moderatorAPI";
@@ -94,9 +94,9 @@ const ModeratorSupportService = observer(() => {
             data.data.forEach(function(entry) {
                 if (!(entry.id==='5')) {
                     if (!(entry.id==='4')) {
-                        getCurrentUserProfile('oleg@spam.com').then(d => {
+                        getUserByIDE(entry.authorId).then(d => {
                             var extra = {reportID: entry.id, authorId: entry.authorId, description: entry.description, status: entry.status, type: entry.type}
-                                food = Object.assign({}, extra, d.data);
+                            food = Object.assign({}, extra, d.data);
                             arr.push(food)
                             console.log('ARR>>')
                             console.log(arr)
