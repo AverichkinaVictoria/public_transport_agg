@@ -32,7 +32,8 @@ const ManagerMainRoutes = () => {
         return(
             <div className='routes'>
                 {routes.map(route => (
-                    <p className='routeRecord' key={route.route_id}><Route key={route.route_id} route={route}></Route></p>
+                    <div className='routeRecord' key={route.route_id}>
+                        <Route key={route.route_id} route={route} schedule={schedule.find(d => (d.routeId === route.route_id))}></Route></div>
                 ))}
             </div>
         )
@@ -52,7 +53,7 @@ const ManagerMainRoutes = () => {
                         <div className='routes-container'>
                             <button className='create-route' onClick={() => createRoute()}>Create route</button>
                             {loadRoutes()}
-                            {/* {printRoutes()} */}
+                            {printRoutes()}
                         </div>
                     </div>
                 </div>

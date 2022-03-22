@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import { MANAGER_MAIN_ROUTE_EDIT_ROUTE } from '../../../utils/consts';
 
-const Route = ({route}) => {
+const Route = ({route, schedule}) => {
     const navigate = useNavigate();
 
     function placesToText(places) {
@@ -25,14 +25,13 @@ const Route = ({route}) => {
 return(
     <div className="route" onClick={() => {editRoute(route)}}>
         <div className="block">
-            <p>Route #{route.id}</p>
+            <p>Route #{route.route_id}</p>
             <p>From {route.departure_city} to {route.arrival_city}</p>
-            <p>{route.departure_time} {'->'} {route.arrival_time}</p>
-            <p>Regularity: {route.days.reduce((prev, curr) => [prev, ', ', curr])}</p>
-            <p>Vehicle #{route.vehicle}</p>
+            <p>{route.duration}</p>
+            <p>Vehicle #{schedule.vehicleId}</p>
         </div>
         <div className="block">
-            {placesToText(route.costs)}
+            {/* {placesToText(route.costs)} */}
         </div>
     </div>
 )
