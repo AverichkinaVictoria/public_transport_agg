@@ -1,19 +1,40 @@
+import { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
+import { getSchema } from '../../../http/managerAPI';
 import { MANAGER_MAIN_VEHICLE_EDIT_ROUTE } from '../../../utils/consts';
 
 const Vehicle = ({vehicle}) => {
 const navigate = useNavigate();
+// const [places, setPlaces] = useState([])
+const [ecoCost, setEcoCost] = useState()
+const [busCost, setBusCost] = useState()
+const [ecoCount, setEcoCount] = useState()
+const [busCount, setBusCount] = useState()
 
-function placesToText(places) {
+function initiate() {
+    getSchema(vehicle.vehicle_id).then(data => {
+        console.log(data.data.seats)
+        // setPlaces(data.data.seats)
+        setEcoCount(data.data.seats.filter(d => d.seatClass === "Economy").length)
+        setBusCount(data.data.seats.filter(d => d.seatClass === "Business").length)
+        setEcoCost(data.data.seats.find(d => d.seatClass === "Economy").cost)
+        setBusCost(data.data.seats.find(d => d.seatClass === "Business").cost)
+    })
+}
+
+function placesToText() {
 return (
     <div>
-        {places.map(place => (
-          <div key={place.title} className="place">
-            <p>{place.type}</p>
-            <p>{place.vacant}</p>
-            <p>{place.cost}</p>
-          </div>
-        ))}
+        <div className="place">
+            <p>Economy</p>
+            <p>{ecoCount}</p>
+            <p>{ecoCost}$</p>
+        </div>
+        <div className="place">
+            <p>Business</p>
+            <p>{busCount}</p>
+            <p>{busCost}$</p>
+        </div>
     </div>
 )
 }
@@ -25,15 +46,14 @@ function editVehicle(vehicle) {
 return (
     <div className="vehicle" onClick={() => {editVehicle(vehicle)}}>
         <div className="block">
-            <p>Vehicle #{vehicle.id}</p>
-            <p>Type: {vehicle.type}</p>
-            <p>Brand: {vehicle.brand}</p>
-            <p>Model: {vehicle.model}</p>
-            <p>Year: {vehicle.year}</p>
-            <p>Number: {vehicle.number}</p>
+            <p><b>Vehicle #{vehicle.vehicle_id}</b></p>
+            <p>Model: {vehicle.model_name}</p>
+            <p>Year: {vehicle.production_year}</p>
+            <p>Capacity: {vehicle.seats_count}</p>
         </div>
         <div className="block">
-            {placesToText(vehicle.places)}
+            {initiate()}
+            {placesToText()}
         </div>
     </div>
 )

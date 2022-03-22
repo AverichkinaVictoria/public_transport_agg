@@ -7,12 +7,22 @@ export const getCompany = async () => {
 }
 
 export const getVehicles = async () => {
-    const response = await $host.get('api/v1/vehicles/company/9')
+    const response = await $host.get('api/v1/vehicles/company/9') // TODO: replace 3 -> 9
+    return response
+}
+
+export const getSchema = async (id) => {
+    const response = await $host.get('api/v1/schemas/vehicle/' + id)
     return response
 }
 
 export const getRoutes = async () => {
     const response = await $host.get('api/v1/companies/9/routes')
+    return response
+}
+
+export const getSchedule = async () => {
+    const response = await $host.get('api/v1/companies/9/schedule')
     return response
 }
 
@@ -43,14 +53,22 @@ export const postRoute = async (depCity, arrCity, hours, minutes, depTime, vehic
 
 export const postVehicle = async (model, year, seats) => {
     const res1 = await $host.post('api/v1/vehicles', {
-        company_id: 4, // TODO: ЗАМЕНИТЬ НА 9
+        company_id: 4,
         model_name: model,
         production_year: year,
         seats_count: seats.length,
         is_active: true
     })
 
-    const res2 = await $host.post('api/v1/vehicles/' + res1.data.vehicle_id + '/schema', {
-        
+    const res2 = await $host.post('api/v1/schemas/vehicle/' +  res1.data.vehicle_id, {
+        seats: seats,
+        passages: [
+            {
+                nextSeatsRow: 0,
+                details: "right"
+            }
+        ]
     })
+
+    return res2
 }

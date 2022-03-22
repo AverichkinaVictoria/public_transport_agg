@@ -1,28 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/styles_for_pages/Manager.css'
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
 import Vehicle from './components/Vehicle';
-import * as consts from "../../utils/ConstantsManager";
 import { useNavigate } from 'react-router';
-import { MANAGER_MAIN_VEHICLE_CREATE_ROUTE, MANAGER_MAIN_VEHICLE_EDIT_ROUTE } from '../../utils/consts';
+import { MANAGER_MAIN_VEHICLE_CREATE_ROUTE } from '../../utils/consts';
 import { getVehicles } from '../../http/managerAPI';
 
 const ManagerMainVehicles = () => {
-    useEffect(() => {
+    const [vehicles, setVehicles] = useState([])
+
+    function loadVehicles() {
         console.log("LOADING getVehicles>>>")
         getVehicles().then(data => {
-            console.log(data.data)
+            console.log(data.data.vehicles)
+            setVehicles(data.data.vehicles)
         }).finally()
-    })
+    }
 
     const navigate = useNavigate();
 
     function printVehicles() {
         return(
             <div className='vehicles'>
-                {consts.VEHICLES.map(vehicle => (
-                    <p className='vehicleRecord' key={vehicle.id}><Vehicle key={vehicle.id} vehicle={vehicle}></Vehicle></p>
+                
+                {vehicles.map(vehicle => (
+                    <p className='vehicleRecord' key={vehicle.vehicle_id}><Vehicle key={vehicle.vehicle_id} vehicle={vehicle}></Vehicle></p>
                 ))}
             </div>
         )
@@ -41,6 +44,7 @@ const ManagerMainVehicles = () => {
                     <div className="content-page">
                         <div className='vehicle_container'>
                             <button className='create-route' onClick={() => createVehicle()}>Create vehicle</button>
+                            {loadVehicles()}
                             {printVehicles()}
                         </div>
                     </div>
