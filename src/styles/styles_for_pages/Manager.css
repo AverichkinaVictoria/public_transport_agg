@@ -163,7 +163,7 @@ a:-webkit-any-link {
     border-radius: 5px;
     border-color: black;
     margin: 30px;
-    width: 400px;
+    /* width: 400px; */
 }
 
 .block {
@@ -317,4 +317,25 @@ a:-webkit-any-link {
 
 .feedbackRecord p {
     margin-bottom: 10px;
+}
+
+.seats-entries{
+    margin: 5px;
+    border: solid 2px;
+    border-radius: 5px;
+    border-color: black;
+    padding: 6px;
+    /* display: flex; */
+}
+
+.seats div {
+    margin: 20px;
+}
+
+.seats {
+    margin: 20px;
+    border: solid 2px;
+    border-radius: 5px;
+    border-color: black;
+    /* padding: 6px; */
 }

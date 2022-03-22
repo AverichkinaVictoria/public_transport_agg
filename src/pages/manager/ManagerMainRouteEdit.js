@@ -1,10 +1,34 @@
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
 import {useLocation} from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { getRoute } from "../../http/managerAPI";
 
 const ManagerMainRouteEdit = () => {
     const location = useLocation();
     const route = location.state.route;
+
+    const [depCity, setDepCity] = useState('')
+    const [arrCity, setArrCity] = useState('')
+    const [hours, setHours] = useState('')
+    const [minutes, setMinutes] = useState('')
+    const [vehicleId, setVehicleId] = useState('')
+
+    useEffect(() => {
+        if (location.state.isNew) {
+            return
+        }
+
+        console.log("GETTING ROUTE >>>")
+        getRoute(route.id).then(data => {
+            console.log(data.data)
+            setDepCity(data.data.departure_city)
+            setArrCity(data.data.arrival_city)
+            setHours(data.data.duration.hours)
+            setMinutes(data.data.duration.minutes)
+            // setVehicleId()
+        }).finally()
+    })
 
     function Capitalize(str){
         return str.charAt(0).toUpperCase() + str.slice(1);
@@ -32,56 +56,50 @@ const ManagerMainRouteEdit = () => {
                     <Extra></Extra>
                     <div className="content-page-route-edit">
                         <div className="routeInput">
-                            <p>Route #{route.id}</p>
                             <p>Departure city</p>
-                            <p><input className="input-text" type="text" placeholder="Departure city" defaultValue={route.departure_city}></input></p>
+                            <p><input className="input-text" type="text" placeholder="Departure city" defaultValue={depCity}></input></p>
                             <p>Arrival city</p>
-                            <p><input className="input-text" type="text" placeholder="Arrival city" defaultValue={route.arrival_city}></input></p>
+                            <p><input className="input-text" type="text" placeholder="Arrival city" defaultValue={arrCity}></input></p>
                             <p>Departure time</p>
-                            <p><input className="input-text" type="text" placeholder="Departure time" defaultValue={route.departure_time}></input></p>
-                            <p>Arrival time</p>
-                            <p><input className="input-text" type="text" placeholder="Arrival time" defaultValue={route.arrival_time}></input></p>
+                            <p><input className="input-text" type="text" placeholder="Departure time" ></input></p>
+                            <p>Duration</p>
+                            <p><input className="input-text" type="text" placeholder="Hours" defaultValue={hours}></input></p>
+                            <p><input className="input-text" type="text" placeholder="Minutes" defaultValue={minutes}></input></p>
                             <p>Vehicle</p>
-                            <p><input className="input-text" type="text" placeholder="Vehicle" defaultValue={route.vehicle}></input></p>
+                            <p><input className="input-text" type="text" placeholder="Vehicle" ></input></p>
                             
-                            <p>Costs:</p>
-                            {route.costs.map(place => (
-                            <div key={place.title} className="places-costs">
-                                <p>{Capitalize(place.type)}</p>
-                                <p><input className="input-text" type="text" placeholder={place.type} defaultValue={place.cost}></input></p>
-                            </div>
-                            ))}
+                           
                             <p><button className="create-route">Save changes</button></p>
                         </div>
                         <div className="regularity">
                             <p>Regularity:</p>
                             <p>
                                 <input type="checkbox" name="monday"></input>
-                                <label for="monday"> Monday</label>
+                                <label htmlFor="monday"> Monday</label>
                             </p>
                             <p>
                                 <input type="checkbox" name="tuesday"></input>
-                                <label for="tuesday"> Tuesday</label>
+                                <label htmlFor="tuesday"> Tuesday</label>
                             </p>
                             <p>
                                 <input type="checkbox" name="wednesday"></input>
-                                <label for="wednesday"> Wednesday</label>
+                                <label htmlFor="wednesday"> Wednesday</label>
                             </p>
                             <p>
                                 <input type="checkbox" name="thursday"></input>
-                                <label for="thursday"> Thursday</label>
+                                <label htmlFor="thursday"> Thursday</label>
                             </p>
                             <p>
                                 <input type="checkbox" name="friday"></input>
-                                <label for="friday"> Friday</label>
+                                <label htmlFor="friday"> Friday</label>
                             </p>
                             <p>
                                 <input type="checkbox" name="saturday"></input>
-                                <label for="saturday"> Saturday</label>
+                                <label htmlFor="saturday"> Saturday</label>
                             </p>
                             <p>
                                 <input type="checkbox" name="sunday"></input>
-                                <label for="sunday"> Sunday</label>
+                                <label htmlFor="sunday"> Sunday</label>
                             </p>
                             {printFeedback()}
                         </div>

@@ -59,12 +59,12 @@ export const VEHICLES = [
             {
                 type: "econom",
                 vacant: 20,
-                cost: "20$"
+                cost: "20"
             },
             {
                 type: "business",
                 vacant: 5,
-                cost: "50$"
+                cost: "50"
             }
         ]
     },
@@ -79,12 +79,12 @@ export const VEHICLES = [
             {
                 type: "econom",
                 vacant: 10,
-                cost: "25$"
+                cost: "25"
             },
             {
                 type: "business",
                 vacant: 2,
-                cost: "60$"
+                cost: "60"
             }
         ]
     }
@@ -220,7 +220,7 @@ export const SEATS = [
 ]
 
 export const EMPTY_ROUTE = {
-    id: 123810,
+    id: 1,
         departure_city: "",
         departure_time: "",
         arrival_city: "",
@@ -244,7 +244,7 @@ export const EMPTY_ROUTE = {
 
 export const ROUTES = [
     {
-        id: 123804,
+        id: 1,
         departure_city: "Moscow",
         departure_time: "17:00",
         arrival_city: "Voronezh",
