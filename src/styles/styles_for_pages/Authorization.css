@@ -224,6 +224,21 @@ body {
     color: black;
 }
 
+.password-reset-form-control-h2-validate {
+    margin: 0 auto;
+    width: 490px;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+
+
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
 .password-reset-form-control-input {
     width: 411px;
     height: 49px;
@@ -604,6 +619,18 @@ body {
     }
 
     .password-reset-form-control-h2 {
+        margin: 0 auto;
+        width: 300px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        color: black;
+    }
+
+    .password-reset-form-control-h2-validate {
         margin: 0 auto;
         width: 300px;
         font-style: normal;

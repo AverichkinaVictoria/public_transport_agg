@@ -1,16 +1,23 @@
 import React, {useState} from 'react';
 import '../styles/styles_for_pages/Authorization.css'
 import {sendReset} from "../http/userAPI";
+import {AUTH_ROUTE, VALIDATION_PASSWORD_RESET} from "../utils/consts";
+import {useNavigate} from "react-router";
 
 const PasswordReset = () => {
     const [email, setEmail] = useState('')
+    let navigate = useNavigate()
+
     const sendResetPass = async () => {
         if (!(email==='')) {
             const res = sendReset(email).then(function (response){
                 console.log('SEND RESET>>>')
                 console.log(response)
+                navigate(VALIDATION_PASSWORD_RESET)
             })
+
         }
+
     }
 
     return (

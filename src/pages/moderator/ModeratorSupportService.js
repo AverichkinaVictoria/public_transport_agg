@@ -7,7 +7,14 @@ import {getCurrentUser} from "../../http/userAPI";
 import {observer} from "mobx-react-lite";
 import MaterialTable from "material-table";
 import no_bttn from "../../UI/no_button.svg";
-import {deleteUser, getHelpDesk, getUsersList} from "../../http/moderatorAPI";
+import {
+    addUser, changeHelpDesk,
+    deleteUser, getCompaniesFiles,
+    getCurrentUserProfile,
+    getHelpDesk, getUserByIDE,
+    getUserByIDR,
+    getUsersList, postCompaniesRequests
+} from "../../http/moderatorAPI";
 import AddBox from "@material-ui/icons/AddBox";
 import Check from "@material-ui/icons/Check";
 import Clear from "@material-ui/icons/Clear";
@@ -26,6 +33,7 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 import documents_bttn from "../../UI/documents.svg";
 import star from "../../UI/Star.svg";
 import {useTranslation} from "react-i18next";
+import yes_bttn from "../../UI/yes_button.svg";
 
 const ModeratorSupportService = observer(() => {
 
@@ -64,8 +72,9 @@ const ModeratorSupportService = observer(() => {
     };
 
     const columns = [
-        {title: "id", field: "id", hidden: true},
+        {title: "id", field: "reportID", hidden: true},
         {title: t('support.moderator_type'), field: 'type' },
+        {title: t('support.moderator_status'), field: 'status' },
         {title: t('support.moderator_first_name'), field: 'firstName', grouping: false },
         {title: t('support.moderator_middle_name'), field: 'middleName',sorting: false,grouping: false},
         {title: t('support.moderator_last_name'), field: 'lastName',grouping: false},
@@ -80,7 +89,27 @@ const ModeratorSupportService = observer(() => {
             console.log(data.data)
             setTableData(data.data)
 
+            const arr = []
+            var food = {}
+            data.data.forEach(function(entry) {
+                if (!(entry.id==='5')) {
+                    if (!(entry.id==='4')) {
+                        getUserByIDE(entry.authorId).then(d => {
+                            var extra = {reportID: entry.id, authorId: entry.authorId, description: entry.description, status: entry.status, type: entry.type}
+                            food = Object.assign({}, extra, d.data);
+                            arr.push(food)
+                            console.log('ARR>>')
+                            console.log(arr)
+
+                            setTableData(arr)
+                        }).finally()
+
+                    }
+                }
+            });
+
         }).finally()
+
 
 
         // setTableData([
@@ -169,19 +198,50 @@ const ModeratorSupportService = observer(() => {
                             }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped', grouping: true}}
                                            actions={[
                                                {
-                                                   icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
-                                                   tooltip: t('feedbacks.moderator_delete_feedback'),
+                                                   icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={yes_bttn} style={{height: "35px", width: '35px'}}/></button>,
+                                                   tooltip: t('support.moderator_process_report'),
                                                    onClick: (e, data) => {
-                                                       console.log(data.name)
-                                                       //серверные запросы на удаление
+                                                       // change for processing
+                                                       console.log(data.reportID)
+                                                       console.log(data.type)
 
+                                                       changeHelpDesk(data.reportID,'processing', data.type).then(function (response){
+                                                           console.log(response)
+                                                       })
 
                                                        const updatedData = [...tableData]
                                                        const index = tableData.indexOf(data);
                                                        if (index > -1) {
-                                                           updatedData.splice(index, 1); // 2nd parameter means remove one item only
+                                                           updatedData[index]['status'] = 'processing'; // 2nd parameter means remove one item only
                                                        }
                                                        setTableData(updatedData)
+                                                   }
+
+                                               },
+                                               {
+                                                   icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
+                                                   tooltip: t('support.moderator_close_report'),
+                                                   onClick: (e, data) => {
+
+
+                                                       changeHelpDesk(data.reportID,'complete', data.type).then(function (response){
+                                                           console.log(response)
+                                                       })
+
+                                                       const updatedData = [...tableData]
+                                                       const index = tableData.indexOf(data);
+                                                       if (index > -1) {
+                                                           updatedData[index]['status'] = 'complete'; // 2nd parameter means remove one item only
+                                                       }
+                                                       setTableData(updatedData)
+
+
+                                                       // const updatedData = [...tableData]
+                                                       // const index = tableData.indexOf(data);
+                                                       // if (index > -1) {
+                                                       //     updatedData.splice(index, 1); // 2nd parameter means remove one item only
+                                                       // }
+                                                       // setTableData(updatedData)
 
 
                                                    }

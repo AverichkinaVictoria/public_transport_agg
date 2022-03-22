@@ -2,6 +2,8 @@ export const AUTH_ROUTE = '/auth'
 export const REGISTER_ROUTE = '/registration'
 export const PASSWORD_RESET_ROUTE = '/password_reset'
 export const PASSWORD_RESET_CHANGE_ROUTE = '/password_reset_change'
+export const VALIDATION_PAGE = '/validate_email'
+export const VALIDATION_PASSWORD_RESET = '/submit_reset'
 export const MANAGER_MAIN_ROUTE = '/manager_main'
 
 export const MANAGER_MAIN_VEHICLES_ROUTE = '/manager_main_vehicles'

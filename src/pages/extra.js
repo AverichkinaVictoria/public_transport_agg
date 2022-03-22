@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import menu_but from "../UI/menu_but.svg";
 import search_but from "../UI/search_but.svg";
 import eng_lan from "../UI/uk_flag.svg";
-import rus_lan from "../UI/rus_flag.svg";
+import rus_lan from "../UI/russian_flag.svg";
 import account_img from "../UI/account_img.jpg";
 import '../styles/styles_for_pages/extra.css'
 import {observer} from "mobx-react-lite";
