@@ -48,6 +48,13 @@ const ProfileManagerCard = observer(() => {
                 })
             } catch (e) {
                 console.log(e)
+                setFirstName('')
+                setMiddleName('')
+                setLastName('')
+                setEmail(toJS(user.user).email)
+                setPhone('')
+                setImg('')
+                setTc('')
             }
 
         })

@@ -48,9 +48,17 @@ const Auth = observer(() => {
             //Сделать проверку на то существует ли в базе пользователь
 
             const ans = addUser(infoUserCurrent.data.id,'','','',infoUserCurrent.data.email,'','', infoUserCurrent.data.type,0,'').then(function (response){
-                console.log(response)
-                console.log('Added')
-            }).catch(function(){console.log('ERROR!!!')})
+                const ans1 = getCurrentUserProfile(infoUserCurrent.data.email).then(function (response){
+                    user.setUser(response.data)
+                    console.log('THIS USER>>>')
+                    console.log(toJS(user.user))
+                })
+            }).catch(function(){
+                const ans1 = getCurrentUserProfile(infoUserCurrent.data.email).then(function (response){
+                user.setUser(response.data)
+                console.log('THIS USER>>>')
+                console.log(toJS(user.user))
+            })})
 
             const ans1 = getCurrentUserProfile(infoUserCurrent.data.email).then(function (response){
                 user.setUser(response.data)

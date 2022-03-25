@@ -49,6 +49,12 @@ const ProfileCard = observer((user_img) => {
                 })
             } catch (e) {
                 console.log(e)
+                setFirstName('-')
+                setMiddleName('')
+                setLastName('')
+                setEmail(toJS(user.user).email)
+                setPhone('')
+                setImg('')
             }
 
         })
