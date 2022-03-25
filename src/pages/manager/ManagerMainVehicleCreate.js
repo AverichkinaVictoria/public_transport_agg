@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../../styles/styles_for_pages/Manager.css'
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
 import { useNavigate } from 'react-router';
 import { MANAGER_MAIN_VEHICLES_ROUTE } from '../../utils/consts';
 import { postVehicle } from '../../http/managerAPI';
-import { NoEncryption } from '@material-ui/icons';
 
 const ManagerMainVehicleCreate = () => {
     const navigate = useNavigate()
@@ -90,6 +89,7 @@ const ManagerMainVehicleCreate = () => {
                             <p><button onClick={() => createVehicle()}>Create vehicle</button></p>
                         </div>
                         <div className="seats">
+                            {console.log(seats)}
                             {seats.map((row, i) => (
                             <div key={i}>
                                 {row.map((col, j) => (

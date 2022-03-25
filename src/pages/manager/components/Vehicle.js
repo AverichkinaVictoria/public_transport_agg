@@ -5,7 +5,7 @@ import { MANAGER_MAIN_VEHICLE_EDIT_ROUTE } from '../../../utils/consts';
 
 const Vehicle = ({vehicle}) => {
 const navigate = useNavigate();
-// const [places, setPlaces] = useState([])
+const [places, setPlaces] = useState(null)
 const [ecoCost, setEcoCost] = useState()
 const [busCost, setBusCost] = useState()
 const [ecoCount, setEcoCount] = useState()
@@ -13,8 +13,10 @@ const [busCount, setBusCount] = useState()
 
 function initiate() {
     getSchema(vehicle.vehicle_id).then(data => {
-        console.log(data.data.seats)
-        // setPlaces(data.data.seats)
+        if (places == null) {
+            setPlaces(data.data.seats)
+        }
+
         setEcoCount(data.data.seats.filter(d => d.seatClass === "Economy").length)
         setBusCount(data.data.seats.filter(d => d.seatClass === "Business").length)
         setEcoCost(data.data.seats.find(d => d.seatClass === "Economy").cost)
@@ -40,7 +42,7 @@ return (
 }
 
 function editVehicle(vehicle) {
-    navigate(MANAGER_MAIN_VEHICLE_EDIT_ROUTE, {state: {vehicle: vehicle}});
+    navigate(MANAGER_MAIN_VEHICLE_EDIT_ROUTE, {state: {vehicle: vehicle, seats: places}});
 }
 
 return (
