@@ -26,13 +26,7 @@ const ModeratorProfile = observer(() => {
             // user.setImg('smth')
             console.log('THIS USER>>>')
             console.log(toJS(user.user))
-            // getCompaniesFiles(response.data.imageUrl).then(function (response){
-            //     console.log('DATA URL RESPONSE>>>')
-            //     console.log(response.data.url)
-            //     // user.setImg(response.data.url)
-            //     console.log('DATA URL>>>')
-            //     console.log(user.img)
-            // })
+
         })
     }, [])
 

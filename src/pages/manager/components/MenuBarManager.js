@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import '../../../styles/styles_for_pages/Manager.css'
 import {
     AUTH_ROUTE,
@@ -18,11 +18,18 @@ import support_icon from "../../../UI/support_icon.svg";
 import logout_icon from "../../../UI/logout_icon.svg";
 import * as consts from "../../../utils/ConstantsManager";
 import {useNavigate} from "react-router";
+import {Context} from "../../../index";
+import {observer} from "mobx-react-lite";
+import {useTranslation} from "react-i18next";
 
 
 
-const MenuBarManager = () => {
+const MenuBarManager = observer(() => {
     let navigate = useNavigate()
+    const {user} = useContext(Context)
+    const { t,i18n  } = useTranslation();
+
+
 
     const moveManagerMain = async() => {
         navigate(MANAGER_MAIN_PROFILE_ROUTE)
@@ -57,6 +64,10 @@ const MenuBarManager = () => {
     }
 
     const moveManagerMainAuth = async() => {
+        user.setUser({})
+        user.setIsAuth(false)
+        localStorage.clear()
+        i18n.changeLanguage('eng')
         navigate(AUTH_ROUTE)
     }
 
@@ -65,17 +76,18 @@ const MenuBarManager = () => {
             <ul className="sidebar">
                 <h1 className="h1-Manager">Public Transport</h1>
                 <li className="li-ManagerMain">
-                <a className="a-ManagerMain" onClick={moveManagerMain}><span>{consts.MANAGER_PROFILE.first_name}<br/>
-                    {consts.MANAGER_PROFILE.middle_name}<br/>
-                    {consts.MANAGER_PROFILE.last_name}<br/>
-                    {consts.MANAGER_PROFILE.email}
+                <a className="a-ManagerMain" onClick={moveManagerMain}><span>{user.user.firstName}<br/>
+                    {user.user.middleName}<br/>
+                    {user.user.lastName}<br/>
+                    {user.user.email}
                 </span></a>
                 </li>
                 <li className="li-ManagerMain">
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainRoute}>
                             <img src={statictic_icon} className="icons" alt="menu"/>
-                        Statistics
+                        {/*Statistics*/}
+                            {t('menu.manager_menu1')}
                             </a>
                     </span>
                 </li>
@@ -83,7 +95,9 @@ const MenuBarManager = () => {
                 <li className="li-ManagerMain">
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainVehicles}> <img src={vehicle_icon} className="icons" alt="menu"/>
-                        Vehicles</a>
+                        {/*Vehicles*/}
+                            {t('menu.manager_menu2')}
+                        </a>
 
                     </span>
                 </li>
@@ -92,7 +106,8 @@ const MenuBarManager = () => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainRoutesRoute}>
                         <img src={routes_icon} className="icons" alt="menu"/>
-                        Routes
+                        {/*Routes*/}
+                            {t('menu.manager_menu3')}
                         </a>
                     </span>
                 </li>
@@ -101,7 +116,8 @@ const MenuBarManager = () => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainFeedback}>
                         <img src={feedback_icon} className="icons" alt="menu"/>
-                        Feedback
+                        {/*Feedback*/}
+                            {t('menu.manager_menu4')}
                         </a>
                     </span>
                 </li>
@@ -110,7 +126,8 @@ const MenuBarManager = () => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainTC}>
                         <img src={trans_company_icon} className="icons" alt="menu"/>
-                        Transport company
+                        {/*Transport company*/}
+                            {t('menu.manager_menu5')}
                         </a>
                     </span>
                 </li>
@@ -119,7 +136,8 @@ const MenuBarManager = () => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainProfile}>
                         <img src={profile_icon} className="icons" alt="menu"/>
-                        Profile
+                        {/*Profile*/}
+                            {t('menu.manager_menu6')}
                         </a>
                     </span>
                 </li>
@@ -128,7 +146,8 @@ const MenuBarManager = () => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainSupport}>
                         <img src={support_icon} className="icons" alt="menu"/>
-                        Support service</a>
+                        {/*Support service*/}
+                            {t('menu.manager_menu7')}</a>
                     </span>
                 </li>
 
@@ -136,7 +155,8 @@ const MenuBarManager = () => {
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainAuth}>
                         <img src={logout_icon} className="icons" alt="menu"/>
-                        Log out
+                        {/*Log out*/}
+                            {t('menu.manager_menu8')}
                         </a>
                     </span>
                 </li>
@@ -145,6 +165,6 @@ const MenuBarManager = () => {
             </ul>
         </div>
     );
-};
+});
 
 export default MenuBarManager;

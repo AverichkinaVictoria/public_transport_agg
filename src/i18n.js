@@ -26,7 +26,16 @@ i18n
                         moderator_menu4: 'Feedbacks',
                         moderator_menu5: 'Profile',
                         moderator_menu6: 'Support service',
-                        moderator_menu7: 'Log out'
+                        moderator_menu7: 'Log out',
+
+                        manager_menu1: 'Statistics',
+                        manager_menu2: 'Vehicles',
+                        manager_menu3: 'Routes',
+                        manager_menu4: 'Feedbacks',
+                        manager_menu5: 'Transport Company',
+                        manager_menu6: 'Profile',
+                        manager_menu7: 'Support service',
+                        manager_menu8: 'Log out'
                     },
                     feedbacks: {
                         moderator_first_name: 'First name:',
@@ -88,7 +97,8 @@ i18n
                         moderator_phone: 'Phone number',
                         moderator_load: 'Load',
                         moderator_save: 'Save changes',
-                        moderator_change_password: 'Reset password'
+                        moderator_change_password: 'Reset password',
+                        manager_tc: 'Transport company'
                     },
                     support: {
                         moderator_type: 'Type',
@@ -118,7 +128,16 @@ i18n
                         moderator_menu4: 'Отзывы',
                         moderator_menu5: 'Профиль',
                         moderator_menu6: 'Служба поддержки',
-                        moderator_menu7: 'Выйти'
+                        moderator_menu7: 'Выйти',
+
+                        manager_menu1: 'Статистика',
+                        manager_menu2: 'Транспорт',
+                        manager_menu3: 'Маршруты',
+                        manager_menu4: 'Отзывы',
+                        manager_menu5: 'Транспортная компания',
+                        manager_menu6: 'Профиль',
+                        manager_menu7: 'Служба поддержки',
+                        manager_menu8: 'Выйти'
                     },
                     feedbacks: {
                         moderator_first_name: 'Имя:',
@@ -180,7 +199,8 @@ i18n
                         moderator_phone: 'Телефон',
                         moderator_load: 'Загрузить',
                         moderator_save: 'Сохранить',
-                        moderator_change_password: 'Пароль'
+                        moderator_change_password: 'Пароль',
+                        manager_tc: 'Транспортная компания'
                     },
                     support: {
                         moderator_type: 'Тип',

@@ -10,8 +10,12 @@ const ManagerMainSupport = () => {
                 <MenuBarManager></MenuBarManager>
                 <div className="content">
                     <Extra></Extra>
-                    <div className="content-page">
-                        Support
+                    <div className="content-page-profile">
+                        <div>
+                            <p><input type="text" placeholder="Subject"></input></p>
+                            <p><textarea rows="10" cols="40" placeholder="Input message..."></textarea></p>
+                            <p><button type='submit'>Submit</button></p>
+                        </div>
                     </div>
                 </div>
             </div>

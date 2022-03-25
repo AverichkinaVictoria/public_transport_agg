@@ -163,6 +163,7 @@ a:-webkit-any-link {
     border-radius: 5px;
     border-color: black;
     margin: 30px;
+    width: -webkit-fill-available;
     /* width: 400px; */
 }
 

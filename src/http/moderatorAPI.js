@@ -56,7 +56,7 @@ export const changeHelpDesk = async (id, statusForChange, typeForChange) => {
         status: statusForChange,
         type: typeForChange,
         files: [
-            '144899549247705088'
+            '147088101104816176'
         ]
     })
     return response

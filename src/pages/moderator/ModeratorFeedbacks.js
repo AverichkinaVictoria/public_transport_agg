@@ -83,13 +83,6 @@ const ModeratorFeedbacks = observer(() => {
         getAllFeedbacks().then(data => {
             setTableData(data.data)
         }).finally()
-
-        // setTableData([
-        //     {id: 1, firstName: 'Victoria1', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 5, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше нЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдЯ не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогдикогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
-        //     {id: 2, firstName: 'Victoria2', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 3, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
-        //     {id: 3, firstName: 'Victoria3', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 4, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"},
-        //     {id: 4, firstName: 'Victoria4', middleName: 'Nikolaevna', lastName: 'Averichkina', email: "test@mail.ru", tc: 'RZD', vehicle: '№299210', departureCity: 'Moscow', arrivalCity: 'Rostov', rating: 2, desc: "Я не довольна состоянием транспортного средства. Все разваливается, еле едет. Больше никогда не воспользуюсь данной компанией. И внукам советовать не буду!"}
-        // ])
     }, [])
 
     const closeFeedback = () => {
@@ -166,9 +159,7 @@ const ModeratorFeedbacks = observer(() => {
                         </div>
 
 
-                        {/*{feedbacksArr.feedbacks.map(feedbacks =>{*/}
-                        {/*    return <CardFeedbacks key={feedbacks.id} feedbacksAll= {feedbacksArr} feedbacks={feedbacks}/>}*/}
-                        {/*)}*/}
+
 
 
                         <div className='moderator-table'>

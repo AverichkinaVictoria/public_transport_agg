@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import menu_but from "../UI/menu_but.svg";
 import search_but from "../UI/search_but.svg";
 import eng_lan from "../UI/uk_flag.svg";
@@ -15,6 +15,7 @@ import {
 import {useNavigate} from "react-router";
 import {Context} from "../index";
 import { useTranslation, Trans } from 'react-i18next';
+import {getUsersList} from "../http/moderatorAPI";
 
 const Extra = observer(() => {
     let navigate = useNavigate()
@@ -25,6 +26,8 @@ const Extra = observer(() => {
     localStorage.getItem('language') === "rus"
         ? (flag = rus_lan)
         : (flag = eng_lan);
+
+
 
     const moveMainProfile = async() => {
         if (user.role==='manager') {

@@ -30,6 +30,7 @@ const MenuBarMain = observer(() => {
         user.setUser({})
         user.setIsAuth(false)
         localStorage.clear()
+        i18n.changeLanguage('eng')
         navigate(AUTH_ROUTE)
     }
 
