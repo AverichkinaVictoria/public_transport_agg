@@ -2,7 +2,7 @@ import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
 import {useLocation} from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import { putVehicle } from "../../http/managerAPI";
+import { putSchema, putVehicle } from "../../http/managerAPI";
 import { MANAGER_MAIN_VEHICLES_ROUTE } from "../../utils/consts";
 import { useState } from "react";
 
@@ -18,9 +18,11 @@ const ManagerMainVehicleEdit = () => {
     const [rows, setRows] = useState(findRows())
     const [cols, setCols] = useState(findCols())
     const [seats, setSeats] = useState(jsonToArray())
-    const [ecoCost, setEcoCost] = useState(places.find(d => d.seatClass === "Economy").cost)
-    const [busCost, setBusCost] = useState(places.find(d => d.seatClass === "Business").cost)
-    
+    const [ecoCost, setEcoCost] = useState(places.find(d => d.seatClass === "Economy") !== undefined 
+                                            ? places.find(d => d.seatClass === "Economy").cost : 0)
+    const [busCost, setBusCost] = useState(places.find(d => d.seatClass === "Business") !== undefined 
+                                            ? places.find(d => d.seatClass === "Business").cost : 0)
+
     const navigate = useNavigate()
 
     function findRows() {
@@ -57,6 +59,7 @@ const ManagerMainVehicleEdit = () => {
 
     function saveChanges() {
         putVehicle(vehicle.vehicle_id, model, year, seatsToJSON())
+        putSchema(vehicle.vehicle_id, seatsToJSON())
         navigate(MANAGER_MAIN_VEHICLES_ROUTE)
     }
 

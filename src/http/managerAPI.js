@@ -76,10 +76,9 @@ export const postVehicle = async (model, year, seats) => {
 }
 
 export const putVehicle = async (id, model, year, seats) => {
-    console.log("PUT VEHICLES >>>")
+    console.log("put vehicle")
     console.log(id)
-
-    const res1 = await $host.put('api/v1/vehicles/' + id, {
+    const response = await $host.put('api/v1/vehicles/' + id, {
         company_id: COMPANY_ID,
         model_name: model,
         production_year: year,
@@ -87,7 +86,11 @@ export const putVehicle = async (id, model, year, seats) => {
         is_active: true
     })
 
-    const res2 = await $host.put('api/v1/schemas/vehicle/' +  id, {
+    return response
+}
+
+export const putSchema = async (id, seats) => {
+    const response = await $host.put('api/v1/schemas/vehicle/' +  id, {
         seats: seats,
         passages: [
             {
@@ -97,5 +100,5 @@ export const putVehicle = async (id, model, year, seats) => {
         ]
     })
 
-    return (res1, res2)
+    return response
 }
