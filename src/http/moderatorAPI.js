@@ -1,4 +1,4 @@
-import {$authHost, $authHostE, $authHostR, $host} from "./index";
+import {$authHost, $authHostE, $authHostR} from "./index";
 import axios from "axios";
 
 export const getCompanies = async () => {

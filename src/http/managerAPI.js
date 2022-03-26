@@ -1,5 +1,4 @@
 import {$host} from "./index";
-import axios from "axios";
 
 const COMPANY_ID = 9
 
@@ -76,8 +75,6 @@ export const postVehicle = async (model, year, seats) => {
 }
 
 export const putVehicle = async (id, model, year, seats) => {
-    console.log("put vehicle")
-    console.log(id)
     const response = await $host.put('api/v1/vehicles/' + id, {
         company_id: COMPANY_ID,
         model_name: model,

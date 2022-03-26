@@ -20,7 +20,6 @@ export default class TC {
         this._companies = companies
     }
 
-
     get companies() {
         return this._companies
     }
@@ -31,5 +30,4 @@ export default class TC {
             this._companies.splice(index, 1); // 2nd parameter means remove one item only
         }
     }
-
 }

@@ -32,7 +32,6 @@ export default class User {
         this._language = lan
     }
 
-
     get language() {
         return this._language
     }
@@ -42,15 +41,11 @@ export default class User {
         return this._img
     }
 
-
     get test() {
         return this._test
     }
 
-
     get users() {
         return this._users
     }
-
-
 }
