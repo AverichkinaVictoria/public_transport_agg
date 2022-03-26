@@ -16,10 +16,7 @@ export default class Feedbacks {
         this._feedbacks = feedbacks
     }
 
-
     get feedbacks() {
         return this._feedbacks
     }
-
-
 }

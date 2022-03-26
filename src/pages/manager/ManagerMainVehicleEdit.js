@@ -26,12 +26,20 @@ const ManagerMainVehicleEdit = () => {
     const navigate = useNavigate()
 
     function findRows() {
+        if (places === undefined) {
+            return 0
+        }
+
         var clone = places.slice(0)
 
         return clone.sort((a, b) => b.rowLocation - a.rowLocation)[0].rowLocation + 1
     }
 
     function findCols() {
+        if (places === undefined) {
+            return 0
+        }
+
         var clone = places.slice(0)
 
         return clone.sort((a, b) => b.columnLocation - a.columnLocation)[0].columnLocation + 1

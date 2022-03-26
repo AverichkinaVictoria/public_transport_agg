@@ -33,10 +33,6 @@ const ManagerMainTc = () => {
                             <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.website} placeholder='Website' /></p>
                             <p>Phone</p>
                             <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.phone} placeholder='Phone' /></p>
-                            <p>Payment details</p>
-                            <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.payment_details} placeholder='Payment details' /></p>
-                            <p>Tax number</p>
-                            <p><input type="text" defaultValue={consts.TRANSPORT_COMPANY.tax_number} placeholder='Tax number' /></p>
                             <p><button type="submit">Save changes</button></p>
                         </div>
                     </div>
