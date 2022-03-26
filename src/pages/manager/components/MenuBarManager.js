@@ -71,14 +71,14 @@ const MenuBarManager = () => {
                     {consts.MANAGER_PROFILE.email}
                 </span></a>
                 </li>
-                <li className="li-ManagerMain">
+                {/* <li className="li-ManagerMain">
                     <span>
                         <a className="a-ManagerMain" onClick={moveManagerMainRoute}>
                             <img src={statictic_icon} className="icons" alt="menu"/>
                         Statistics
                             </a>
                     </span>
-                </li>
+                </li> */}
 
                 <li className="li-ManagerMain">
                     <span>
