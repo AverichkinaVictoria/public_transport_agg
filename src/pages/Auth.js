@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import '../styles/styles_for_pages/Authorization.css'
 import {
     MANAGER_MAIN_ROUTE,
+    MANAGER_MAIN_VEHICLES_ROUTE,
     MODERATOR_MAIN_ROUTE,
     MODERATOR_MAIN_TC_ROUTE,
     PASSWORD_RESET_ROUTE,
@@ -64,7 +65,7 @@ const Auth = observer(() => {
 
             if (infoUserCurrent.data.type==='manager') {
                 console.log('manager')
-                navigate(MANAGER_MAIN_ROUTE)
+                navigate(MANAGER_MAIN_VEHICLES_ROUTE)
             } else if (infoUserCurrent.data.type==='moderator') {
                 console.log('moderator')
                 navigate(MODERATOR_MAIN_TC_ROUTE)

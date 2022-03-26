@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../../styles/styles_for_pages/Manager.css'
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
@@ -8,27 +8,32 @@ import { MANAGER_MAIN_VEHICLE_CREATE_ROUTE } from '../../utils/consts';
 import { getVehicles } from '../../http/managerAPI';
 
 const ManagerMainVehicles = () => {
-    const [vehicles, setVehicles] = useState([])
+    const [vehicles, setVehicles] = useState(null)
 
     function loadVehicles() {
         console.log("LOADING getVehicles>>>")
         getVehicles().then(data => {
-            console.log(data.data.vehicles)
-            setVehicles(data.data.vehicles)
+            if (vehicles === null) {
+                console.log(data.data.vehicles)
+                setVehicles(data.data.vehicles)
+            }
         }).finally()
     }
 
     const navigate = useNavigate();
 
     function printVehicles() {
-        return(
-            <div className='vehicles'>
-                
-                {vehicles.map(vehicle => (
-                    <p className='vehicleRecord' key={vehicle.vehicle_id}><Vehicle key={vehicle.vehicle_id} vehicle={vehicle}></Vehicle></p>
-                ))}
-            </div>
-        )
+        if (vehicles != null) {
+            return(
+                <div className='vehicles'>
+                    {vehicles.map(vehicle => (
+                        <div className='vehicleRecord' key={vehicle.vehicle_id}>
+                            <Vehicle key={vehicle.vehicle_id} vehicle={vehicle} />
+                        </div>
+                    ))}
+                </div>
+            )
+        }
     }
 
     function createVehicle() {

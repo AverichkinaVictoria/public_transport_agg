@@ -9,33 +9,40 @@ import { useNavigate } from 'react-router';
 import { getRoutes, getSchedule } from '../../http/managerAPI';
 
 const ManagerMainRoutes = () => {
-    const [routes, setRoutes] = useState([])
-    const [schedule, setSchedule] = useState([])
+    const [routes, setRoutes] = useState(null)
+    const [schedule, setSchedule] = useState(null)
 
     function loadRoutes() {
         console.log("GETTING ROUTES >>>")
         getRoutes().then(data => {
-            console.log(data.data.routes)
-            setRoutes(data.data.routes)
+            if (routes === null) {
+                console.log(data.data.routes)
+                setRoutes(data.data.routes)
+            }
         }).finally()
 
         console.log("GETTING SCHEDULE >>>")
         getSchedule().then(data => {
-            console.log(data.data.items)
-            setSchedule(data.data.items)
+            if (schedule === null) {
+                console.log(data.data.items)
+                setSchedule(data.data.items)
+            }
         }).finally()
     }
 
     const navigate = useNavigate();
 
     function printRoutes() {
-        return(
-            <div className='routes'>
-                {routes.map(route => (
-                    <p className='routeRecord' key={route.route_id}><Route key={route.route_id} route={route}></Route></p>
-                ))}
-            </div>
-        )
+        if (routes !== null & schedule !== null) {
+            return(
+                <div className='routes'>
+                    {routes.map(route => (
+                        <div className='routeRecord' key={route.route_id}>
+                            <Route key={route.route_id} route={route} schedule={schedule.find(d => (d.routeId === route.route_id))}></Route></div>
+                    ))}
+                </div>
+            )
+        }
     }
 
     function createRoute() {
@@ -52,7 +59,7 @@ const ManagerMainRoutes = () => {
                         <div className='routes-container'>
                             <button className='create-route' onClick={() => createRoute()}>Create route</button>
                             {loadRoutes()}
-                            {/* {printRoutes()} */}
+                            {printRoutes()}
                         </div>
                     </div>
                 </div>

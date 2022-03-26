@@ -5,7 +5,7 @@ import { MANAGER_MAIN_VEHICLE_EDIT_ROUTE } from '../../../utils/consts';
 
 const Vehicle = ({vehicle}) => {
 const navigate = useNavigate();
-// const [places, setPlaces] = useState([])
+const [places, setPlaces] = useState(null)
 const [ecoCost, setEcoCost] = useState()
 const [busCost, setBusCost] = useState()
 const [ecoCount, setEcoCount] = useState()
@@ -13,12 +13,16 @@ const [busCount, setBusCount] = useState()
 
 function initiate() {
     getSchema(vehicle.vehicle_id).then(data => {
-        console.log(data.data.seats)
-        // setPlaces(data.data.seats)
-        setEcoCount(data.data.seats.filter(d => d.seatClass === "Economy").length)
-        setBusCount(data.data.seats.filter(d => d.seatClass === "Business").length)
-        setEcoCost(data.data.seats.find(d => d.seatClass === "Economy").cost)
-        setBusCost(data.data.seats.find(d => d.seatClass === "Business").cost)
+        var v = data.data.seats
+
+        if (places == null) {
+            setPlaces(v)
+        }
+
+        setEcoCount(v.filter(d => d.seatClass === "Economy").length)
+        setBusCount(v.filter(d => d.seatClass === "Business").length)
+        setEcoCost(v.find(d => d.seatClass === "Economy") !== undefined ? v.find(d => d.seatClass === "Economy").cost : 0)
+        setBusCost(v.find(d => d.seatClass === "Business") !== undefined ? v.find(d => d.seatClass === "Business").cost : 0)
     })
 }
 
@@ -40,7 +44,7 @@ return (
 }
 
 function editVehicle(vehicle) {
-    navigate(MANAGER_MAIN_VEHICLE_EDIT_ROUTE, {state: {vehicle: vehicle}});
+    navigate(MANAGER_MAIN_VEHICLE_EDIT_ROUTE, {state: {vehicle: vehicle, seats: places}});
 }
 
 return (

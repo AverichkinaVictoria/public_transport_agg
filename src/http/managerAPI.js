@@ -1,13 +1,15 @@
 import {$host} from "./index";
 import axios from "axios";
 
+const COMPANY_ID = 9
+
 export const getCompany = async () => {
-    const response = await $host.get('api/v1/companies/9')
+    const response = await $host.get('api/v1/companies/' + COMPANY_ID)
     return response
 }
 
 export const getVehicles = async () => {
-    const response = await $host.get('api/v1/vehicles/company/9') // TODO: replace 3 -> 9
+    const response = await $host.get('api/v1/vehicles/company/' + COMPANY_ID)
     return response
 }
 
@@ -17,12 +19,12 @@ export const getSchema = async (id) => {
 }
 
 export const getRoutes = async () => {
-    const response = await $host.get('api/v1/companies/9/routes')
+    const response = await $host.get('api/v1/companies/' + COMPANY_ID + '/routes')
     return response
 }
 
 export const getSchedule = async () => {
-    const response = await $host.get('api/v1/companies/9/schedule')
+    const response = await $host.get('api/v1/companies/' + COMPANY_ID+ '/schedule')
     return response
 }
 
@@ -33,7 +35,7 @@ export const getRoute = async (id) => {
 
 export const postRoute = async (depCity, arrCity, hours, minutes, depTime, vehicleId) => {
     const res1 = await $host.post('api/v1/routes', {
-        company_id: 4, // TODO: ЗАМЕНИТЬ НА 9
+        company_id: COMPANY_ID,
         departure_city: depCity,
         arrival_city: arrCity,
         duration: {
@@ -53,7 +55,7 @@ export const postRoute = async (depCity, arrCity, hours, minutes, depTime, vehic
 
 export const postVehicle = async (model, year, seats) => {
     const res1 = await $host.post('api/v1/vehicles', {
-        company_id: 4,
+        company_id: COMPANY_ID,
         model_name: model,
         production_year: year,
         seats_count: seats.length,
@@ -71,4 +73,32 @@ export const postVehicle = async (model, year, seats) => {
     })
 
     return res2
+}
+
+export const putVehicle = async (id, model, year, seats) => {
+    console.log("put vehicle")
+    console.log(id)
+    const response = await $host.put('api/v1/vehicles/' + id, {
+        company_id: COMPANY_ID,
+        model_name: model,
+        production_year: year,
+        seats_count: seats.length,
+        is_active: true
+    })
+
+    return response
+}
+
+export const putSchema = async (id, seats) => {
+    const response = await $host.put('api/v1/schemas/vehicle/' +  id, {
+        seats: seats,
+        passages: [
+            {
+                nextSeatsRow: 0,
+                details: "right"
+            }
+        ]
+    })
+
+    return response
 }
