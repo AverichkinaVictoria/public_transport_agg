@@ -2,12 +2,12 @@ import {$authHost, $authHostE, $authHostR, $host} from "./index";
 import axios from "axios";
 
 export const getCompanies = async () => {
-    const response = await $authHost.get('api/v1/companies')
+    const response = await $authHost.get('api/v1/companies?limit=100')
     return response
 }
 
 export const getCompaniesRequests = async () => {
-    const response = await $authHost.get('api/v1/companies/requests')
+    const response = await $authHost.get('api/v1/companies/requests?limit=100')
     return response
 }
 
