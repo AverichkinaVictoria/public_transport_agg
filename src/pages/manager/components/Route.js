@@ -1,8 +1,12 @@
+import moment from 'moment-timezone';
+import { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { MANAGER_MAIN_ROUTE_EDIT_ROUTE } from '../../../utils/consts';
 
 const Route = ({route, schedule}) => {
     const navigate = useNavigate();
+
+    const [d, setD] = useState(undefined)
 
     function placesToText(places) {
     return (
@@ -19,18 +23,35 @@ const Route = ({route, schedule}) => {
     }
 
     function editRoute(route) {
-        navigate(MANAGER_MAIN_ROUTE_EDIT_ROUTE, {state: {route: route}});
+        navigate(MANAGER_MAIN_ROUTE_EDIT_ROUTE, {state: {route: route, schedule: schedule}});
+    }
+
+    function printInfo() {
+        if (schedule === undefined) {
+            return
+        }
+
+        if (d === undefined) {
+            setD(new Date(schedule.departureDate))
+        }
+
+        return (
+            <div className="block">
+                <p><b>Route #{route.route_id}</b></p>
+                <p>From {route.departure_city} to {route.arrival_city}</p>
+                <p>Scheduled at {schedule.departureDate}</p>
+                <p>Duration: {route.duration}</p>
+                <p>Vehicle #{schedule.vehicleId}</p>
+            </div>
+        )
     }
 
 return(
     <div className="route" onClick={() => {editRoute(route)}}>
+        {printInfo()}
         <div className="block">
-            <p>Route #{route.route_id}</p>
-            <p>From {route.departure_city} to {route.arrival_city}</p>
-            <p>{route.duration}</p>
-            <p>Vehicle #{schedule.vehicleId}</p>
-        </div>
-        <div className="block">
+            {/* {console.log(route)}
+            {console.log(schedule)} */}
             {/* {placesToText(route.costs)} */}
         </div>
     </div>

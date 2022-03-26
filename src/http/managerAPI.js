@@ -32,15 +32,12 @@ export const getRoute = async (id) => {
     return response
 }
 
-export const postRoute = async (depCity, arrCity, hours, minutes, depTime, vehicleId) => {
+export const postRoute = async (depCity, arrCity, duration, depTime, vehicleId) => {
     const res1 = await $host.post('api/v1/routes', {
         company_id: COMPANY_ID,
         departure_city: depCity,
         arrival_city: arrCity,
-        duration: {
-            hours: hours,
-            minutes: minutes
-        }
+        duration: duration
     })
 
     const res2 = await $host.post('api/v1/routes/schedule/new', {
@@ -98,4 +95,20 @@ export const putSchema = async (id, seats) => {
     })
 
     return response
+}
+
+export const putRoute = async (id, depCity, arrCity, duration, depDate, vehicleId) => {
+    const res1 = await $host.put('api/v1/routes/' + id, {
+        departure_city: depCity,
+        arrival_city: arrCity,
+        duration: duration
+    })
+
+    const res2 = await $host.put('api/v1/routes/schedule/' + id, {
+        routeId: id,
+        departureDate: depDate,
+        assignedVehicleId: vehicleId
+    })
+
+    return (res1, res2)
 }
