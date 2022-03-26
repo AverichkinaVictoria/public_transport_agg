@@ -6,35 +6,22 @@ import { observer } from 'mobx-react-lite';
 import Context from '@mui/base/TabsUnstyled/TabsContext';
 import { getCurrentUser } from '../../http/userAPI';
 import * as consts from "../../utils/ConstantsManager";
+import {getCurrentUserProfile} from "../../http/moderatorAPI";
+import {toJS} from "mobx";
+import ProfileCard from "../moderator/components/profileCard";
+import ProfileManagerCard from "./components/profileManagerCard";
 
-const ManagerMainProfile = () => {
+const ManagerMainProfile = observer(() => {
+
+
     return (
         <div className='manager-menu-bar'>
             <div className="container">
                 <MenuBarManager></MenuBarManager>
                 <div className="content">
                     <Extra></Extra>
-                    <div className="content-page-profile">
-                        <div className="left">
-                            <p><img src={consts.MANAGER_PROFILE.icon} alt='icon'/></p>
-                            <p><button type="submit">Load icon</button></p>
-                        </div>
-                        <div className="right">
-                            <p>First name</p>
-                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.first_name} placeholder="First name" /></p>
-                            <p>Middle name</p>
-                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.middle_name} placeholder="Middle name" /></p>
-                            <p>Last name</p>
-                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.last_name} placeholder="Last name" /></p>
-                            <p>E-mail</p>
-                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.email} placeholder="E-mail" /></p>
-                            <p>Phone</p>
-                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.phone} placeholder="Phone" /></p>
-                            <p>Company</p>
-                            <p><input type="text" defaultValue={consts.MANAGER_PROFILE.company} placeholder="Company" /></p>
-                            <p><input type="text" placeholder="Change password" /></p>
-                            <p><button type="submit">Save changes</button></p>
-                        </div>
+                    <div className="content-page">
+                        <ProfileManagerCard> </ProfileManagerCard>
                     </div>
                     <div className="bottom-profile">
                     </div>
@@ -42,6 +29,6 @@ const ManagerMainProfile = () => {
             </div>
         </div>
     );
-}
+})
 
 export default ManagerMainProfile;

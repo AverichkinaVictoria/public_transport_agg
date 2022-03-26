@@ -1,27 +1,27 @@
 import React, {useContext, useEffect, useState} from 'react';
-import profilePic from "../../../UI/account_img.jpg";
-import {useNavigate} from "react-router";
-import {AUTH_ROUTE, MANAGER_MAIN_ROUTE, PASSWORD_RESET_ROUTE} from "../../../utils/consts";
-import {
-    addUser, getAllFeedbacks,
-    getCompaniesFiles,
-    getCurrentUser, getCurrentUserProfile,
-    getHelpDesk, postFeedbacks, putCompaniesFiles,
-    putCurrentUserProfile
-} from "../../../http/moderatorAPI";
 import {Context} from "../../../index";
 import {toJS} from "mobx";
-import {observer} from "mobx-react-lite";
-import axios from "axios";
+import profilePic from "../../../UI/account_img.jpg";
+import {useNavigate} from "react-router";
 import {useTranslation} from "react-i18next";
+import {
+    getCompaniesFiles,
+    getCurrentUserProfile,
+    putCompaniesFiles,
+    putCurrentUserProfile
+} from "../../../http/moderatorAPI";
+import axios from "axios";
+import {PASSWORD_RESET_ROUTE} from "../../../utils/consts";
+import {observer} from "mobx-react-lite";
 
-const ProfileCard = observer((user_img) => {
+const ProfileManagerCard = observer(() => {
     const {user} = useContext(Context)
 
     const [firstName, setFirstName] = useState(toJS(user.user).firstName)
     const [middleName, setMiddleName] = useState(toJS(user.user).middleName)
     const [lastName, setLastName] = useState(toJS(user.user).lastName)
     const [email, setEmail] = useState(toJS(user.user).email)
+    const [tc, setTc] = useState(toJS(user.user).companyName)
     const [phone, setPhone] = useState(toJS(user.user).phone)
     const [file, setFile] = useState(null)
     const [img, setImg] = useState(profilePic)
@@ -35,26 +35,26 @@ const ProfileCard = observer((user_img) => {
         const ans1 = getCurrentUserProfile(localStorage.getItem('email')).then(function (response){
             try {
                 user.setUser(response.data)
-                // user.setImg('smth')
-                console.log('THIS USER>>>')
+                console.log('THIS USER PROFILE>>>')
                 console.log(response.data)
                 setFirstName(response.data.firstName)
                 setMiddleName(response.data.middleName)
                 setLastName(response.data.lastName)
                 setEmail(response.data.email)
                 setPhone(response.data.phone)
-                // setImg(response.data.imageUrl)
+                setTc(response.data.companyName)
                 getCompaniesFiles(response.data.imageUrl).then(function (res){
                     setImg(res.data.url)
                 })
             } catch (e) {
                 console.log(e)
-                setFirstName('-')
+                setFirstName('')
                 setMiddleName('')
                 setLastName('')
                 setEmail(toJS(user.user).email)
                 setPhone('')
                 setImg('')
+                setTc('')
             }
 
         })
@@ -112,33 +112,16 @@ const ProfileCard = observer((user_img) => {
     const saveChanges = () => {
         console.log('USER EMAIL>>>')
         console.log(toJS(user.user).email)
-        const ans1 = putCurrentUserProfile(localStorage.getItem('id'),firstName,lastName,middleName,email,phone,0,'',localStorage.getItem('role'),user.user.imageUrl).then(function (response){
+        const ans1 = putCurrentUserProfile(localStorage.getItem('id'),firstName,lastName,middleName,email,phone,0,tc,localStorage.getItem('role'),user.user.imageUrl).then(function (response){
             const ans1 = getCurrentUserProfile(email).then(function (response){
                 user.setUser(response.data)
 
             }).catch(function(){})
         })
 
-        // const ans = getCurrentUser(user.email).then(function (response){
-        //     console.log('USER DATA>>>')
-        //     console.log(response)
-        // })
-        //сбросить токен
-        // getHelpDesk().then(function (response){
-        //     console.log("HELPDESK>>>")
-        //     console.log(response)
-        // })
-
-
     }
 
     const resetPassword = () => {
-        //сбросить токен
-        // const r = getAllFeedbacks().then(function (response){
-        //     console.log('GET FEEDBACKS RES >>>')
-        //     console.log(response)
-        // })
-
         user.setUser({})
         user.setIsAuth(false)
         localStorage.clear()
@@ -160,11 +143,11 @@ const ProfileCard = observer((user_img) => {
 
 
 
-                    <label className="moderator-load-img-profile">
-                        <input type="file" name="myImage" accept="image/x-png,image/jpeg, image/jpg" onChange={selectFile} />
-                        {/*Load image*/}
-                        {t('profile.moderator_load')}
-                    </label>
+                <label className="moderator-load-img-profile">
+                    <input type="file" name="myImage" accept="image/x-png,image/jpeg, image/jpg" style={{width:"411px",height:"49px"}} onChange={selectFile} />
+                    {/*Load image*/}
+                    {t('profile.moderator_load')}
+                </label>
 
 
             </div>
@@ -199,19 +182,25 @@ const ProfileCard = observer((user_img) => {
                            autoFocus="" value={phone || ''} onChange={e => setPhone(e.target.value)}/>
                 </div>
 
-                    <button className="moderator-submit-profile" onClick={saveChanges}>
-                        {/*Save changes*/}
-                        {t('profile.moderator_save')}
-                    </button>
+                <div className="profile-field">
+                    <h2 className="profile-field-h2">{t('profile.manager_tc')}</h2>
+                    <input type="text" id="last-name" className="profile-field-input" placeholder={user.user.companyName} required=""
+                           autoFocus="" value={tc || ''} onChange={e => setTc(e.target.value)}/>
+                </div>
+
+                <button className="moderator-submit-profile" onClick={saveChanges}>
+                    {/*Save changes*/}
+                    {t('profile.moderator_save')}
+                </button>
                 <button className="moderator-submit-profile" onClick={resetPassword}>
                     {/*Reset password*/}
                     {t('profile.moderator_change_password')}
                 </button>
 
-                </div>
+            </div>
 
         </div>
     );
 });
 
-export default ProfileCard;
+export default ProfileManagerCard;

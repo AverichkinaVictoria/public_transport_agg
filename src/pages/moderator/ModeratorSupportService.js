@@ -87,7 +87,7 @@ const ModeratorSupportService = observer(() => {
         getHelpDesk().then(data => {
             console.log('REPORTS LIST>>>')
             console.log(data.data)
-            setTableData(data.data)
+            //setTableData(data.data)
 
             const arr = []
             var food = {}
