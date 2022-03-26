@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../../styles/styles_for_pages/Manager.css'
 import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
-import * as consts from "../../utils/ConstantsManager";
 import Route from './components/Route';
-import { MANAGER_MAIN_ROUTE_CREATE_ROUTE, MANAGER_MAIN_ROUTE_EDIT_ROUTE } from '../../utils/consts';
+import { MANAGER_MAIN_ROUTE_CREATE_ROUTE } from '../../utils/consts';
 import { useNavigate } from 'react-router';
 import { getRoutes, getSchedule } from '../../http/managerAPI';
 
