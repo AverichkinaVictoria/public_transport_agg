@@ -2,8 +2,9 @@ import Extra from "../extra";
 import MenuBarManager from "./components/MenuBarManager";
 import {useLocation} from 'react-router-dom';
 import { useState } from "react";
+import { MANAGER_MAIN_ROUTES_ROUTE } from "../../utils/consts";
 import DatePicker from "react-datepicker";
-
+import { useNavigate } from 'react-router';
 import "react-datepicker/dist/react-datepicker.css";
 import { putRoute } from "../../http/managerAPI";
 
@@ -11,6 +12,7 @@ const ManagerMainRouteEdit = () => {
     const location = useLocation();
     const route = location.state.route;
     const schedule = location.state.schedule;
+    const navigate = useNavigate();
 
     const [depCity, setDepCity] = useState(route.departure_city)
     const [arrCity, setArrCity] = useState(route.arrival_city)
@@ -20,6 +22,7 @@ const ManagerMainRouteEdit = () => {
 
     function saveChanges() {
         putRoute(route.route_id, depCity, arrCity, duration, depDate, vehicleId)
+        navigate(MANAGER_MAIN_ROUTES_ROUTE);
     }
 
     return (
