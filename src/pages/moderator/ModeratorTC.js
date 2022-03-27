@@ -117,6 +117,7 @@ const ModeratorTc = observer(() => {
 
         getCompaniesRequests().then(data => {
             console.log('LOADING DATA getCompaniesRequests>>>')
+            console.log(data)
             // console.log(data.data.list)
             const arr = []
             data.data.list.forEach(function(entry) {

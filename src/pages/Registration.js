@@ -22,13 +22,19 @@ const Registration = () => {
     const registration_user = async () => {
 
         // console.log(localStorage.getItem('id'))
+
         const ch = (password2===password)
         if (ch) {
-            setErrorMessage('');
-            const response = await registration(email, password)
-            console.log(response)
+            try {
+                setErrorMessage('');
+                const response = await registration(email, password)
+                console.log(response)
 
-            navigate(VALIDATION_PAGE)
+                navigate(VALIDATION_PAGE)
+            } catch (e){
+                setErrorMessage("Registration error!");
+            }
+
         } else {
             setErrorMessage('The passwords are different!');
         }
