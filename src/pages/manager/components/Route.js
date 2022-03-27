@@ -39,7 +39,7 @@ const Route = ({route, schedule}) => {
             <div className="block">
                 <p><b>Route #{route.route_id}</b></p>
                 <p>From {route.departure_city} to {route.arrival_city}</p>
-                <p>Scheduled at {schedule.departureDate}</p>
+                <p>Scheduled at {schedule.departureDate.replace("T", " ")}</p>
                 <p>Duration: {route.duration}</p>
                 <p>Vehicle #{schedule.vehicleId}</p>
             </div>
