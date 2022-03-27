@@ -2,12 +2,12 @@ import {$authHost, $authHostE, $authHostR} from "./index";
 import axios from "axios";
 
 export const getCompanies = async () => {
-    const response = await $authHost.get('api/v1/companies?limit=100')
+    const response = await $authHost.get('api/v1/companies?limit=1000')
     return response
 }
 
 export const getCompaniesRequests = async () => {
-    const response = await $authHost.get('api/v1/companies/requests?limit=100')
+    const response = await $authHost.get('api/v1/companies/requests?limit=1000')
     return response
 }
 
@@ -16,15 +16,16 @@ export const postCompaniesRequests = async (id,isApproved) => {
     return response
 }
 
-export const putCompanies = async (id, act,company_code,company_name,company_address,company_phone,company_website,company_desc) => {
+export const putCompanies = async (id, company_code,company_name,company_legal_name,company_address,company_phone,company_website,company_desc,notes_cur, act) => {
     const response = await $authHost.put('api/v1/companies/'+id, {
-        name: company_code,
-        legal_name: company_name,
+        code: company_code,
+        name: company_name,
+        legal_name: company_legal_name,
         address: company_address,
         phone: company_phone,
         website: company_website,
         description: company_desc,
-        notes: "",
+        notes: notes_cur,
         is_active: act
     })
     return response

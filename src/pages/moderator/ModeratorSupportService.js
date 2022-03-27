@@ -224,7 +224,7 @@ const ModeratorSupportService = observer(() => {
                                                    onClick: (e, data) => {
 
 
-                                                       changeHelpDesk(data.reportID,'complete', data.type).then(function (response){
+                                                       changeHelpDesk(data.reportID,'completed', data.type).then(function (response){
                                                            console.log(response)
                                                        })
 

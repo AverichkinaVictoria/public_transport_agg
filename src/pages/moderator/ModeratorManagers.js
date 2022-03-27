@@ -62,9 +62,9 @@ const ModeratorManagers = observer(() => {
         {title: t('managers.moderator_first_name'), field: 'firstName' },
         {title: t('managers.moderator_middle_name'), field: 'middleName',sorting: false},
         {title: t('managers.moderator_last_name'), field: 'lastName'},
-        {title: t('managers.moderator_email'), field: 'email', sorting: false},
+        {title: t('managers.moderator_email'), field: 'email'},
         {title: t('managers.moderator_company'), field: 'companyName'},
-        {title: t('managers.moderator_phone'), field: 'phone'}
+        {title: t('managers.moderator_phone'), field: 'phone', sorting: false}
     ]
 
     useEffect(() => {

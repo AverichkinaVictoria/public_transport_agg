@@ -67,14 +67,14 @@ const ModeratorFeedbacks = observer(() => {
 
     const columns = [
         {title: "id", field: "id", hidden: true},
-        {title: t('feedbacks.moderator_first_name'), field: 'firstName' },
-        {title: t('feedbacks.moderator_middle_name'), field: 'middleName',sorting: false},
-        {title: t('feedbacks.moderator_last_name'), field: 'lastName'},
+        {title: t('feedbacks.moderator_first_name'), field: 'firstName', grouping: false },
+        {title: t('feedbacks.moderator_middle_name'), field: 'middleName',sorting: false, grouping: false},
+        {title: t('feedbacks.moderator_last_name'), field: 'lastName', grouping: false},
         {title: t('feedbacks.moderator_email'), field: 'email'},
         {title: t('feedbacks.moderator_company'), field: 'companyName'},
         {title: t('feedbacks.moderator_vehicle'), field: 'vehicle'},
-        {title: t('feedbacks.moderator_departure'), field: 'departure'},
-        {title: t('feedbacks.moderator_arrival'), field: 'arrival'},
+        {title: t('feedbacks.moderator_departure'), field: 'departure',grouping: false},
+        {title: t('feedbacks.moderator_arrival'), field: 'arrival',grouping: false},
         {title: t('feedbacks.moderator_rating'), field: 'rating'},
         {title: 'Feedback', field: 'feedback', hidden: true}
     ]
@@ -164,6 +164,9 @@ const ModeratorFeedbacks = observer(() => {
 
                         <div className='moderator-table'>
                             <MaterialTable localization={{
+                                grouping: {
+                                    placeholder: t('support.moderator_group'),
+                                },
                                 pagination: {
                                     labelDisplayedRows: '{from}-{to} of {count}',
                                     labelRowsSelect: t('support.moderator_rows')
@@ -178,7 +181,7 @@ const ModeratorFeedbacks = observer(() => {
                                 body: {
                                     emptyDataSourceMessage: t('feedbacks.moderator_no_records'),
                                 }
-                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped', grouping: true}}
                                            actions={[
                                                {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
