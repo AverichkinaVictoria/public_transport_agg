@@ -497,6 +497,11 @@ body {
     padding-bottom: 10px;
 }
 
+.error-new {
+    color: red;
+    font-size: 20px;
+}
+
 @media (max-width: 600px) {
     .registration-form {
         display: block;

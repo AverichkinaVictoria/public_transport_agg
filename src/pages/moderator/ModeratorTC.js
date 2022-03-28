@@ -31,12 +31,14 @@ import { forwardRef } from 'react';
 import {
     getCompanies,
     getCompaniesFiles,
-    getCompaniesRequests,
+    getCompaniesRequests, getCurrentUserProfile,
     postCompaniesRequests,
     putCompanies, putCompaniesFiles
 } from "../../http/moderatorAPI";
 import axios from "axios";
 import {useTranslation} from "react-i18next";
+import star from "../../UI/Star.svg";
+import {toJS} from "mobx";
 
 
 
@@ -45,6 +47,23 @@ const ModeratorTc = observer(() => {
     const { t,i18n  } = useTranslation();
     const [tableData,setTableData] = useState([])
     const [tableDataAll,setTableDataAll] = useState([])
+    const [tableDataArchieve,setTableDataArchieve] = useState([])
+    const [feedbackVisible,setFeedbackVisible] = useState(false)
+    const [feedbackCur,setFeedbackCur] = useState({})
+    const [comment,setComment] = useState('')
+
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const closeFeedback = () => {
+        //запрос на удаление по id
+        console.log("TEST COMPANY NOTES>>>")
+        const req = putCompanies(feedbackCur.company.id,feedbackCur.company.code,feedbackCur.company.name,feedbackCur.company.legal_name,feedbackCur.company.address,feedbackCur.company.phone,feedbackCur.company.website,feedbackCur.company.description,comment.toString(),false)
+        console.log("TEST COMPANY NOTES AFTER>>>")
+        console.log(req)
+        setFeedbackCur({})
+        setFeedbackVisible(false)
+
+    }
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -70,6 +89,7 @@ const ModeratorTc = observer(() => {
         {title: "id", field: "company.id", hidden: true},
         {title: t('tc.moderator_name'), field: 'company.name' },
         {title: t('tc.moderator_address'), field: 'company.address'},
+        {title: t('managers.moderator_email'), field: 'company.code'},
         {title: t('tc.moderator_phone'), field: 'company.phone', sorting: false},
         {title: t('tc.moderator_website'), field: 'company.website'}
     ]
@@ -78,8 +98,18 @@ const ModeratorTc = observer(() => {
         {title: "id", field: "id", hidden: true},
         {title: t('tc.moderator_name'), field: 'name' },
         {title: t('tc.moderator_address'), field: 'address'},
+        {title: t('managers.moderator_email'), field: 'company.code'},
         {title: t('tc.moderator_phone'), field: 'phone', sorting: false},
         {title: t('tc.moderator_website'), field: 'website'}
+    ]
+
+    const columnsArchieve = [
+        {title: "id", field: "company.id", hidden: true},
+        {title: t('tc.moderator_name'), field: 'company.name' },
+        {title: t('tc.moderator_address'), field: 'company.address'},
+        {title: t('managers.moderator_email'), field: 'company.code'},
+        {title: t('tc.moderator_phone'), field: 'company.phone', sorting: false},
+        {title: t('tc.moderator_website'), field: 'company.website'}
     ]
 
 
@@ -89,23 +119,6 @@ const ModeratorTc = observer(() => {
     const {usersArr} = useContext(Context)
 
     useEffect(() => {
-        // setTableData([
-        //     {id: 1, isActive: true, name: 'RZD1', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "http://rzd.ru/", documents: 'dskjfksj'},
-        //     {id: 2, isActive: false, name: 'RZD2', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
-        //     {id: 3, isActive: true, name: 'RZD3', address: 'moscow  moscow moscow  moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
-        //     {id: 4, isActive: true, name: 'RZD4', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
-        //     {id: 5, isActive: false, name: 'RZD5', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
-        //     {id: 6, isActive: false, name: 'RZD6', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
-        //     {id: 7, isActive: false, name: 'RZD7', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'},
-        //     {id: 8, isActive: false, name: 'RZD8', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "www", documents: 'dskjfksj'}])
-
-        // setTableData([
-        //     {id: 9, isActive: true, name: 'RZD9', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "http://rzd.ru/", documents: 'dskjfksj'},
-        //     {id: 10, isActive: true, name: 'RZD10', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "http://rzd.ru/", documents: 'dskjfksj'},
-        //     {id: 11, isActive: true, name: 'RZD11', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "http://rzd.ru/", documents: 'dskjfksj'},
-        //     {id: 12, isActive: true, name: 'RZD12', address: 'moscow moscow moscow moscow', phone: '+798217377288', website: "http://rzd.ru/", documents: 'dskjfksj'},
-        // ])
-
 
         console.log("LOADING getCompanies>>>")
         getCompanies().then(data => {
@@ -120,15 +133,25 @@ const ModeratorTc = observer(() => {
             console.log(data)
             // console.log(data.data.list)
             const arr = []
+            const arr2 = []
             data.data.list.forEach(function(entry) {
                 if (!(entry.request===null)) {
                     if (entry.request.state==='Created') {
                         arr.push(entry)
                     }
                 }
+                if (entry.company.is_active===false) {
+                    if (!(entry.request===null)) {
+                        if (!(entry.request.state==='Created')){
+                            arr2.push(entry)
+                        }
+                    }
+                }
             });
             console.log(arr)
             setTableData(arr)
+            console.log(arr2)
+            setTableDataArchieve(arr2)
 
         }).finally()
     }, [])
@@ -142,14 +165,49 @@ const ModeratorTc = observer(() => {
                     <Extra></Extra>
                     <div className="content-page">
 
+                        <div className="card-header-2">
+                            <div className="card__title-header-2"></div>
+                            <div className="card__body-header-2">
+
+                                <div className="inside-title-header-2" >
+                                    {errorMessage && (
+                                        <p className="error-new" style={{font:'16px'}}> {errorMessage} </p>
+                                    )}
+
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div className="card-header">
                             <div className="card__title-header"></div>
                             <div className="card__body-header">
+
                                 <div className="inside-title-header">
                                     {/*For moderation:*/}
                                     {t('tc.moderator_for_moderation')}
 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={feedbackVisible ? "moderator-TC-card active" : "moderator-TC-card"}>
+
+                            <div className="card__body" style={{background: "rgba(63, 165, 239, 0.26)", margin: "0rem 0rem 0rem 0",
+                                padding: "0.8rem"}}>
+                                <div style={{overflow: "hidden"}}>
+                                    <h2 style={{marginLeft:"20px"}}>{t('feedbacks.moderator_reason_text')}</h2>
+                                    <textarea placeholder={t('feedbacks.moderator_reason_placeh')} id="textComment" name="textComment"
+                                              style={{paddingBottom:"30px",fontSize:"16px",height: "50px",width: "500px",background: "transparent", outline: "none", border: "none", margin:"20px"}} value={comment || ''} onChange={e => setComment(e.target.value)}>
+                                    </textarea>
+                                </div>
+
+                            </div>
+
+                            <div className="card-main">
+
+                                <div className="bttns-moderator">
+                                    <button className="yes-no-bttn" onClick={closeFeedback} style={{background:"rgba(63, 165, 239, 0.26)"}} ><img src={yes_bttn} /></button>
                                 </div>
                             </div>
                         </div>
@@ -202,6 +260,10 @@ const ModeratorTc = observer(() => {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
                                                    tooltip: t('tc.moderator_decline'),
                                                    onClick: (e, data) => {
+                                                       console.log(data)
+                                                       setFeedbackCur(data)
+                                                       setFeedbackVisible(true)
+
                                                        const req = postCompaniesRequests(data.request.request_id, false)
                                                        console.log("PRINTING DATA>>>")
 
@@ -215,7 +277,12 @@ const ModeratorTc = observer(() => {
                                                        }
                                                        setTableData(updatedData)
 
-                                                       //обновить setTableDataAll
+                                                       const addedData = [...tableDataArchieve]
+
+                                                       addedData.push(data)
+                                                       setTableDataArchieve(addedData)
+
+
 
                                                        }
 
@@ -228,9 +295,15 @@ const ModeratorTc = observer(() => {
 
                                                        //ЗАМЕНИТЬ НА data.request.document_id
 
-                                                       getCompaniesFiles('144899549247705088').then(function (response){
+                                                       getCompaniesFiles(data.request.document_id).then(function (response){
                                                            window.open(response.data.url, "_blank")
-                                                       })
+                                                       }).catch(function(){
+                                                           setErrorMessage('Document not found!');
+                                                           const timeId = setTimeout(() => {
+                                                               // After 3 seconds set the show value to false
+                                                               setErrorMessage('');
+                                                           }, 3000)
+                                                           })
 
 
                                                    }
@@ -288,6 +361,39 @@ const ModeratorTc = observer(() => {
                                                }
                                            ]}
                                            columns={columnsAll} data={tableDataAll} title=''/>
+                        </div>
+
+                        <div className="card-header">
+                            <div className="card__title-header"></div>
+                            <div className="card__body-header">
+                                <div className="inside-title-header">
+                                    {/*Not active:*/}
+                                    {t('tc.moderator_not_act')}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className='moderator-table'>
+                            <MaterialTable localization={{
+                                pagination: {
+                                    labelDisplayedRows: '{from}-{to} of {count}',
+                                    labelRowsSelect: t('support.moderator_rows')
+                                },
+                                toolbar: {
+                                    nRowsSelected: '{0} row(s) selected',
+                                    searchPlaceholder: t('feedbacks.moderator_search')
+                                },
+                                header: {
+                                    actions: t('feedbacks.moderator_actions')
+                                },
+                                body: {
+                                    emptyDataSourceMessage: t('tc.moderator_no_records'),
+                                }
+                            }} icons={tableIcons} options={{ headerStyle: { position: 'initial', top: 0, fontSize:'18px', fontWeight: 'bold' }, paginationType:'stepped'}}
+                                           actions={[
+
+                                           ]}
+                                           columns={columnsArchieve} data={tableDataArchieve} title=''/>
                         </div>
 
 

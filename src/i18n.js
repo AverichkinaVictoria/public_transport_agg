@@ -25,7 +25,7 @@ i18n
                         moderator_menu3: 'Users',
                         moderator_menu4: 'Feedbacks',
                         moderator_menu5: 'Profile',
-                        moderator_menu6: 'Support service',
+                        moderator_menu6: 'Complaints',
                         moderator_menu7: 'Log out',
 
                         manager_menu1: 'Statistics',
@@ -52,7 +52,9 @@ i18n
                         moderator_no_records: 'No records to display',
                         moderator_search: 'Search',
                         moderator_show_feedback: 'Show feedback',
-                        moderator_delete_feedback: 'Delete'
+                        moderator_delete_feedback: 'Delete',
+                        moderator_reason_placeh: "Write here",
+                        moderator_reason_text: "Rejection reason:"
                     },
                     tc: {
                         moderator_name: 'Name',
@@ -67,7 +69,8 @@ i18n
                         moderator_decline: 'Decline',
                         moderator_accept: 'Accept',
                         moderator_all: 'All:',
-                        moderator_delete: 'Delete'
+                        moderator_delete: 'Delete',
+                        moderator_not_act: 'Not active:'
                     },
                     managers: {
                         moderator_first_name: 'First name',
@@ -127,7 +130,7 @@ i18n
                         moderator_menu3: 'Пассажиры',
                         moderator_menu4: 'Отзывы',
                         moderator_menu5: 'Профиль',
-                        moderator_menu6: 'Служба поддержки',
+                        moderator_menu6: 'Жалобы',
                         moderator_menu7: 'Выйти',
 
                         manager_menu1: 'Статистика',
@@ -154,7 +157,9 @@ i18n
                         moderator_no_records: 'Нет доступных отзывов',
                         moderator_search: 'Поиск',
                         moderator_show_feedback: 'Показать отзыв',
-                        moderator_delete_feedback: 'Удалить'
+                        moderator_delete_feedback: 'Удалить',
+                        moderator_reason_placeh: "Напишите здесь",
+                        moderator_reason_text: "Причина отказа:"
                     },
                     tc: {
                         moderator_name: 'Название',
@@ -169,7 +174,8 @@ i18n
                         moderator_decline: 'Отклонить',
                         moderator_accept: 'Принять',
                         moderator_all: 'Все:',
-                        moderator_delete: 'Удалить'
+                        moderator_delete: 'Удалить',
+                        moderator_not_act: 'Архивные:'
                     },
                     managers: {
                         moderator_first_name: 'Имя',
