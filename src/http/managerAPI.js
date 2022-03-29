@@ -112,3 +112,14 @@ export const putRoute = async (id, depCity, arrCity, duration, depDate, vehicleI
 
     return (res1, res2)
 }
+
+export const putCompany = async (companyName, website, phone, address) => {
+    const response = await $host.put('api/v1/companies/' + COMPANY_ID, {
+        legal_name: companyName,
+        address: address,
+        phone: phone,
+        website: website
+    })
+
+    return response
+}
