@@ -79,6 +79,7 @@ const ManagerMainFeedback = observer(() => {
 
     useEffect(() => {
         getAllFeedbacks().then(data => {
+            console.log("All feedbacks")
             console.log(data.data)
             var arr = []
             data.data.forEach(function(entry) {

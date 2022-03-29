@@ -41,6 +41,7 @@ import ManagerMainRouteCreate from "./pages/manager/ManagerMainRouteCreate";
 import ManagerMainVehicleCreate from "./pages/manager/ManagerMainVehicleCreate";
 import ValidationReg from "./pages/moderator/Validation_reg";
 import PasswordResetValidation from "./pages/moderator/PasswordResetValidation";
+import TransportCompanyCard from "./pages/manager/components/TransportCompanyCard";
 
 export const authRoutesModerator = [
     {
@@ -101,7 +102,8 @@ export const authRoutesManager = [
     },
     {
         path: MANAGER_MAIN_TC_ROUTE,
-        Component: ManagerMainTC
+        // Component: ManagerMainTC
+        Component: TransportCompanyCard
     },
     {
         path: MANAGER_MAIN_ROUTE_EDIT_ROUTE,

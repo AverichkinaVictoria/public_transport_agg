@@ -34,7 +34,7 @@ i18n
                         manager_menu4: 'Feedbacks',
                         manager_menu5: 'Transport Company',
                         manager_menu6: 'Profile',
-                        manager_menu7: 'Support service',
+                        manager_menu7: 'Complaints',
                         manager_menu8: 'Log out'
                     },
                     feedbacks: {
@@ -139,7 +139,7 @@ i18n
                         manager_menu4: 'Отзывы',
                         manager_menu5: 'Транспортная компания',
                         manager_menu6: 'Профиль',
-                        manager_menu7: 'Служба поддержки',
+                        manager_menu7: 'Жалобы',
                         manager_menu8: 'Выйти'
                     },
                     feedbacks: {
