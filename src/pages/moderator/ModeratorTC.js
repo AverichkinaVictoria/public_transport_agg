@@ -98,7 +98,7 @@ const ModeratorTc = observer(() => {
         {title: "id", field: "id", hidden: true},
         {title: t('tc.moderator_name'), field: 'name' },
         {title: t('tc.moderator_address'), field: 'address'},
-        {title: t('managers.moderator_email'), field: 'company.code'},
+        {title: t('managers.moderator_email'), field: 'code'},
         {title: t('tc.moderator_phone'), field: 'phone', sorting: false},
         {title: t('tc.moderator_website'), field: 'website'}
     ]
@@ -122,7 +122,7 @@ const ModeratorTc = observer(() => {
 
         console.log("LOADING getCompanies>>>")
         getCompanies().then(data => {
-
+            console.log("ALL>>>")
             console.log(data)
             setTableDataAll(data.data.companies)
 
@@ -345,7 +345,7 @@ const ModeratorTc = observer(() => {
                                                    icon: () =>  <button className="yes-no-bttn" style={{height: "35px", width: '35px'}}><img src={no_bttn} style={{height: "35px", width: '35px'}} /></button>,
                                                    tooltip: t('tc.moderator_delete'),
                                                    onClick: (e, data) => {
-                                                       const req = putCompanies(data.id, false, data.code, data.name, data.address, data.phone, data.website, data.description)
+                                                       const req = putCompanies(data.id, data.code, data.name,data.legal_name, data.address, data.phone, data.website, data.description,data.notes, false)
                                                        console.log(req)
                                                        //серверные запросы на удаление
 
